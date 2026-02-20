@@ -59,7 +59,7 @@ export default function Priser({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header siteName={siteName} />
+      <Header siteName={siteName} lightBg />
       <JsonLd data={buildWebsiteJsonLd(siteInfo, siteUrl)} />
 
       <main className="flex-1">

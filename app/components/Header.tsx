@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 interface HeaderProps {
   siteName?: string;
+  lightBg?: boolean;
   menuItems?: Array<{
     title: string;
     url: string;
@@ -10,7 +11,7 @@ interface HeaderProps {
   }>;
 }
 
-export function Header({ siteName = "ABB Medical", menuItems = [] }: HeaderProps) {
+export function Header({ siteName = "ABB Medical", menuItems = [], lightBg = false }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -23,17 +24,14 @@ export function Header({ siteName = "ABB Medical", menuItems = [] }: HeaderProps
 
   const navItems = menuItems.length > 0 ? menuItems : [
     { title: "Forside", url: "/" },
-    { title: "Behandlinger", url: "/behandlinger" },
-    { title: "Om os", url: "/om-os" },
     { title: "Priser", url: "/priser" },
-    { title: "Kontakt", url: "/kontakt" },
   ];
 
   return (
     <header
       className={[
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
+        scrolled || lightBg
           ? "bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm"
           : "bg-transparent",
       ].join(" ")}
@@ -44,7 +42,7 @@ export function Header({ siteName = "ABB Medical", menuItems = [] }: HeaderProps
           to="/"
           className={[
             "font-heading text-xl font-medium tracking-tight transition-colors duration-300",
-            scrolled ? "text-secondary" : "text-white",
+            scrolled || lightBg ? "text-secondary" : "text-white",
           ].join(" ")}
           style={{ fontFamily: "var(--font-heading)" }}
         >
@@ -54,7 +52,7 @@ export function Header({ siteName = "ABB Medical", menuItems = [] }: HeaderProps
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <NavLink key={item.url} href={item.url} label={item.title} scrolled={scrolled} />
+            <NavLink key={item.url} href={item.url} label={item.title} scrolled={scrolled || lightBg} />
           ))}
         </nav>
 
@@ -74,12 +72,12 @@ export function Header({ siteName = "ABB Medical", menuItems = [] }: HeaderProps
           onClick={() => setMobileOpen(!mobileOpen)}
           className={[
             "md:hidden p-2 rounded-lg transition-colors",
-            scrolled ? "hover:bg-slate-100" : "hover:bg-white/10",
+            scrolled || lightBg ? "hover:bg-slate-100" : "hover:bg-white/10",
           ].join(" ")}
           aria-label="Åbn menu"
         >
           <svg
-            className={["w-6 h-6 transition-colors", scrolled ? "text-secondary" : "text-white"].join(" ")}
+            className={["w-6 h-6 transition-colors", scrolled || lightBg ? "text-secondary" : "text-white"].join(" ")}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
