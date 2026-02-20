@@ -94,7 +94,9 @@ jobs:
           sed -i "s/{{CUSTOMER_ID}}/${NAMESPACE}/g" infra/deployment.yaml
 
       - name: Apply Kubernetes manifests
-        run: kubectl apply -f infra/deployment.yaml
+        run: |
+          kubectl apply -f infra/deployment.yaml \
+            || (kubectl delete -f infra/deployment.yaml --ignore-not-found && kubectl apply -f infra/deployment.yaml)
 
       - name: Deploy with image tags
         env:
