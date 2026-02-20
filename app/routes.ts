@@ -4,5 +4,6 @@ export default [
   index("routes/index.tsx"),
   route("robots.txt", "routes/robots[.]txt.tsx"),
   route("sitemap.xml", "routes/sitemap[.]xml.tsx"),
+  route("priser", "routes/priser.tsx"),
   route("*", "routes/$.tsx"),
 ] satisfies RouteConfig;
