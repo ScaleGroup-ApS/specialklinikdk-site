@@ -5,64 +5,117 @@ interface FooterProps {
   siteDescription?: string;
 }
 
-export function Footer({ siteName = "Site", siteDescription }: FooterProps) {
+export function Footer({ siteName = "ABB Medical", siteDescription }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
     <footer className="bg-secondary text-text-on-dark">
+      {/* Top accent line */}
+      <div className="h-[1px]" style={{ background: "linear-gradient(90deg, transparent, #4FD1C5, transparent)" }} />
+
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Brand Column */}
-          <div className="md:col-span-2">
-            <Link to="/" className="text-2xl font-bold text-white tracking-tight">
+          <div className="md:col-span-5">
+            <Link
+              to="/"
+              className="text-2xl font-medium text-white tracking-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
               {siteName}
             </Link>
-            {siteDescription && (
-              <p className="mt-4 text-text-on-dark/70 max-w-md leading-relaxed">
+            {siteDescription ? (
+              <p className="mt-4 text-slate-400 max-w-xs leading-relaxed text-sm">
                 {siteDescription}
               </p>
+            ) : (
+              <p className="mt-4 text-slate-400 max-w-xs leading-relaxed text-sm">
+                Din private specialklinik i København. Vi kombinerer avanceret medicinsk teknologi med personlig, diskret omsorg.
+              </p>
             )}
+
+            {/* Contact Info */}
+            <div className="mt-8 space-y-2 text-sm text-slate-400">
+              <div className="flex items-center gap-3">
+                <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>Frederiksberg, København</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>+45 XX XX XX XX</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>kontakt@abbmedical.dk</span>
+              </div>
+            </div>
           </div>
 
-          {/* Navigation Column */}
-          <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+          {/* Spacer */}
+          <div className="hidden md:block md:col-span-1" />
+
+          {/* Navigation */}
+          <div className="md:col-span-2">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-[0.15em] mb-5">
               Navigation
             </h3>
             <ul className="space-y-3">
               <FooterLink to="/" label="Forside" />
+              <FooterLink to="/behandlinger" label="Behandlinger" />
               <FooterLink to="/om-os" label="Om os" />
+              <FooterLink to="/priser" label="Priser" />
               <FooterLink to="/kontakt" label="Kontakt" />
             </ul>
           </div>
 
-          {/* Legal Column */}
-          <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+          {/* Services */}
+          <div className="md:col-span-2">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-[0.15em] mb-5">
+              Ydelser
+            </h3>
+            <ul className="space-y-3">
+              <FooterLink to="/behandlinger" label="Hudterapi" />
+              <FooterLink to="/behandlinger" label="Sportsskader" />
+              <FooterLink to="/behandlinger" label="Kirurgisk vejledning" />
+              <FooterLink to="/behandlinger" label="Præventiv medicin" />
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div className="md:col-span-2">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-[0.15em] mb-5">
               Juridisk
             </h3>
             <ul className="space-y-3">
               <FooterLink to="/privatlivspolitik" label="Privatlivspolitik" />
               <FooterLink to="/handelsbetingelser" label="Handelsbetingelser" />
+              <FooterLink to="/cookies" label="Cookie-politik" />
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Copyright Bar */}
-      <div className="border-t border-white/10">
+      {/* Bottom Bar */}
+      <div className="border-t border-white/8">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-text-on-dark/50">
+          <p className="text-sm text-slate-500">
             © {year} {siteName}. Alle rettigheder forbeholdes.
           </p>
-          <p className="text-xs text-text-on-dark/30">
+          <p className="text-xs text-slate-600">
             Drevet af{" "}
             <a
               href="https://scaleweb.dk"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-on-dark/50 hover:text-text-on-dark/70 transition-colors"
+              className="text-slate-500 hover:text-slate-400 transition-colors"
             >
               Scaleweb
             </a>
@@ -78,7 +131,7 @@ function FooterLink({ to, label }: { to: string; label: string }) {
     <li>
       <Link
         to={to}
-        className="text-text-on-dark/60 hover:text-white transition-colors text-sm"
+        className="animated-link text-sm text-slate-400 hover:text-white transition-colors"
       >
         {label}
       </Link>

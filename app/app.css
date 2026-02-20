@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 /* ── Design Tokens ─────────────────────────────────────────────────────────
-   These CSS variables are the design system foundation.
-   In production, the AI design brief will generate custom values per customer.
+   Medical Minimalism — ABB Medical Aps
+   Palette: Deep Slate + Clinical Teal
    ──────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  --color-primary: #2563eb;
-  --color-primary-dark: #1d4ed8;
-  --color-primary-light: #3b82f6;
-  --color-secondary: #0f172a;
-  --color-accent: #06b6d4;
-  --color-surface: #ffffff;
-  --color-surface-dim: #f8fafc;
-  --color-surface-dark: #0f172a;
-  --color-text: #1e293b;
-  --color-text-muted: #64748b;
-  --color-text-on-dark: #f1f5f9;
-  --color-border: #e2e8f0;
+  --color-primary: #4FD1C5;
+  --color-primary-dark: #3a8a83;
+  --color-primary-light: #7ee8e2;
+  --color-secondary: #0F172A;
+  --color-accent: #4FD1C5;
+  --color-surface: #FFFFFF;
+  --color-surface-dim: #F8FAFC;
+  --color-surface-dark: #0F172A;
+  --color-text: #334155;
+  --color-text-muted: #64748B;
+  --color-text-on-dark: #F1F5F9;
+  --color-border: #E2E8F0;
 
-  --font-heading: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Lora", Georgia, serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -38,171 +38,135 @@ body {
   line-height: 1.6;
 }
 
-/* ── WordPress Content Styles ──────────────────────────────────────────
-   These styles apply to the rendered HTML from WordPress WP-REST API.
-   They ensure Gutenberg block output looks correct in the React app.
-   ──────────────────────────────────────────────────────────────────────── */
+/* ── Typography Utilities ──────────────────────────────────────────────── */
 
-.wp-content {
-  /* Headings */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    font-weight: 700;
-  }
-
-  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-  h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
-  h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-
-  /* Paragraphs */
-  p {
-    margin-bottom: 1.25em;
-    max-width: 72ch;
-  }
-
-  /* Links */
-  a {
-    color: var(--color-primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    transition: color 0.2s ease;
-  }
-  a:hover {
-    color: var(--color-primary-dark);
-  }
-
-  /* Images */
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
-
-  /* WordPress alignment classes */
-  .alignfull {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-
-  .alignwide {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .aligncenter {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* WordPress button styles */
-  .wp-block-button__link {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.75rem 2rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .wp-block-button__link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
-  }
-
-  /* WordPress columns */
-  .wp-block-columns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-
-  .wp-block-column {
-    flex: 1 1 0;
-    min-width: 250px;
-  }
-
-  /* WordPress separator */
-  .wp-block-separator {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: 3rem auto;
-    max-width: 100px;
-  }
-
-  /* WordPress cover block */
-  .wp-block-cover {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
-    overflow: hidden;
-    border-radius: 16px;
-  }
-
-  /* WordPress group block */
-  .wp-block-group {
-    box-sizing: border-box;
-  }
-
-  /* WordPress spacer */
-  .wp-block-spacer {
-    display: block;
-  }
-
-  /* Lists */
-  ul, ol {
-    padding-left: 1.5em;
-    margin-bottom: 1.25em;
-  }
-
-  li {
-    margin-bottom: 0.5em;
-  }
-
-  /* Blockquotes */
-  blockquote {
-    border-left: 4px solid var(--color-primary);
-    padding: 1rem 1.5rem;
-    margin: 2rem 0;
-    background: var(--color-surface-dim);
-    border-radius: 0 8px 8px 0;
-    font-style: italic;
-  }
-
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5em;
-  }
-
-  th, td {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--color-border);
-    text-align: left;
-  }
-
-  th {
-    background: var(--color-surface-dim);
-    font-weight: 600;
-  }
+.font-heading {
+  font-family: var(--font-heading);
 }
 
-/* ── Animations ────────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Button Styles ─────────────────────────────────────────────────────── */
+
+.btn-gradient {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: -0.01em;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(79, 209, 197, 0.4);
+}
+
+.btn-gradient:active {
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--color-secondary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid var(--color-border);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+}
+
+.btn-outline:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+}
+
+/* ── Animated Link Underline ───────────────────────────────────────────── */
+
+.animated-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.animated-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.animated-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Glassmorphism ─────────────────────────────────────────────────────── */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* ── Blob / Mesh Gradient Animations ──────────────────────────────────── */
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  25%  { transform: translate(40px, -55px) scale(1.06); }
+  50%  { transform: translate(-30px, 30px) scale(0.94); }
+  75%  { transform: translate(20px, 45px) scale(1.03); }
+}
+
+.animate-blob {
+  animation: blobFloat 16s infinite ease-in-out;
+}
+
+.animate-blob-2 {
+  animation: blobFloat 20s infinite ease-in-out;
+  animation-delay: -6s;
+}
+
+.animate-blob-3 {
+  animation: blobFloat 22s infinite ease-in-out;
+  animation-delay: -11s;
+}
+
+/* ── Page Animations ───────────────────────────────────────────────────── */
 
 @keyframes fadeInUp {
   from {
@@ -236,4 +200,151 @@ body {
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 8px;
+}
+
+/* ── Focus Ring (Material 3) ───────────────────────────────────────────── */
+
+*:focus-visible {
+  outline: 2px solid #4FD1C5;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── WordPress Content Styles ──────────────────────────────────────────── */
+
+.wp-content {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+  }
+
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+  p {
+    margin-bottom: 1.25em;
+    max-width: 72ch;
+  }
+
+  a {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+
+  a:hover { color: var(--color-primary); }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .alignfull {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .alignwide {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .aligncenter {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .wp-block-button__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 209, 197, 0.25);
+  }
+
+  .wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .wp-block-column {
+    flex: 1 1 0;
+    min-width: 250px;
+  }
+
+  .wp-block-separator {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 3rem auto;
+    max-width: 100px;
+  }
+
+  .wp-block-cover {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .wp-block-group { box-sizing: border-box; }
+  .wp-block-spacer { display: block; }
+
+  ul, ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.25em;
+  }
+
+  li { margin-bottom: 0.5em; }
+
+  blockquote {
+    border-left: 4px solid var(--color-primary);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--color-surface-dim);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+  }
+
+  th, td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  th {
+    background: var(--color-surface-dim);
+    font-weight: 600;
+  }
 }
