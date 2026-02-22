@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { useState, useEffect } from "react";
 
 interface HeaderProps {
@@ -11,7 +10,7 @@ interface HeaderProps {
   }>;
 }
 
-export function Header({ siteName = "ABB Medical", menuItems = [], lightBg = false }: HeaderProps) {
+export function Header({ siteName = "Specialklinik Taastrup", menuItems = [], lightBg = false }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -23,8 +22,21 @@ export function Header({ siteName = "ABB Medical", menuItems = [], lightBg = fal
   }, []);
 
   const navItems = menuItems.length > 0 ? menuItems : [
-    { title: "Forside", url: "/" },
+    {
+      title: "Omskæring",
+      url: "/omskaering",
+      children: [
+        { title: "Om omskæring", url: "/omskaering" },
+        { title: "Forberedelse inden omskæring", url: "/forberedelse-inden-omskaering" },
+        { title: "Klassisk metode", url: "/omskaering-med-klassisk-metode" },
+        { title: "Ringmetoden", url: "/omskaering-med-ringmetoden" },
+        { title: "Omskæring med fuld bedøvelse", url: "/omskaering-med-fuld-bedoevelse" },
+      ],
+    },
+    { title: "Om os", url: "/om-os" },
+    { title: "FAQ", url: "/faq" },
     { title: "Priser", url: "/priser" },
+    { title: "Kontakt os", url: "/kontakt-os" },
   ];
 
   return (
@@ -38,33 +50,36 @@ export function Header({ siteName = "ABB Medical", menuItems = [], lightBg = fal
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          to="/"
-          className={[
-            "font-heading text-xl font-medium tracking-tight transition-colors duration-300",
-            scrolled || lightBg ? "text-secondary" : "text-white",
-          ].join(" ")}
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          {siteName}
-        </Link>
+        <a href="/" className="inline-flex items-center">
+          <img
+            src="/images/Specialklinik-Taastrup-1%20(2).svg"
+            alt={siteName}
+            className="h-10 md:h-11 w-auto rounded-md bg-white/95 p-1 shadow-sm"
+          />
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <NavLink key={item.url} href={item.url} label={item.title} scrolled={scrolled || lightBg} />
+            <NavLink
+              key={item.url}
+              href={item.url}
+              label={item.title}
+              childrenItems={item.children}
+              scrolled={scrolled || lightBg}
+            />
           ))}
         </nav>
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <Link
-            to="/kontakt"
+          <a
+            href="/booking"
             className="btn-gradient text-sm"
             style={{ padding: "0.625rem 1.5rem", borderRadius: "0.5rem" }}
           >
-            Book konsultation
-          </Link>
+            Book tid online
+          </a>
         </div>
 
         {/* Mobile Hamburger */}
@@ -100,18 +115,19 @@ export function Header({ siteName = "ABB Medical", menuItems = [], lightBg = fal
                 key={item.url}
                 href={item.url}
                 label={item.title}
+                childrenItems={item.children}
                 onClick={() => setMobileOpen(false)}
               />
             ))}
             <div className="pt-3 border-t border-slate-100 mt-3">
-              <Link
-                to="/kontakt"
+              <a
+                href="/booking"
                 onClick={() => setMobileOpen(false)}
                 className="btn-gradient w-full justify-center"
                 style={{ borderRadius: "0.5rem" }}
               >
-                Book konsultation
-              </Link>
+                Book tid online
+              </a>
             </div>
           </nav>
         </div>
@@ -123,45 +139,129 @@ export function Header({ siteName = "ABB Medical", menuItems = [], lightBg = fal
 function NavLink({
   href,
   label,
+  childrenItems,
   scrolled,
 }: {
   href: string;
   label: string;
+  childrenItems?: Array<{ title: string; url: string }>;
   scrolled: boolean;
 }) {
   const to = href.startsWith("http") ? new URL(href).pathname : href;
+  const hasChildren = !!childrenItems?.length;
+  const isOmskaeringMenu = label === "Omskæring" && hasChildren;
 
   return (
-    <Link
-      to={to}
-      className={[
-        "animated-link text-sm font-medium transition-colors duration-200",
-        scrolled ? "text-slate-600 hover:text-secondary" : "text-white/80 hover:text-white",
-      ].join(" ")}
-    >
-      {label}
-    </Link>
+    <div className="relative group">
+      <a
+        href={to}
+        className={[
+          "animated-link text-sm font-medium transition-colors duration-200 inline-flex items-center gap-1",
+          scrolled ? "text-slate-600 hover:text-secondary" : "text-white/80 hover:text-white",
+        ].join(" ")}
+      >
+        {label}
+        {hasChildren && (
+          <svg className="w-3.5 h-3.5 mt-px" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        )}
+      </a>
+
+      {hasChildren && (
+        <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+          <div
+            className={[
+              "rounded-xl border border-slate-200 bg-white shadow-xl",
+              isOmskaeringMenu ? "w-[680px] p-4" : "min-w-[280px] p-2",
+            ].join(" ")}
+          >
+            {isOmskaeringMenu ? (
+              <div className="grid grid-cols-3 gap-3">
+                {childrenItems!.map((item) => {
+                  const childTo = item.url.startsWith("http") ? new URL(item.url).pathname : item.url;
+                  return (
+                    <a
+                      key={item.url}
+                      href={childTo}
+                      className="block rounded-lg border border-slate-100 p-3 hover:bg-slate-50 hover:border-slate-200 transition-colors"
+                    >
+                      <p className="text-sm font-semibold text-secondary">{item.title}</p>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Læs mere om behandling, forløb og praktisk information.
+                      </p>
+                    </a>
+                  );
+                })}
+                <a
+                  href="/booking"
+                  className="col-span-3 mt-1 rounded-lg px-4 py-3 text-sm font-semibold text-white transition-colors"
+                  style={{ background: "#697DA8" }}
+                >
+                  Book tid online
+                </a>
+              </div>
+            ) : (
+              childrenItems!.map((item) => {
+                const childTo = item.url.startsWith("http") ? new URL(item.url).pathname : item.url;
+                return (
+                  <a
+                    key={item.url}
+                    href={childTo}
+                    className="block px-3 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-secondary transition-colors"
+                  >
+                    {item.title}
+                  </a>
+                );
+              })
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
 function MobileNavLink({
   href,
   label,
+  childrenItems,
   onClick,
 }: {
   href: string;
   label: string;
+  childrenItems?: Array<{ title: string; url: string }>;
   onClick: () => void;
 }) {
   const to = href.startsWith("http") ? new URL(href).pathname : href;
+  const hasChildren = !!childrenItems?.length;
 
   return (
-    <Link
-      to={to}
-      onClick={onClick}
-      className="block px-4 py-3 text-secondary hover:bg-slate-50 rounded-xl transition-colors font-medium text-[15px]"
-    >
-      {label}
-    </Link>
+    <div className="rounded-xl border border-slate-100">
+      <a
+        href={to}
+        onClick={onClick}
+        className="block px-4 py-3 text-secondary hover:bg-slate-50 rounded-t-xl transition-colors font-medium text-[15px]"
+      >
+        {label}
+      </a>
+      {hasChildren && (
+        <div className="pb-2">
+          {childrenItems!.map((item) => {
+            const childTo = item.url.startsWith("http") ? new URL(item.url).pathname : item.url;
+            return (
+              <a
+                key={item.url}
+                href={childTo}
+                onClick={onClick}
+                className="block px-6 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+              >
+                {item.title}
+              </a>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }

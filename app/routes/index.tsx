@@ -46,14 +46,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 // ── Meta ─────────────────────────────────────────────────────────────────────
 
 export function meta({ data }: Route.MetaArgs) {
-  if (!data) return [{ title: "ABB Medical" }];
+  if (!data) return [{ title: "Specialklinik Taastrup" }];
 
   const { siteInfo, page, siteUrl } = data;
-  const siteName = siteInfo?.name ?? "ABB Medical";
+  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
   const description = page?.excerpt?.rendered
     ? stripHtml(page.excerpt.rendered)
     : siteInfo?.description ??
-      "Din private specialklinik i København — avanceret teknologi møder personlig omsorg.";
+      "Professionel omskæring i trygge rammer for drengebørn. Tryghed - hele vejen.";
 
   return [
     ...buildMeta({
@@ -74,7 +74,7 @@ export function meta({ data }: Route.MetaArgs) {
 
 export default function Index({ loaderData }: Route.ComponentProps) {
   const { page, siteInfo, siteUrl } = loaderData;
-  const siteName = siteInfo?.name ?? "ABB Medical";
+  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
 
   return (
     <div className="flex flex-col min-h-screen">

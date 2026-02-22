@@ -5,21 +5,21 @@ import { useState } from "react";
 const TESTIMONIALS = [
   {
     quote:
-      "ABB Medical har ændret mit liv. Den personlige omsorg og den faglige ekspertise er i en klasse for sig. Jeg ville ønske, jeg var startet her langt tidligere.",
-    name: "Maria K.",
-    info: "Patient, Hudterapi",
+      "Har du spørgsmål om klinikken eller proceduren? Vi har samlet de mest relevante svar om smertelindring, forberedelse, efterbehandling og resultater.",
+    name: "FAQ",
+    info: "Oftest stillede spørgsmål",
   },
   {
     quote:
-      "Efter min sportsskade var jeg dybt frustreret. ABB Medicals team fik mig hurtigt tilbage på banen med en struktureret og professionel behandlingsplan.",
-    name: "Thomas B.",
-    info: "Patient, Sportsskader & Fysioterapi",
+      "Vi anbefaler, at I læser afsnittet om forberedelse inden omskæring inden I møder op til den aftalte tid i klinikken.",
+    name: "Forberedelse",
+    info: "Vigtig information inden besog",
   },
   {
     quote:
-      "Den diskrete og respektfulde tilgang til behandling gav mig tryghed fra første dag. Præventiv medicin har nu en helt ny betydning for mig.",
-    name: "Anne-Sofie L.",
-    info: "Patient, Præventiv Medicin",
+      "Hvis I ikke kan finde svar på jeres spørgsmål, er I altid velkomne til at kontakte os på kontakt@specialklinik.dk.",
+    name: "Kontakt",
+    info: "Vi svarer hurtigt på henvendelser",
   },
 ];
 
@@ -41,7 +41,7 @@ export function Testimonials() {
             transition={{ duration: 0.6 }}
             className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4"
           >
-            Patientoplevelser
+            Information & vejledning
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -51,8 +51,8 @@ export function Testimonials() {
             className="font-heading text-4xl md:text-5xl font-medium text-secondary"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Hvad siger vores{" "}
-            <span className="gradient-text">patienter</span>
+            Oftest stillede{" "}
+            <span className="gradient-text">spørgsmål</span>
           </motion.h2>
         </div>
 

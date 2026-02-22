@@ -1,64 +1,67 @@
 // app/components/home/SocialProof.tsx
 import { motion } from "framer-motion";
 
-const LOGOS = [
-  { name: "Sundhedsstyrelsen", abbr: "SST" },
-  { name: "Dansk Medicinsk Selskab", abbr: "DMS" },
-  { name: "Region Hovedstaden", abbr: "RH" },
-  { name: "ISO 9001:2015", abbr: "ISO" },
-  { name: "GDPR Compliant", abbr: "GDPR" },
+const HIGHLIGHTS = [
+  {
+    title: "Under proceduren",
+    text:
+      "Forældre kan være til stede under deres babys omskæring eller vente i et andet behageligt rum.",
+  },
+  {
+    title: "Tillid & sikkerhed",
+    text:
+      "Vores læger og sygeplejersker arbejder med stor erfaring og faglig ekspertise, så barnet er i trygge hænder.",
+  },
+  {
+    title: "Teknisk ekspertise",
+    text:
+      "Vi har omfattende erfaring med variationer af forhud og penis samt et særligt fokus på nyfødte og spædbørn.",
+  },
+  {
+    title: "Smertelindring",
+    text:
+      "Vi tager smertelindring alvorligt og tilbyder forskellige muligheder for at minimere smerter og ubehag.",
+  },
 ];
 
 export function SocialProof() {
   return (
-    <section className="py-12" style={{ background: "var(--color-surface-dim)" }}>
+    <section className="py-20" style={{ background: "var(--color-surface-dim)" }}>
       <div className="max-w-7xl mx-auto px-6">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-muted mb-8"
+          className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-muted mb-5"
         >
-          Anerkendt af branchen
+          Specialklinik Taastrup
         </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-center font-heading text-3xl md:text-4xl text-secondary mb-12"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          Tryghed, erfaring og faglighed
+        </motion.h2>
 
-        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-          {LOGOS.map((logo, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {HIGHLIGHTS.map((item, i) => (
             <motion.div
-              key={logo.abbr}
+              key={item.title}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group cursor-default"
-              title={logo.name}
+              className="glass-card p-6 md:p-7"
             >
-              <div
-                className="px-5 py-2.5 rounded-lg border font-semibold text-sm tracking-wide transition-all duration-300"
-                style={{
-                  borderColor: "var(--color-border)",
-                  color: "var(--color-text-muted)",
-                  filter: "grayscale(1) opacity(0.6)",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLDivElement;
-                  el.style.filter = "grayscale(0) opacity(1)";
-                  el.style.borderColor = "var(--color-primary)";
-                  el.style.color = "var(--color-primary-dark)";
-                  el.style.boxShadow = "0 4px 12px rgba(79,209,197,0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLDivElement;
-                  el.style.filter = "grayscale(1) opacity(0.6)";
-                  el.style.borderColor = "var(--color-border)";
-                  el.style.color = "var(--color-text-muted)";
-                  el.style.boxShadow = "none";
-                }}
-              >
-                {logo.abbr}
-              </div>
+              <h3 className="font-heading text-xl text-secondary mb-3" style={{ fontFamily: "var(--font-heading)" }}>
+                {item.title}
+              </h3>
+              <p className="text-text-muted leading-[1.7]">{item.text}</p>
             </motion.div>
           ))}
         </div>

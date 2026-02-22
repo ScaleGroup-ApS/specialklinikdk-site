@@ -6,21 +6,21 @@
    ──────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  --color-primary: #4FD1C5;
-  --color-primary-dark: #3a8a83;
-  --color-primary-light: #7ee8e2;
-  --color-secondary: #0F172A;
-  --color-accent: #4FD1C5;
+  --color-primary: #697DA8;
+  --color-primary-dark: #586b93;
+  --color-primary-light: #8c9fc4;
+  --color-secondary: #000000;
+  --color-accent: #697DA8;
   --color-surface: #FFFFFF;
   --color-surface-dim: #F8FAFC;
   --color-surface-dark: #0F172A;
-  --color-text: #334155;
-  --color-text-muted: #64748B;
+  --color-text: #000000;
+  --color-text-muted: #1f2937;
   --color-text-on-dark: #F1F5F9;
   --color-border: #E2E8F0;
 
-  --font-heading: "Lora", Georgia, serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Google Sans Flex", system-ui, -apple-system, sans-serif;
+  --font-body: "Google Sans Flex", system-ui, -apple-system, sans-serif;
 }
 
 /* ── Base Styles ───────────────────────────────────────────────────────── */
@@ -45,11 +45,11 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  background: none;
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  background-clip: border-box;
+  color: var(--color-primary);
 }
 
 /* ── Button Styles ─────────────────────────────────────────────────────── */
@@ -59,7 +59,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.875rem 2rem;
-  background: linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%);
+  background: #697DA8;
   color: white;
   font-family: var(--font-body);
   font-weight: 600;
@@ -76,7 +76,7 @@ body {
 
 .btn-gradient:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(79, 209, 197, 0.4);
+  box-shadow: 0 16px 40px rgba(105, 125, 168, 0.4);
 }
 
 .btn-gradient:active {
@@ -122,7 +122,7 @@ body {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%);
+  background: var(--color-primary);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -205,7 +205,7 @@ body {
 /* ── Focus Ring (Material 3) ───────────────────────────────────────────── */
 
 *:focus-visible {
-  outline: 2px solid #4FD1C5;
+  outline: 2px solid var(--color-primary);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -281,7 +281,7 @@ body {
 
   .wp-block-button__link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(79, 209, 197, 0.25);
+    box-shadow: 0 8px 24px rgba(105, 125, 168, 0.25);
   }
 
   .wp-block-columns {

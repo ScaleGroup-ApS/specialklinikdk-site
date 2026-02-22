@@ -36,16 +36,17 @@ export function HeroSection() {
         style={{ background: "rgba(15, 23, 42, 0.4)" }}
       />
 
-      {/* Content — 7/12 column width on desktop */}
+      {/* Content + hero image */}
       <div className="relative max-w-7xl mx-auto px-6 py-32 md:py-44 w-full">
-        <div className="max-w-[700px]">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="max-w-[700px]">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-6"
           >
-            ABB Medical Aps
+            Specialklinik Taastrup
           </motion.p>
 
           <h1
@@ -58,7 +59,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.25 }}
               className="block"
             >
-              Specialiseret behandling,
+              Velkommen til Specialklinik Taastrup,
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -66,7 +67,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="block gradient-text"
             >
-              bygget på tillid.
+              Tryghed - Hele vejen.
             </motion.span>
           </h1>
 
@@ -77,21 +78,45 @@ export function HeroSection() {
             className="text-lg md:text-xl leading-[1.7] mb-12"
             style={{ color: "rgba(241,245,249,0.8)", maxWidth: "560px" }}
           >
-            ABB Medical er din private specialklinik i København, hvor avanceret
-            teknologi møder personlig omsorg.
+            Professionel omskæring i trygge rammer. Vi udfører rituel omskæring af
+            drengebørn med høj sikkerhed, faglig ekspertise og tydelig vejledning
+            før, under og efter forløbet.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7 }}
+            className="flex flex-wrap gap-4"
           >
-            <Link to="/behandlinger" className="btn-gradient">
-              Se Vores Behandlinger
+            <Link to="/omskaering" className="btn-gradient">
+              Læs om omskæring
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+            <Link
+              to="/priser"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/35 text-white hover:bg-white/10 transition-colors"
+            >
+              Priser
+            </Link>
+          </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="hidden lg:flex justify-end"
+          >
+            <div className="w-full max-w-[520px] rounded-2xl bg-white/90 p-6 shadow-2xl border border-white/60">
+              <img
+                src="/images/Specialklinik-Taastrup-1%20(2).svg"
+                alt="Specialklinik Taastrup logo"
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
