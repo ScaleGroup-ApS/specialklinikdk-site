@@ -61,7 +61,7 @@ export function Testimonials() {
           <div className="relative min-h-[260px]">
             {/* Decorative large quote mark */}
             <div
-              className="absolute top-0 left-0 select-none pointer-events-none"
+              className="absolute top-0 left-1/2 -translate-x-1/2 select-none pointer-events-none"
               style={{
                 fontFamily: "var(--font-heading)",
                 fontSize: "220px",
@@ -80,9 +80,9 @@ export function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="relative grid md:grid-cols-[1fr_200px] gap-12 items-center"
+                className="relative"
               >
-                <blockquote>
+                <blockquote className="text-center max-w-3xl mx-auto">
                   <p
                     className="font-heading text-2xl md:text-3xl text-secondary italic leading-[1.55] mb-8"
                     style={{ fontFamily: "var(--font-heading)" }}

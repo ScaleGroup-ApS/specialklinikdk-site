@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
+import { PatientTestimonials } from "~/components/PatientTestimonials";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 import type { WpSiteInfo } from "~/lib/wp-types";
@@ -64,6 +65,15 @@ export default function Omskaering({ loaderData }: Route.ComponentProps) {
             lade deres drengebørn omskære.
           </p>
 
+          <figure className="mb-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+            <img
+              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+              alt="Specialklinik Taastrup"
+              className="w-full h-[260px] md:h-[360px] object-cover"
+              loading="lazy"
+            />
+          </figure>
+
           <div className="space-y-6 text-text-muted leading-[1.8]">
             <p>
               Omskæring af drengebørn er omdiskuteret. Styrelsen for Patientsikkerhed har
@@ -102,6 +112,7 @@ export default function Omskaering({ loaderData }: Route.ComponentProps) {
             </Link>
           </section>
         </article>
+        <PatientTestimonials />
       </main>
 
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />

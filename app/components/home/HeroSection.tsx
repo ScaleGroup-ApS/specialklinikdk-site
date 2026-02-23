@@ -61,14 +61,6 @@ export function HeroSection() {
             >
               Velkommen til Specialklinik Taastrup,
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="block gradient-text"
-            >
-              Tryghed - Hele vejen.
-            </motion.span>
           </h1>
 
           <motion.p
@@ -110,13 +102,11 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.35 }}
             className="hidden lg:flex justify-end"
           >
-            <div className="w-full max-w-[520px] rounded-2xl bg-white/90 p-6 shadow-2xl border border-white/60">
-              <img
-                src="/images/Specialklinik-Taastrup-1%20(2).svg"
-                alt="Specialklinik Taastrup logo"
-                className="w-full h-auto object-contain"
-              />
-            </div>
+            <img
+              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+              alt="Specialklinik Taastrup"
+              className="w-full max-w-[520px] h-[360px] object-cover rounded-2xl shadow-2xl"
+            />
           </motion.div>
         </div>
       </div>

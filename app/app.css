@@ -108,6 +108,34 @@ body {
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
 }
 
+/* Action buttons with primary hover */
+.hover-primary-btn {
+  transition: all 0.25s ease;
+}
+
+.hover-primary-btn:hover {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border-color: var(--color-primary) !important;
+  transform: translateY(-2px);
+}
+
+/* Reusable card hover treatment */
+.card-hover {
+  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary-dark) !important;
+  box-shadow: 0 16px 34px rgba(105, 125, 168, 0.28);
+}
+
+.card-hover:hover * {
+  color: #fff !important;
+}
+
 /* ── Animated Link Underline ───────────────────────────────────────────── */
 
 .animated-link {

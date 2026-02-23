@@ -115,7 +115,7 @@ export function ServicesSection() {
             >
               <Link to={service.href} className="block h-full group">
                 <div
-                  className="glass-card p-8 h-full transition-shadow duration-300 group-hover:shadow-[0_20px_60px_rgba(79,209,197,0.15)]"
+                  className="glass-card card-hover p-8 h-full transition-shadow duration-300 group-hover:shadow-[0_20px_60px_rgba(79,209,197,0.15)]"
                 >
                   <div className="text-primary mb-6">{service.icon}</div>
                   <h3

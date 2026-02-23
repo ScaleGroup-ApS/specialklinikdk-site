@@ -2,6 +2,7 @@ import type { Route } from "./+types/forberedelse-inden-omskaering";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
+import { PatientTestimonials } from "~/components/PatientTestimonials";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 import type { WpSiteInfo } from "~/lib/wp-types";
@@ -70,6 +71,15 @@ export default function Forberedelse({ loaderData }: Route.ComponentProps) {
             </p>
           </div>
 
+          <figure className="mt-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+            <img
+              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+              alt="Rolige rammer i klinikken"
+              className="w-full h-[240px] md:h-[320px] object-cover"
+              loading="lazy"
+            />
+          </figure>
+
           <section className="mt-10 space-y-5">
             <div className="glass-card p-6">
               <h2 className="font-heading text-2xl text-secondary mb-2">Tryllecreme</h2>
@@ -116,6 +126,7 @@ export default function Forberedelse({ loaderData }: Route.ComponentProps) {
             op, skal der medbringes samtykkeerklæring.
           </p>
         </article>
+        <PatientTestimonials />
       </main>
 
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />

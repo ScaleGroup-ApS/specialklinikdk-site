@@ -56,7 +56,7 @@ export function SocialProof() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass-card p-6 md:p-7"
+              className="glass-card card-hover p-6 md:p-7"
             >
               <h3 className="font-heading text-xl text-secondary mb-3" style={{ fontFamily: "var(--font-heading)" }}>
                 {item.title}

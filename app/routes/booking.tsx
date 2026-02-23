@@ -2,6 +2,7 @@ import type { Route } from "./+types/booking";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
+import { PatientTestimonials } from "~/components/PatientTestimonials";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 import type { WpSiteInfo } from "~/lib/wp-types";
@@ -72,6 +73,7 @@ export default function Booking({ loaderData }: Route.ComponentProps) {
             </p>
           </div>
         </article>
+        <PatientTestimonials />
       </main>
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />
     </div>

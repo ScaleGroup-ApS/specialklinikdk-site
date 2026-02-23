@@ -2,6 +2,7 @@ import type { Route } from "./+types/omskaering-med-klassisk-metode";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
+import { PatientTestimonials } from "~/components/PatientTestimonials";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 import type { WpSiteInfo } from "~/lib/wp-types";
@@ -73,6 +74,15 @@ export default function OmskaeringKlassisk({ loaderData }: Route.ComponentProps)
             kan forvente efter omskæringen, og hvilke forholdsregler der gælder.
           </p>
 
+          <figure className="mb-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+            <img
+              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+              alt="Kliniske rammer for behandling"
+              className="w-full h-[250px] md:h-[340px] object-cover"
+              loading="lazy"
+            />
+          </figure>
+
           <section className="space-y-6 text-text-muted leading-[1.8]">
             <div className="glass-card p-6">
               <h2 className="font-heading text-2xl text-secondary mb-2">Bedøvelse</h2>
@@ -128,6 +138,7 @@ export default function OmskaeringKlassisk({ loaderData }: Route.ComponentProps)
             </p>
           </section>
         </article>
+        <PatientTestimonials />
       </main>
 
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />

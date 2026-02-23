@@ -2,6 +2,7 @@ import type { Route } from "./+types/omskaering-med-ringmetoden";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
+import { PatientTestimonials } from "~/components/PatientTestimonials";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 import type { WpSiteInfo } from "~/lib/wp-types";
@@ -75,6 +76,15 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
             </p>
           </section>
 
+          <figure className="mt-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+            <img
+              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+              alt="Trygge omgivelser hos Specialklinik Taastrup"
+              className="w-full h-[250px] md:h-[340px] object-cover"
+              loading="lazy"
+            />
+          </figure>
+
           <section className="mt-10 space-y-6 text-text-muted leading-[1.8]">
             <div className="glass-card p-6">
               <h2 className="font-heading text-2xl text-secondary mb-2">Bedøvelse</h2>
@@ -123,6 +133,7 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
             </p>
           </section>
         </article>
+        <PatientTestimonials />
       </main>
 
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />
