@@ -54,7 +54,7 @@ export function Header({ siteName = "Specialklinik Taastrup", menuItems = [], li
           <img
             src="/images/Specialklinik_logo.svg"
             alt={siteName}
-            className="h-18 md:h-20 w-auto object-contain"
+            className="h-12 md:h-16 w-auto object-contain"
           />
         </a>
 
