@@ -52,9 +52,9 @@ export function Header({ siteName = "Specialklinik Taastrup", menuItems = [], li
         {/* Logo */}
         <a href="/" className="inline-flex items-center">
           <img
-            src="/images/Specialklinik-Taastrup-1%20(2).svg"
+            src="/images/Specialklinik_logo.svg"
             alt={siteName}
-            className="h-10 md:h-11 w-auto rounded-md bg-white/95 p-1 shadow-sm"
+            className="h-18 md:h-20 w-auto object-contain"
           />
         </a>
 
@@ -173,7 +173,7 @@ function NavLink({
           <div
             className={[
               "rounded-xl border border-slate-200 bg-white shadow-xl",
-              isOmskaeringMenu ? "w-[680px] p-4" : "min-w-[280px] p-2",
+              isOmskaeringMenu ? "w-[860px] p-4" : "min-w-[280px] p-2",
             ].join(" ")}
           >
             {isOmskaeringMenu ? (
@@ -184,10 +184,10 @@ function NavLink({
                     <a
                       key={item.url}
                       href={childTo}
-                      className="block rounded-lg border border-slate-100 p-3 hover:bg-slate-50 hover:border-slate-200 transition-colors"
+                      className="block rounded-lg border border-slate-100 px-3 py-2.5 hover:bg-slate-50 hover:border-slate-200 transition-colors"
                     >
-                      <p className="text-sm font-semibold text-secondary">{item.title}</p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-[13px] font-semibold text-secondary whitespace-nowrap">{item.title}</p>
+                      <p className="text-[11px] text-slate-500 mt-1">
                         Læs mere om behandling, forløb og praktisk information.
                       </p>
                     </a>
@@ -249,13 +249,15 @@ function MobileNavLink({
         <div className="pb-2">
           {childrenItems!.map((item) => {
             const childTo = item.url.startsWith("http") ? new URL(item.url).pathname : item.url;
+            const icon = getMobileSubmenuIcon(item.title);
             return (
               <a
                 key={item.url}
                 href={childTo}
                 onClick={onClick}
-                className="block px-6 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+                className="flex items-center gap-2 px-6 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors"
               >
+                <span className="text-primary">{icon}</span>
                 {item.title}
               </a>
             );
@@ -263,5 +265,47 @@ function MobileNavLink({
         </div>
       )}
     </div>
+  );
+}
+
+function getMobileSubmenuIcon(title: string) {
+  const baseClass = "w-4 h-4";
+
+  if (title.includes("Forberedelse")) {
+    return (
+      <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    );
+  }
+
+  if (title.includes("Ring")) {
+    return (
+      <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="7" strokeWidth={1.8} />
+      </svg>
+    );
+  }
+
+  if (title.includes("bedøvelse")) {
+    return (
+      <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19.428 15.428a4 4 0 00-5.656 0l-7.07 7.07a2 2 0 01-2.829-2.828l7.071-7.071a4 4 0 000-5.657m8.484 8.486l-8.486-8.486" />
+      </svg>
+    );
+  }
+
+  if (title.includes("Klassisk")) {
+    return (
+      <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2-9H7m12 12H5a2 2 0 01-2-2V7a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg className={baseClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
   );
 }

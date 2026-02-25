@@ -78,7 +78,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header siteName={siteName} />
+      <Header siteName={siteName} lightBg />
 
       {/* Structured Data */}
       <JsonLd data={buildWebsiteJsonLd(siteInfo, siteUrl)} />

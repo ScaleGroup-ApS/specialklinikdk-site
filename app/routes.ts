@@ -14,5 +14,7 @@ export default [
   route("kontakt-os", "routes/kontaktos.tsx"),
   route("booking", "routes/booking.tsx"),
   route("priser", "routes/priser.tsx"),
+  route("privatlivspolitik", "routes/privatlivspolitik.tsx"),
+  route("cookiepolitik", "routes/cookiepolitik.tsx"),
   route("*", "routes/$.tsx"),
 ] satisfies RouteConfig;

@@ -5,39 +5,57 @@ import { Link } from "react-router";
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center">
-      {/* Animated mesh gradient background */}
-      <div className="absolute inset-0" style={{ background: "var(--color-secondary)" }}>
+      {/* Animated floating circles on light background */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)" }}
+      >
         <div
-          className="absolute top-[-20%] left-[-10%] w-[60%] h-[70%] rounded-full animate-blob"
+          className="absolute top-[-12%] left-[-8%] w-[56%] h-[64%] rounded-full animate-blob"
           style={{
-            background: "radial-gradient(circle, rgba(79,209,197,0.35) 0%, transparent 70%)",
-            filter: "blur(80px)",
+            background: "radial-gradient(circle, rgba(105,125,168,0.22) 0%, transparent 70%)",
+            filter: "blur(90px)",
           }}
         />
         <div
-          className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[60%] rounded-full animate-blob-2"
+          className="absolute bottom-[-10%] right-[-5%] w-[48%] h-[58%] rounded-full animate-blob-2"
           style={{
-            background: "radial-gradient(circle, rgba(126,232,226,0.2) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(140,159,196,0.25) 0%, transparent 70%)",
             filter: "blur(100px)",
           }}
         />
         <div
-          className="absolute top-[40%] right-[20%] w-[40%] h-[40%] rounded-full animate-blob-3"
+          className="absolute top-[44%] right-[18%] w-[36%] h-[36%] rounded-full animate-blob-3"
           style={{
-            background: "radial-gradient(circle, rgba(58,138,131,0.25) 0%, transparent 70%)",
-            filter: "blur(60px)",
+            background: "radial-gradient(circle, rgba(105,125,168,0.16) 0%, transparent 70%)",
+            filter: "blur(70px)",
           }}
         />
+
+        {/* Mobile floating circles on sides */}
+        <motion.div
+          className="absolute md:hidden top-[22%] -left-7 w-16 h-16 rounded-full border"
+          style={{ borderColor: "rgba(105,125,168,0.38)", background: "rgba(105,125,168,0.10)" }}
+          animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
+          transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute md:hidden top-[48%] -right-6 w-12 h-12 rounded-full border"
+          style={{ borderColor: "rgba(105,125,168,0.36)", background: "rgba(105,125,168,0.10)" }}
+          animate={{ y: [0, 9, 0], x: [0, -4, 0] }}
+          transition={{ duration: 8.1, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+        />
+        <motion.div
+          className="absolute md:hidden bottom-[18%] -left-5 w-10 h-10 rounded-full border"
+          style={{ borderColor: "rgba(105,125,168,0.34)", background: "rgba(105,125,168,0.08)" }}
+          animate={{ y: [0, -7, 0], x: [0, 3, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+        />
+
       </div>
 
-      {/* Dark overlay for text contrast */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "rgba(15, 23, 42, 0.4)" }}
-      />
-
       {/* Content + hero image */}
-      <div className="relative max-w-7xl mx-auto px-6 py-32 md:py-44 w-full">
+      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-44 w-full">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div className="max-w-[700px]">
           <motion.p
@@ -46,11 +64,11 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-6"
           >
-            Specialklinik Taastrup
+            Tryghed hele vejen
           </motion.p>
 
           <h1
-            className="font-heading text-5xl md:text-7xl font-medium text-white leading-[1.1] tracking-tight mb-8"
+            className="font-heading text-5xl md:text-7xl font-medium text-secondary leading-[1.1] tracking-tight mb-8"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             <motion.span
@@ -59,7 +77,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.25 }}
               className="block"
             >
-              Velkommen til Specialklinik Taastrup,
+              Velkommen til Specialklinik Taastrup
             </motion.span>
           </h1>
 
@@ -68,7 +86,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.55 }}
             className="text-lg md:text-xl leading-[1.7] mb-12"
-            style={{ color: "rgba(241,245,249,0.8)", maxWidth: "560px" }}
+            style={{ color: "var(--color-text-muted)", maxWidth: "560px" }}
           >
             Professionel omskæring i trygge rammer. Vi udfører rituel omskæring af
             drengebørn med høj sikkerhed, faglig ekspertise og tydelig vejledning
@@ -89,7 +107,7 @@ export function HeroSection() {
             </Link>
             <Link
               to="/priser"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/35 text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 text-secondary hover:bg-slate-100 transition-colors"
             >
               Priser
             </Link>
@@ -102,11 +120,32 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.35 }}
             className="hidden lg:flex justify-end"
           >
-            <img
-              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
-              alt="Specialklinik Taastrup"
-              className="w-full max-w-[520px] h-[360px] object-cover rounded-2xl shadow-2xl"
-            />
+            <div className="relative w-full max-w-[520px]">
+              <motion.div
+                className="absolute -top-6 -left-6 w-16 h-16 rounded-full border z-10"
+                style={{ borderColor: "rgba(105,125,168,0.45)", background: "rgba(105,125,168,0.10)" }}
+                animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div
+                className="absolute -bottom-5 -left-4 w-10 h-10 rounded-full border z-10"
+                style={{ borderColor: "rgba(105,125,168,0.45)", background: "rgba(105,125,168,0.12)" }}
+                animate={{ y: [0, -10, 0], x: [0, -8, 0] }}
+                transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+              />
+              <motion.div
+                className="absolute top-6 -right-6 w-14 h-14 rounded-full border z-10"
+                style={{ borderColor: "rgba(105,125,168,0.42)", background: "rgba(105,125,168,0.10)" }}
+                animate={{ y: [0, 10, 0], x: [0, -5, 0] }}
+                transition={{ duration: 7.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+              />
+
+              <img
+                src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+                alt="Specialklinik Taastrup"
+                className="relative z-20 w-full h-[360px] object-cover rounded-2xl shadow-2xl"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -120,7 +159,7 @@ export function HeroSection() {
       >
         <span
           className="text-xs uppercase tracking-widest"
-          style={{ color: "rgba(255,255,255,0.35)" }}
+          style={{ color: "rgba(31,41,55,0.55)" }}
         >
           Scroll
         </span>
@@ -128,7 +167,7 @@ export function HeroSection() {
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
           className="w-px h-8"
-          style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.4), transparent)" }}
+          style={{ background: "linear-gradient(to bottom, rgba(31,41,55,0.45), transparent)" }}
         />
       </motion.div>
     </section>

@@ -53,6 +53,16 @@ export default function Booking({ loaderData }: Route.ComponentProps) {
           <h2 className="font-heading text-2xl text-secondary mb-4">
             Book tid online til omskæring
           </h2>
+
+          <figure className="mb-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+            <img
+              src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+              alt="Specialklinik Taastrup"
+              className="w-full h-[240px] md:h-[320px] object-cover"
+              loading="lazy"
+            />
+          </figure>
+
           <div className="space-y-6 text-text-muted leading-[1.8]">
             <p>
               Her kan I booke en tid til at få jeres søn omskåret. Hvis det drejer sig om
@@ -72,6 +82,31 @@ export default function Booking({ loaderData }: Route.ComponentProps) {
               kun kan ske efter forudgående booking eller aftale.
             </p>
           </div>
+
+          <section className="mt-10">
+            <h3 className="font-heading text-2xl text-secondary mb-4">Online booking</h3>
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <iframe
+                title="Online booking - Specialklinik Taastrup"
+                src="https://system.easypractice.net/book/specialklinik-taastrup?cookie_fixed=1"
+                width="100%"
+                height="760"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <p className="text-sm text-text-muted mt-3">
+              Hvis booking-vinduet ikke vises, kan du åbne booking i ny fane{" "}
+              <a
+                href="https://system.easypractice.net/book/specialklinik-taastrup?cookie_fixed=1"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary hover:underline"
+              >
+                her
+              </a>.
+            </p>
+          </section>
         </article>
         <PatientTestimonials />
       </main>

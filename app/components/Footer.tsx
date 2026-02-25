@@ -23,9 +23,9 @@ export function Footer({ siteName = "Specialklinik Taastrup", siteDescription }:
               className="inline-flex items-center"
             >
               <img
-                src="/images/Specialklinik-Taastrup-1%20(2).svg"
+                src="/images/Specialklinik_logo.svg"
                 alt={siteName}
-                className="h-12 w-auto rounded-md bg-white p-1"
+                className="h-16 md:h-20 w-auto object-contain"
               />
             </Link>
             {siteDescription ? (
@@ -101,7 +101,7 @@ export function Footer({ siteName = "Specialklinik Taastrup", siteDescription }:
             </h3>
             <ul className="space-y-3">
               <FooterLink to="/privatlivspolitik" label="Privatlivspolitik" />
-              <FooterLink to="/cookies" label="Cookie-politik" />
+              <FooterLink to="/cookiepolitik" label="Cookie-politik" />
             </ul>
           </div>
         </div>
