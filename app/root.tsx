@@ -17,10 +17,6 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap",
-  },
 ];
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -31,6 +27,22 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap"
+          onLoad={(e) => {
+            const link = e.currentTarget as HTMLLinkElement;
+            link.onload = null;
+            link.rel = "stylesheet";
+          }}
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap"
+          />
+        </noscript>
         <script
           data-cookieconsent="ignore"
           dangerouslySetInnerHTML={{
@@ -58,13 +70,8 @@ export function Layout({ children }: { children: ReactNode }) {
           src="https://consent.cookiebot.com/uc.js"
           data-cbid="6112a7b2-a31a-484a-ac22-5ea85e43ef52"
           data-culture="DA"
-        />
-        <script
-          id="CookiebotAuto"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid="6112a7b2-a31a-484a-ac22-5ea85e43ef52"
           data-blockingmode="auto"
-          type="text/javascript"
+          async
         />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES7V2VYL1D" />
         <script
@@ -74,33 +81,17 @@ export function Layout({ children }: { children: ReactNode }) {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-ES7V2VYL1D');
-            `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+              gtag('config', 'AW-11172242203');
               var _paq = window._paq = window._paq || [];
-              _paq.push(['trackPageView']);
-              _paq.push(['enableLinkTracking']);
-              (function() {
+              window.addEventListener('load', function () {
+                _paq.push(['trackPageView']);
+                _paq.push(['enableLinkTracking']);
                 var u="https://scaleweb.matomo.cloud/";
                 _paq.push(['setTrackerUrl', u+'matomo.php']);
                 _paq.push(['setSiteId', '44']);
                 var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
                 g.async=true; g.src='https://cdn.matomo.cloud/scaleweb.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-              })();
-            `,
-          }}
-        />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11172242203" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-11172242203');
+              });
             `,
           }}
         />
