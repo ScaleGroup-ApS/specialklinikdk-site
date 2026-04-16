@@ -1,175 +1,256 @@
 // app/components/home/HeroSection.tsx
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
+
+const rise = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
+};
+
 export function HeroSection() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center">
-      {/* Animated floating circles on light background */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)" }}
-      >
+    <section
+      className="relative overflow-hidden isolate"
+      style={{
+        background:
+          "linear-gradient(180deg, #FFFFFF 0%, #FAF8F2 55%, #F3EFE3 100%)",
+      }}
+    >
+      {/* Ambient blobs */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-[-12%] left-[-8%] w-[56%] h-[64%] rounded-full animate-blob"
+          className="absolute top-[-15%] left-[-10%] w-[60%] h-[70%] rounded-full animate-blob"
           style={{
-            background: "radial-gradient(circle, rgba(105,125,168,0.22) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(105,125,168,0.22) 0%, transparent 70%)",
             filter: "blur(90px)",
           }}
         />
         <div
-          className="absolute bottom-[-10%] right-[-5%] w-[48%] h-[58%] rounded-full animate-blob-2"
+          className="absolute bottom-[-15%] right-[-8%] w-[55%] h-[65%] rounded-full animate-blob-2"
           style={{
-            background: "radial-gradient(circle, rgba(140,159,196,0.25) 0%, transparent 70%)",
-            filter: "blur(100px)",
+            background:
+              "radial-gradient(circle, rgba(183,133,91,0.14) 0%, transparent 70%)",
+            filter: "blur(110px)",
           }}
         />
-        <div
-          className="absolute top-[44%] right-[18%] w-[36%] h-[36%] rounded-full animate-blob-3"
-          style={{
-            background: "radial-gradient(circle, rgba(105,125,168,0.16) 0%, transparent 70%)",
-            filter: "blur(70px)",
-          }}
-        />
-
-        {/* Mobile floating circles on sides */}
-        <motion.div
-          className="absolute md:hidden top-[22%] -left-7 w-16 h-16 rounded-full border"
-          style={{ borderColor: "rgba(105,125,168,0.38)", background: "rgba(105,125,168,0.10)" }}
-          animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
-          transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute md:hidden top-[48%] -right-6 w-12 h-12 rounded-full border"
-          style={{ borderColor: "rgba(105,125,168,0.36)", background: "rgba(105,125,168,0.10)" }}
-          animate={{ y: [0, 9, 0], x: [0, -4, 0] }}
-          transition={{ duration: 8.1, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-        />
-        <motion.div
-          className="absolute md:hidden bottom-[18%] -left-5 w-10 h-10 rounded-full border"
-          style={{ borderColor: "rgba(105,125,168,0.34)", background: "rgba(105,125,168,0.08)" }}
-          animate={{ y: [0, -7, 0], x: [0, 3, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
-        />
-
       </div>
 
-      {/* Content + hero image */}
-      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-44 w-full">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div className="max-w-[700px]">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-6"
-          >
-            Tryghed hele vejen
-          </motion.p>
+      {/* Grain */}
+      <div aria-hidden className="absolute inset-0 grain pointer-events-none" />
 
-          <h1
-            className="font-heading text-5xl md:text-7xl font-medium text-secondary leading-[1.1] tracking-tight mb-8"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="block"
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pt-36 md:pt-44 pb-20 md:pb-28">
+        {/* Top bar — clinic meta */}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.05 }}
+          className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.24em] text-[color:var(--color-text-muted)] mb-14 md:mb-20"
+        >
+          <span className="inline-flex items-center gap-2">
+            <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500">
+              <span className="absolute inset-0 rounded-full bg-emerald-500 pulse-dot-outer" />
+            </span>
+            Klinikken er åben
+          </span>
+          <span className="h-px w-6 bg-[color:var(--color-border-strong)]" />
+          <span>Autoriseret læge · Styrelsen for Patientsikkerhed</span>
+          <span className="h-px w-6 bg-[color:var(--color-border-strong)] hidden md:inline-block" />
+          <span className="hidden md:inline">Taastrup · København</span>
+        </motion.div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end"
+        >
+          {/* Headline block */}
+          <div className="lg:col-span-7">
+            <motion.p variants={rise} className="eyebrow mb-8">
+              01 — Specialklinik Taastrup
+            </motion.p>
+
+            <h1 className="display-xxl text-[color:var(--color-ink)]">
+              <motion.span variants={rise} className="block">
+                Tryghed
+              </motion.span>
+              <motion.span variants={rise} className="block">
+                hele{" "}
+                <span className="relative inline-block">
+                  <span className="font-display italic font-light">vejen</span>
+                  <svg
+                    aria-hidden
+                    className="absolute left-0 right-0 -bottom-2 w-full"
+                    viewBox="0 0 200 12"
+                    preserveAspectRatio="none"
+                  >
+                    <motion.path
+                      d="M2 8 C 50 2, 150 2, 198 8"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      style={{ color: "var(--color-accent-warm)" }}
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: reduce ? 1 : 1 }}
+                      transition={{ duration: 1.6, ease: EASE, delay: 0.8 }}
+                    />
+                  </svg>
+                </span>
+                .
+              </motion.span>
+            </h1>
+
+            <motion.p
+              variants={rise}
+              className="mt-10 max-w-xl text-[17px] md:text-[18px] leading-[1.75] text-[color:var(--color-text-muted)]"
             >
-              Velkommen til Specialklinik Taastrup
-            </motion.span>
-          </h1>
+              Rituel drengeomskæring udført af autoriseret læge i rolige,
+              professionelle rammer. Vi guider jer trygt gennem hele forløbet —
+              med faglig omhu, klar information og respekt for jeres valg.
+            </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55 }}
-            className="text-lg md:text-xl leading-[1.7] mb-12"
-            style={{ color: "var(--color-text-muted)", maxWidth: "560px" }}
-          >
-            Professionel omskæring i trygge rammer. Vi udfører rituel omskæring af
-            drengebørn med høj sikkerhed, faglig ekspertise og tydelig vejledning
-            før, under og efter forløbet.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7 }}
-            className="flex flex-wrap gap-4"
-          >
-            <Link to="/omskaering" className="btn-gradient">
-              Læs om omskæring
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-            <Link
-              to="/priser"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 text-secondary hover:bg-slate-100 transition-colors"
+            <motion.div
+              variants={rise}
+              className="mt-12 flex flex-wrap items-center gap-4"
             >
-              Priser
-            </Link>
-          </motion.div>
+              <Link to="/booking" className="btn-gradient">
+                Book tid online
+                <span className="btn-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.6}
+                      d="M5 12h14M13 6l6 6-6 6"
+                    />
+                  </svg>
+                </span>
+              </Link>
+              <Link to="/omskaering" className="btn-outline">
+                Læs om omskæring
+              </Link>
+              <a
+                href="tel:+4520763516"
+                className="ml-1 hidden sm:inline-flex items-center gap-2 text-sm text-[color:var(--color-ink)] animated-link"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.2l-2.25 1.1a11 11 0 005.5 5.5l1.1-2.25a1 1 0 011.2-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"
+                  />
+                </svg>
+                20 76 35 16
+              </a>
+            </motion.div>
           </div>
 
+          {/* Editorial image block */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="hidden lg:flex justify-end"
+            variants={rise}
+            className="lg:col-span-5 relative"
           >
-            <div className="relative w-full max-w-[520px]">
-              <motion.div
-                className="absolute -top-6 -left-6 w-16 h-16 rounded-full border z-10"
-                style={{ borderColor: "rgba(105,125,168,0.45)", background: "rgba(105,125,168,0.10)" }}
-                animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute -bottom-5 -left-4 w-10 h-10 rounded-full border z-10"
-                style={{ borderColor: "rgba(105,125,168,0.45)", background: "rgba(105,125,168,0.12)" }}
-                animate={{ y: [0, -10, 0], x: [0, -8, 0] }}
-                transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-              />
-              <motion.div
-                className="absolute top-6 -right-6 w-14 h-14 rounded-full border z-10"
-                style={{ borderColor: "rgba(105,125,168,0.42)", background: "rgba(105,125,168,0.10)" }}
-                animate={{ y: [0, 10, 0], x: [0, -5, 0] }}
-                transition={{ duration: 7.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-              />
-
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] bg-[color:var(--color-surface-dim-2)] shadow-[0_50px_100px_-40px_rgba(11,16,32,0.35)]">
               <img
                 src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
-                alt="Specialklinik Taastrup"
-                className="relative z-20 w-full h-[360px] object-cover rounded-2xl shadow-2xl"
+                alt="Specialklinik Taastrup — klinikken indefra"
+                className="absolute inset-0 w-full h-full object-cover animate-ken-burns"
               />
+              {/* Brand tag */}
+              <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-white/90">
+                <span>Est. 2015</span>
+                <span>Taastrup, DK</span>
+              </div>
+              {/* Caption card */}
+              <div className="absolute bottom-5 left-5 right-5">
+                <div className="glass-card p-5 flex items-center gap-4">
+                  <div className="flex -space-x-2">
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-xs font-semibold"
+                        style={{
+                          background: [
+                            "linear-gradient(135deg,#697DA8,#4A5D87)",
+                            "linear-gradient(135deg,#B7855B,#8a5f3b)",
+                            "linear-gradient(135deg,#1B2237,#0B1020)",
+                          ][i],
+                          color: "#fff",
+                        }}
+                      >
+                        {["M", "A", "S"][i]}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[13px] font-semibold text-[color:var(--color-ink)] leading-tight">
+                      Hundredvis af forældre har valgt os
+                    </p>
+                    <p className="text-[11px] text-[color:var(--color-text-muted)] mt-0.5">
+                      Dokumenteret forløb · Lovpligtig patientforsikring
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span
-          className="text-xs uppercase tracking-widest"
-          style={{ color: "rgba(31,41,55,0.55)" }}
-        >
-          Scroll
-        </span>
+            {/* Floating chip */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, rotate: -4 }}
+              animate={{ opacity: 1, scale: 1, rotate: -4 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}
+              className="hidden md:flex absolute -left-8 -bottom-6 card-elevated px-5 py-4 items-center gap-3"
+              style={{ transform: "rotate(-4deg)" }}
+            >
+              <span className="text-[color:var(--color-accent-warm)]">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2l2.39 4.84L20 8l-4 3.9.94 5.47L12 14.77 7.06 17.37 8 11.9 4 8l5.61-1.16L12 2z" />
+                </svg>
+              </span>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)]">Anbefales af forældre</p>
+                <p className="text-sm font-semibold text-[color:var(--color-ink)]">4.9 / 5 · 100+ anmeldelser</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll cue */}
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-px h-8"
-          style={{ background: "linear-gradient(to bottom, rgba(31,41,55,0.45), transparent)" }}
-        />
-      </motion.div>
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6, duration: 1 }}
+          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-3 text-[color:var(--color-text-muted)]"
+        >
+          <span className="text-[10px] uppercase tracking-[0.32em]">Scroll</span>
+          <motion.span
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+            className="block w-px h-10"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(11,16,32,0.45), transparent)",
+            }}
+          />
+        </motion.div>
+      </div>
     </section>
   );
 }

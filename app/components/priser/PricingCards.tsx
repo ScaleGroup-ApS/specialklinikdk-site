@@ -2,190 +2,172 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
-interface Plan {
-  name: string;
-  subtitle: string;
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+type Tier = {
+  ageGroup: string;
+  method: string;
+  description: string;
   price: string;
   unit: string;
-  featured: boolean;
-  features: string[];
-  cta: string;
-  href: string;
-}
+  featured?: boolean;
+  note?: string;
+};
 
-const PLANS: Plan[] = [
+const TIERS: Tier[] = [
   {
-    name: "Konsultation",
-    subtitle: "Kom godt i gang",
-    price: "595",
-    unit: "kr. / konsultation",
-    featured: false,
-    features: [
-      "Individuel vurdering",
-      "Faglig rådgivning",
-      "Behandlingsplan",
-      "Opfølgende mail-support",
-    ],
-    cta: "Book konsultation",
-    href: "/kontakt",
+    ageGroup: "0 – 6 måneder",
+    method: "Ringmetoden",
+    description:
+      "Skånsom, sutur-fri metode med forudsigelig heling. Ideel til nyfødte og spædbørn.",
+    price: "2.500",
+    unit: "kr. · inkl. forsikring",
   },
   {
-    name: "Behandlingsforløb",
-    subtitle: "Vores mest populære",
-    price: "2.495",
-    unit: "kr. / forløb",
+    ageGroup: "6 måneder – 1 år",
+    method: "Ringmetoden",
+    description:
+      "Samme tilgang med ekstra tid og tilpasning. Lokalbedøvelse og beroligende hvor det er relevant.",
+    price: "3.000",
+    unit: "kr. · inkl. forsikring",
     featured: true,
-    features: [
-      "Alt i Konsultation",
-      "5 behandlingssessioner",
-      "Løbende journalføring",
-      "Prioriteret booking",
-      "30-dages opfølgning",
-      "Direkte adgang til behandler",
-    ],
-    cta: "Start dit forløb",
-    href: "/kontakt",
+    note: "Mest valgte",
   },
   {
-    name: "Komplet Pakke",
-    subtitle: "Fuld sundhedsomsorg",
-    price: "4.995",
-    unit: "kr. / kvartal",
-    featured: false,
-    features: [
-      "Alt i Behandlingsforløb",
-      "Ubegrænset konsultationer",
-      "Kvartalsvise sundhedstjek",
-      "Præventiv medicin",
-      "VIP-adgang til klinikken",
-    ],
-    cta: "Kontakt os",
-    href: "/kontakt",
+    ageGroup: "6 – 11 år",
+    method: "Klassisk metode · lokalbedøvelse",
+    description:
+      "Rolig gennemgang, grundig smertelindring og fokus på tryghed igennem hele besøget.",
+    price: "3.500",
+    unit: "kr. · inkl. forsikring",
+  },
+  {
+    ageGroup: "2 – 6 år",
+    method: "Fuld bedøvelse",
+    description:
+      "Udføres i fuld bedøvelse. Aftale laves individuelt — kontakt klinikken på mail for planlægning.",
+    price: "Efter aftale",
+    unit: "Kontakt os",
+  },
+  {
+    ageGroup: "2 – 11 år",
+    method: "Fuld bedøvelse · narkoseteam",
+    description:
+      "Indgreb under fuld bedøvelse med komplet narkoseforløb og efterforløb.",
+    price: "9.000",
+    unit: "kr. · inkl. forsikring",
   },
 ];
 
-function CheckIcon() {
+function Row({ t, i }: { t: Tier; i: number }) {
   return (
-    <svg
-      className="w-5 h-5 flex-shrink-0"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.8, ease: EASE, delay: i * 0.06 }}
+      className={[
+        "group relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center py-8 md:py-10 border-b border-[color:var(--color-border)]",
+        t.featured ? "bg-[color:var(--color-surface-dim)] px-6 md:px-10 -mx-6 md:-mx-10 rounded-2xl border-b-0 md:border md:border-[color:var(--color-border-strong)]" : "",
+      ].join(" ")}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>
-  );
-}
-
-function PricingCard({ plan }: { plan: Plan }) {
-  const inner = (
-    <div
-      className="flex flex-col h-full p-8"
-      style={{
-        background: "#FFFFFF",
-        borderRadius: plan.featured ? "calc(1rem - 1px)" : "1rem",
-        border: plan.featured ? "none" : "1px solid var(--color-border)",
-        boxShadow: plan.featured
-          ? "0 20px 60px rgba(79,209,197,0.12)"
-          : "0 10px 30px rgba(15,23,42,0.05)",
-      }}
-    >
-      {/* Badge */}
-      {plan.featured && (
-        <div className="mb-4">
-          <span
-            className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-white"
-            style={{
-              background: "linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%)",
-            }}
-          >
-            Mest Populære
-          </span>
-        </div>
+      {t.featured && (
+        <span className="absolute -top-3 left-6 md:left-10 inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.24em] bg-[color:var(--color-ink)] text-white">
+          <span className="w-1 h-1 rounded-full bg-[color:var(--color-accent-warm-soft)]" />
+          {t.note ?? "Populær"}
+        </span>
       )}
 
-      {/* Name */}
-      <p className="text-text-muted text-sm font-medium mb-2">{plan.subtitle}</p>
-      <h3
-        className="font-heading text-2xl font-semibold text-secondary mb-6"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        {plan.name}
-      </h3>
+      <div className="md:col-span-3">
+        <p className="text-[11px] uppercase tracking-[0.26em] text-[color:var(--color-accent-warm)]">
+          Aldersgruppe
+        </p>
+        <p className="mt-2 font-display text-2xl md:text-[26px] font-light tracking-tight text-[color:var(--color-ink)]">
+          {t.ageGroup}
+        </p>
+      </div>
 
-      {/* Price */}
-      <div className="mb-8">
-        <span
-          className="font-heading text-5xl font-light text-secondary"
-          style={{ fontFamily: "var(--font-heading)" }}
+      <div className="md:col-span-5">
+        <p className="text-[11px] uppercase tracking-[0.26em] text-[color:var(--color-text-muted)] mb-2">
+          Metode
+        </p>
+        <p className="text-[15px] font-medium text-[color:var(--color-ink)]">
+          {t.method}
+        </p>
+        <p className="mt-2 text-[14px] leading-[1.7] text-[color:var(--color-text-muted)] max-w-prose">
+          {t.description}
+        </p>
+      </div>
+
+      <div className="md:col-span-2 md:text-right">
+        <p className="font-display text-[40px] md:text-[44px] font-light leading-none tracking-tight text-[color:var(--color-ink)]">
+          {t.price}
+        </p>
+        <p className="text-[12px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)] mt-1">
+          {t.unit}
+        </p>
+      </div>
+
+      <div className="md:col-span-2 md:justify-self-end">
+        <Link
+          to="/booking"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--color-ink)] animated-link"
         >
-          {plan.price}
-        </span>
-        <p className="text-text-muted text-sm mt-1">{plan.unit}</p>
+          Book tid
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </Link>
       </div>
-
-      {/* Features */}
-      <ul className="space-y-3 mb-8 flex-1">
-        {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3">
-            <span className="text-primary mt-0.5">
-              <CheckIcon />
-            </span>
-            <span className="text-sm text-text leading-[1.6]">{feature}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* CTA */}
-      <Link
-        to={plan.href}
-        className={plan.featured ? "btn-gradient justify-center" : "btn-outline justify-center"}
-        style={{ width: "100%" }}
-      >
-        {plan.cta}
-      </Link>
-    </div>
+    </motion.article>
   );
-
-  if (plan.featured) {
-    return (
-      <div
-        className="flex-1 rounded-2xl"
-        style={{
-          padding: "1px",
-          background: "linear-gradient(135deg, #4FD1C5 0%, #3a8a83 100%)",
-        }}
-      >
-        {inner}
-      </div>
-    );
-  }
-
-  return <div className="flex-1">{inner}</div>;
 }
 
 export function PricingCards() {
   return (
-    <section className="py-24" style={{ background: "var(--color-surface-dim)" }}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-          {PLANS.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.15 }}
-              className="flex"
-            >
-              <PricingCard plan={plan} />
-            </motion.div>
+    <section className="relative bg-white">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-20 md:py-28">
+        <div className="grid lg:grid-cols-12 gap-10 mb-12 md:mb-16 items-end">
+          <div className="lg:col-span-6">
+            <p className="eyebrow mb-5">Prisoversigt</p>
+            <h2 className="display-xl text-[color:var(--color-ink)]">
+              Pris efter{" "}
+              <span className="font-display italic font-light">alder & metode.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-5 lg:col-start-8">
+            <p className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)]">
+              Alle priser er inklusive lovpligtig patientforsikring, samtale
+              inden indgrebet og skriftlig efterbehandlingsvejledning. Kontakt
+              os hvis I er i tvivl om, hvad der er bedst for jeres barn.
+            </p>
+          </div>
+        </div>
+
+        <div className="border-t border-[color:var(--color-border)]">
+          {TIERS.map((t, i) => (
+            <Row key={`${t.ageGroup}-${t.method}`} t={t} i={i} />
           ))}
+        </div>
+
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-6">
+          <p className="text-[15px] text-[color:var(--color-text-muted)] max-w-lg">
+            Vi anbefaler ofte omskæring i fuld bedøvelse til børn over
+            spædbarnsalderen. Kontakt klinikken for individuel rådgivning.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link to="/booking" className="btn-gradient">
+              Book tid online
+              <span className="btn-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </Link>
+            <Link to="/kontakt-os" className="btn-outline">
+              Skriv til klinikken
+            </Link>
+          </div>
         </div>
       </div>
     </section>

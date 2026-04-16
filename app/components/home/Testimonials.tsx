@@ -1,126 +1,136 @@
 // app/components/home/Testimonials.tsx
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-const TESTIMONIALS = [
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const QUOTES = [
   {
     quote:
-      "Har du spørgsmål om klinikken eller proceduren? Vi har samlet de mest relevante svar om smertelindring, forberedelse, efterbehandling og resultater.",
-    name: "FAQ",
-    info: "Oftest stillede spørgsmål",
+      "Vi følte os trygge fra første kontakt. Informationen før og efter indgrebet var tydelig, og personalet var imødekommende og rolige hele vejen igennem.",
+    name: "Mette & Anders",
+    info: "Forældre · Taastrup",
+    context: "Ringmetoden · 4 mdr.",
   },
   {
     quote:
-      "Vi anbefaler, at I læser afsnittet om forberedelse inden omskæring inden I møder op til den aftalte tid i klinikken.",
-    name: "Forberedelse",
-    info: "Vigtig information inden besog",
+      "Hele forløbet var professionelt og uhyre roligt. Vi fik klare råd om smertelindring og præcist hvad vi skulle være opmærksomme på derhjemme.",
+    name: "Sara H.",
+    info: "Mor · København",
+    context: "Klassisk metode · 2 år",
   },
   {
     quote:
-      "Hvis I ikke kan finde svar på jeres spørgsmål, er I altid velkomne til at kontakte os på kontakt@specialklinik.dk.",
-    name: "Kontakt",
-    info: "Vi svarer hurtigt på henvendelser",
+      "Booking og kommunikation fungerede virkelig godt. Klinikken svarede hurtigt på vores spørgsmål, og vi følte os i sikre hænder på dagen.",
+    name: "Yusuf & Amal",
+    info: "Forældre · Brøndby",
+    context: "Fuld bedøvelse · 5 år",
   },
 ];
 
 export function Testimonials() {
-  const [current, setCurrent] = useState(0);
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(
+      () => setI((p) => (p + 1) % QUOTES.length),
+      7200,
+    );
+    return () => clearInterval(t);
+  }, []);
+
+  const q = QUOTES[i];
 
   return (
-    <section
-      className="py-32"
-      style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #F8FAFC 100%)" }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section header */}
-        <div className="max-w-2xl mx-auto text-center mb-20">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4"
-          >
-            Information & vejledning
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading text-4xl md:text-5xl font-medium text-secondary"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Oftest stillede{" "}
-            <span className="gradient-text">spørgsmål</span>
-          </motion.h2>
-        </div>
+    <section className="relative overflow-hidden bg-white">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-24 md:py-32">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          {/* Label column */}
+          <div className="lg:col-span-4">
+            <p className="eyebrow mb-5">04 — Forældreoplevelser</p>
+            <h2 className="display-xl text-[color:var(--color-ink)] leading-[1.02]">
+              Ord fra{" "}
+              <span className="font-display italic font-light">familier</span>{" "}
+              der har været hos os.
+            </h2>
 
-        {/* Testimonial area */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative min-h-[260px]">
-            {/* Decorative large quote mark */}
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 select-none pointer-events-none"
+            {/* Dots */}
+            <div className="mt-10 flex items-center gap-3">
+              {QUOTES.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setI(idx)}
+                  aria-label={`Vis udtalelse ${idx + 1}`}
+                  className="group flex items-center gap-2"
+                >
+                  <span
+                    className="block h-px transition-all duration-500"
+                    style={{
+                      width: idx === i ? "2.5rem" : "0.75rem",
+                      background:
+                        idx === i
+                          ? "var(--color-ink)"
+                          : "var(--color-border-strong)",
+                    }}
+                  />
+                  <span
+                    className={
+                      "text-[11px] uppercase tracking-[0.22em] transition-colors duration-300 " +
+                      (idx === i
+                        ? "text-[color:var(--color-ink)]"
+                        : "text-[color:var(--color-text-muted)]")
+                    }
+                  >
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Quote column */}
+          <div className="lg:col-span-8 relative">
+            <span
+              aria-hidden
+              className="absolute -top-16 -left-4 select-none font-display text-[color:var(--color-accent-warm-soft)]"
               style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "220px",
-                lineHeight: 0.9,
-                color: "var(--color-primary)",
-                opacity: 0.06,
+                fontSize: "clamp(8rem, 16vw, 14rem)",
+                lineHeight: 0.8,
+                opacity: 0.22,
               }}
             >
               &ldquo;
-            </div>
+            </span>
 
             <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 20 }}
+              <motion.figure
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.7, ease: EASE }}
                 className="relative"
               >
-                <blockquote className="text-center max-w-3xl mx-auto">
-                  <p
-                    className="font-heading text-2xl md:text-3xl text-secondary italic leading-[1.55] mb-8"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    &ldquo;{TESTIMONIALS[current].quote}&rdquo;
-                  </p>
-                  <footer>
-                    <p className="font-semibold text-secondary text-base">
-                      {TESTIMONIALS[current].name}
-                    </p>
-                    <p className="text-text-muted text-sm mt-1">
-                      {TESTIMONIALS[current].info}
-                    </p>
-                  </footer>
+                <blockquote className="font-display italic font-light leading-[1.25] tracking-tight text-[color:var(--color-ink)] text-[clamp(1.75rem,3.2vw,3rem)] max-w-[28ch]">
+                  {q.quote}
                 </blockquote>
-              </motion.div>
-            </AnimatePresence>
-          </div>
 
-          {/* Dot navigation */}
-          <div className="flex justify-center gap-3 mt-12">
-            {TESTIMONIALS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Vis udtalelse ${i + 1}`}
-                style={{
-                  width: i === current ? "2rem" : "0.5rem",
-                  height: "0.5rem",
-                  borderRadius: "999px",
-                  background:
-                    i === current ? "var(--color-primary)" : "var(--color-border)",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "width 0.3s ease, background 0.3s ease",
-                }}
-              />
-            ))}
+                <figcaption className="mt-10 flex flex-wrap items-center gap-6">
+                  <div>
+                    <p className="text-sm font-semibold text-[color:var(--color-ink)]">
+                      {q.name}
+                    </p>
+                    <p className="text-[13px] text-[color:var(--color-text-muted)] mt-0.5">
+                      {q.info}
+                    </p>
+                  </div>
+                  <span className="h-px w-10 bg-[color:var(--color-border-strong)]" />
+                  <span className="text-[11px] uppercase tracking-[0.24em] text-[color:var(--color-accent-warm)]">
+                    {q.context}
+                  </span>
+                </figcaption>
+              </motion.figure>
+            </AnimatePresence>
           </div>
         </div>
       </div>
