@@ -388,6 +388,141 @@ body {
   gap: 4rem;
 }
 
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ── Playful warmth — additional motion utilities ────────────────────────── */
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(-12deg); }
+  40%       { transform: rotate(14deg); }
+  60%       { transform: rotate(-8deg); }
+  80%       { transform: rotate(10deg); }
+}
+.animate-wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+.animate-float-soft { animation: floatSoft 4.5s ease-in-out infinite; }
+
+@keyframes bobTilt {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-5px) rotate(-2deg); }
+}
+.animate-bob-tilt { animation: bobTilt 5s ease-in-out infinite; }
+
+/* Warm "highlighter" sweep across a word — draws from left to right on scroll-in */
+.marker-sweep {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  padding: 0 0.12em;
+}
+.marker-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 30% -0.05em 14% -0.05em;
+  background: linear-gradient(90deg, rgba(217,184,147,0.55), rgba(217,184,147,0.25));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+  border-radius: 4px;
+}
+.marker-sweep.marker-sweep-visible::before {
+  transform: scaleX(1);
+}
+
+/* Shimmering text — subtle gradient sweep on italic display words */
+@keyframes shimmerSweep {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+.text-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-ink) 30%,
+    var(--color-accent-warm) 50%,
+    var(--color-ink) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerSweep 3.8s ease-in-out infinite;
+}
+
+/* Ticket / sticker */
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--color-border-strong);
+  box-shadow: 0 10px 28px -18px rgba(11, 16, 32, 0.25),
+              0 2px 6px -3px rgba(11, 16, 32, 0.12);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.sticker-warm {
+  background: linear-gradient(135deg, #FFF9F0, #FCEFDB);
+  border-color: rgba(183, 133, 91, 0.35);
+  color: var(--color-accent-warm);
+}
+
+.sticker-ink {
+  background: var(--color-ink);
+  color: var(--color-text-on-dark);
+  border-color: transparent;
+}
+
+/* Dotted friendly tape */
+.dotted-rule {
+  background-image: radial-gradient(circle, var(--color-border-strong) 1px, transparent 1px);
+  background-size: 8px 8px;
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 2px;
+}
+
+/* Soft card glow on hover (for service cards / pricing rows) */
+.glow-on-hover { transition: box-shadow 0.5s ease; }
+.glow-on-hover:hover {
+  box-shadow: 0 40px 80px -40px rgba(183, 133, 91, 0.35),
+              0 10px 30px -20px rgba(11, 16, 32, 0.25);
+}
+
+/* Animated number roll for metric indices (hover) */
+.number-roll {
+  display: inline-flex;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1;
+  vertical-align: baseline;
+}
+.number-roll span {
+  display: block;
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.number-roll:hover span,
+.group:hover .number-roll span {
+  transform: translateY(-100%);
+}
+
 /* ── WordPress Content Styles ─────────────────────────────────────────────── */
 
 .wp-content {

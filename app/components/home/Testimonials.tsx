@@ -1,6 +1,8 @@
 // app/components/home/Testimonials.tsx
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -47,10 +49,27 @@ export function Testimonials() {
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           {/* Label column */}
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-5">04 — Forældreoplevelser</p>
+            <div className="mb-6 flex items-center gap-3">
+              <span className="sticker sticker-warm">
+                <span className="text-base leading-none">💬</span>
+                Forældre fortæller
+              </span>
+            </div>
+            <p className="eyebrow mb-4">04 — Forældreoplevelser</p>
             <h2 className="display-xl text-[color:var(--color-ink)] leading-[1.02]">
-              Ord fra{" "}
-              <span className="font-display italic font-light">familier</span>{" "}
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Ord fra"
+                className="block"
+              />{" "}
+              <span className="relative inline-block">
+                <span className="font-display italic font-light">familier</span>
+                <HandDrawnUnderline
+                  className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                  delay={0.7}
+                />
+              </span>{" "}
               der har været hos os.
             </h2>
 
@@ -90,17 +109,20 @@ export function Testimonials() {
 
           {/* Quote column */}
           <div className="lg:col-span-8 relative">
-            <span
+            <motion.span
               aria-hidden
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.22, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: EASE }}
               className="absolute -top-16 -left-4 select-none font-display text-[color:var(--color-accent-warm-soft)]"
               style={{
                 fontSize: "clamp(8rem, 16vw, 14rem)",
                 lineHeight: 0.8,
-                opacity: 0.22,
               }}
             >
               &ldquo;
-            </span>
+            </motion.span>
 
             <AnimatePresence mode="wait">
               <motion.figure

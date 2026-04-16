@@ -2,6 +2,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -52,8 +54,21 @@ export function ProcessTimeline() {
           <div className="lg:col-span-7">
             <p className="eyebrow mb-5">05 — Jeres forløb</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
-              Fire rolige trin —{" "}
-              <span className="font-display italic font-light">fra første tanke til heling.</span>
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Fire rolige trin —"
+                className="block"
+              />
+              <span className="relative inline-block">
+                <span className="font-display italic font-light">
+                  fra første tanke til heling.
+                </span>
+                <HandDrawnUnderline
+                  className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                  delay={0.8}
+                />
+              </span>
             </h2>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
@@ -89,12 +104,16 @@ export function ProcessTimeline() {
                 className="relative pl-10 md:pl-16 grid md:grid-cols-12 gap-6 md:gap-10 items-start"
               >
                 {/* Dot */}
-                <span
+                <motion.span
                   aria-hidden
-                  className="absolute left-0 top-1.5 w-[23px] h-[23px] rounded-full bg-white border border-[color:var(--color-border-strong)] flex items-center justify-center"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ type: "spring", stiffness: 320, damping: 14, delay: i * 0.08 + 0.1 }}
+                  className="absolute left-0 top-1.5 w-[23px] h-[23px] rounded-full bg-white border border-[color:var(--color-border-strong)] flex items-center justify-center shadow-[0_4px_12px_-4px_rgba(11,16,32,0.25)]"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--color-ink)]" />
-                </span>
+                </motion.span>
 
                 <div className="md:col-span-3">
                   <p className="text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-accent-warm)]">

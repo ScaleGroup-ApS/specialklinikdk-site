@@ -1,18 +1,11 @@
 // app/components/home/HeroSection.tsx
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
+import { MagneticButton } from "~/components/motion/MagneticButton";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-const stagger = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-
-const rise = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
-};
 
 export function HeroSection() {
   const reduce = useReducedMotion();
@@ -39,7 +32,7 @@ export function HeroSection() {
           className="absolute bottom-[-15%] right-[-8%] w-[55%] h-[65%] rounded-full animate-blob-2"
           style={{
             background:
-              "radial-gradient(circle, rgba(183,133,91,0.14) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(183,133,91,0.18) 0%, transparent 70%)",
             filter: "blur(110px)",
           }}
         />
@@ -68,51 +61,57 @@ export function HeroSection() {
           <span className="hidden md:inline">Taastrup · København</span>
         </motion.div>
 
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="visible"
-          className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end"
-        >
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           {/* Headline block */}
           <div className="lg:col-span-7">
-            <motion.p variants={rise} className="eyebrow mb-8">
-              01 — Specialklinik Taastrup
-            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="mb-10 flex items-center gap-3"
+            >
+              <span className="sticker sticker-warm">
+                <span className="animate-wave text-base leading-none">👋</span>
+                Hej forældre
+              </span>
+              <span className="eyebrow">01 — Specialklinik Taastrup</span>
+            </motion.div>
 
             <h1 className="display-xxl text-[color:var(--color-ink)]">
-              <motion.span variants={rise} className="block">
-                Tryghed
-              </motion.span>
-              <motion.span variants={rise} className="block">
-                hele{" "}
-                <span className="relative inline-block">
-                  <span className="font-display italic font-light">vejen</span>
-                  <svg
-                    aria-hidden
-                    className="absolute left-0 right-0 -bottom-2 w-full"
-                    viewBox="0 0 200 12"
-                    preserveAspectRatio="none"
-                  >
-                    <motion.path
-                      d="M2 8 C 50 2, 150 2, 198 8"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      style={{ color: "var(--color-accent-warm)" }}
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: reduce ? 1 : 1 }}
-                      transition={{ duration: 1.6, ease: EASE, delay: 0.8 }}
-                    />
-                  </svg>
-                </span>
+              <AnimatedWords as="span" text="Tryghed" className="block" />
+              <AnimatedWords
+                as="span"
+                text="hele"
+                delay={0.12}
+                className="inline-block mr-[0.22em]"
+              />
+              <span className="relative inline-block">
+                <motion.span
+                  initial={{ y: reduce ? 0 : "100%", opacity: reduce ? 1 : 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  transition={{ duration: 0.9, ease: EASE, delay: 0.28 }}
+                  className="inline-block font-display italic font-light"
+                >
+                  vejen
+                </motion.span>
+                <HandDrawnUnderline
+                  className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                  delay={1.1}
+                />
+              </span>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
                 .
               </motion.span>
             </h1>
 
             <motion.p
-              variants={rise}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.6 }}
               className="mt-10 max-w-xl text-[17px] md:text-[18px] leading-[1.75] text-[color:var(--color-text-muted)]"
             >
               Rituel drengeomskæring udført af autoriseret læge i rolige,
@@ -121,22 +120,26 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div
-              variants={rise}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.8 }}
               className="mt-12 flex flex-wrap items-center gap-4"
             >
-              <Link to="/booking" className="btn-gradient">
-                Book tid online
-                <span className="btn-arrow">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.6}
-                      d="M5 12h14M13 6l6 6-6 6"
-                    />
-                  </svg>
-                </span>
-              </Link>
+              <MagneticButton strength={6}>
+                <Link to="/booking" className="btn-gradient">
+                  Book tid online
+                  <span className="btn-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.6}
+                        d="M5 12h14M13 6l6 6-6 6"
+                      />
+                    </svg>
+                  </span>
+                </Link>
+              </MagneticButton>
               <Link to="/omskaering" className="btn-outline">
                 Læs om omskæring
               </Link>
@@ -144,12 +147,7 @@ export function HeroSection() {
                 href="tel:+4520763516"
                 className="ml-1 hidden sm:inline-flex items-center gap-2 text-sm text-[color:var(--color-ink)] animated-link"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -164,16 +162,28 @@ export function HeroSection() {
 
           {/* Editorial image block */}
           <motion.div
-            variants={rise}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.45 }}
             className="lg:col-span-5 relative"
           >
+            {/* Back "polaroid" layer */}
+            <div
+              aria-hidden
+              className="hidden md:block absolute -top-6 -right-4 w-40 h-52 rounded-2xl bg-white border border-[color:var(--color-border)] shadow-[0_30px_60px_-30px_rgba(11,16,32,0.25)] rotate-[6deg]"
+              style={{
+                backgroundImage: "url(/images/Klinikken-scaled%20(1).jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] bg-[color:var(--color-surface-dim-2)] shadow-[0_50px_100px_-40px_rgba(11,16,32,0.35)]">
               <img
                 src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
                 alt="Specialklinik Taastrup — klinikken indefra"
                 className="absolute inset-0 w-full h-full object-cover animate-ken-burns"
               />
-              {/* Brand tag */}
               <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-white/90">
                 <span>Est. 2015</span>
                 <span>Taastrup, DK</span>
@@ -213,11 +223,10 @@ export function HeroSection() {
 
             {/* Floating chip */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: -4 }}
-              animate={{ opacity: 1, scale: 1, rotate: -4 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}
-              className="hidden md:flex absolute -left-8 -bottom-6 card-elevated px-5 py-4 items-center gap-3"
-              style={{ transform: "rotate(-4deg)" }}
+              initial={{ opacity: 0, scale: 0.9, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 1.3 }}
+              className="hidden md:flex absolute -left-8 -bottom-6 card-elevated px-5 py-4 items-center gap-3 animate-bob-tilt"
             >
               <span className="text-[color:var(--color-accent-warm)]">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,7 +239,7 @@ export function HeroSection() {
               </div>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Scroll cue */}
         <motion.div

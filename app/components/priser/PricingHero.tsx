@@ -1,5 +1,7 @@
 // app/components/priser/PricingHero.tsx
 import { motion } from "framer-motion";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -34,15 +36,26 @@ export function PricingHero() {
           Priser · Transparent & inkl. patientforsikring
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
-          className="display-xxl text-[color:var(--color-ink)] max-w-[14ch]"
-        >
-          Tydelige priser{" "}
-          <span className="font-display italic font-light">— ingen tillæg.</span>
-        </motion.h1>
+        <h1 className="display-xxl text-[color:var(--color-ink)] max-w-[14ch]">
+          <AnimatedWords
+            as="span"
+            text="Tydelige priser"
+            className="block"
+            delay={0.1}
+          />
+          <span className="relative inline-block">
+            <AnimatedWords
+              as="span"
+              text="— ingen tillæg."
+              className="font-display italic font-light"
+              delay={0.3}
+            />
+            <HandDrawnUnderline
+              className="absolute left-0 right-0 -bottom-1 w-full h-3"
+              delay={1.1}
+            />
+          </span>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}

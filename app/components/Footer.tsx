@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
 
 interface FooterProps {
   siteName?: string;
@@ -35,10 +36,19 @@ export function Footer({
           <div className="lg:col-span-7">
             <p className="eyebrow eyebrow-light mb-5">Specialklinik Taastrup</p>
             <h3 className="display-xl text-white leading-[1.05] max-w-3xl">
-              Et roligt, professionelt forløb —{" "}
-              <span className="font-display italic font-light text-[color:var(--color-accent-warm-soft)]">
-                kun et klik væk.
-              </span>
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Et roligt, professionelt forløb —"
+                className="block"
+              />
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="kun et klik væk."
+                className="block font-display italic font-light text-[color:var(--color-accent-warm-soft)]"
+                delay={0.2}
+              />
             </h3>
           </div>
           <div className="lg:col-span-5 flex lg:justify-end items-end">

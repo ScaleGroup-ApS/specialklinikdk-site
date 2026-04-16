@@ -1,6 +1,8 @@
 // app/components/priser/PricingCards.tsx
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -72,10 +74,18 @@ function Row({ t, i }: { t: Tier; i: number }) {
       ].join(" ")}
     >
       {t.featured && (
-        <span className="absolute -top-3 left-6 md:left-10 inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.24em] bg-[color:var(--color-ink)] text-white">
-          <span className="w-1 h-1 rounded-full bg-[color:var(--color-accent-warm-soft)]" />
+        <motion.span
+          initial={{ opacity: 0, y: -6, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 320, damping: 16, delay: 0.2 }}
+          className="absolute -top-3 left-6 md:left-10 inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.24em] bg-[color:var(--color-ink)] text-white shadow-[0_10px_20px_-8px_rgba(11,16,32,0.45)]"
+        >
+          <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent-warm-soft)]">
+            <span className="absolute inset-0 rounded-full bg-[color:var(--color-accent-warm-soft)] pulse-dot-outer" />
+          </span>
           {t.note ?? "Populær"}
-        </span>
+        </motion.span>
       )}
 
       <div className="md:col-span-3">
@@ -131,8 +141,19 @@ export function PricingCards() {
           <div className="lg:col-span-6">
             <p className="eyebrow mb-5">Prisoversigt</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
-              Pris efter{" "}
-              <span className="font-display italic font-light">alder & metode.</span>
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Pris efter"
+                className="block"
+              />
+              <span className="relative inline-block">
+                <span className="font-display italic font-light">alder & metode.</span>
+                <HandDrawnUnderline
+                  className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                  delay={0.7}
+                />
+              </span>
             </h2>
           </div>
           <div className="lg:col-span-5 lg:col-start-8">

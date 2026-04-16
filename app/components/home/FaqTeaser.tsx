@@ -2,6 +2,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -32,11 +34,29 @@ export function FaqTeaser() {
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-24 md:py-32">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-32">
-            <p className="eyebrow mb-5">06 — Ofte stillede spørgsmål</p>
+            <div className="mb-5 flex items-center gap-3">
+              <span className="sticker sticker-warm">
+                <span className="text-base leading-none">💡</span>
+                Spørgsmål & svar
+              </span>
+            </div>
+            <p className="eyebrow mb-4">06 — Ofte stillede spørgsmål</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
-              Tydelige svar{" "}
-              <span className="font-display italic font-light">
-                når I har brug for dem.
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Tydelige svar"
+                className="block"
+              />
+              <span className="relative inline-block">
+                <span className="font-display italic font-light">
+                  når I har brug for dem.
+                </span>
+                <HandDrawnUnderline
+                  className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                  delay={0.7}
+                  variant="scribble"
+                />
               </span>
             </h2>
             <p className="mt-8 text-[15px] leading-[1.8] text-[color:var(--color-text-muted)] max-w-md">

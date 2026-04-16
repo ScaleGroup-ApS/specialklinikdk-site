@@ -1,6 +1,8 @@
 // app/components/home/ServicesSection.tsx
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -67,9 +69,21 @@ export function ServicesSection() {
           <div className="lg:col-span-7">
             <p className="eyebrow mb-5">03 — Metoder & forløb</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
-              Valget af metode{" "}
-              <span className="font-display italic font-light">
-                tilpasses jeres barn.
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Valget af metode"
+                className="block"
+              />{" "}
+              <span className="relative inline-block">
+                <span className="font-display italic font-light">
+                  tilpasses jeres barn.
+                </span>
+                <HandDrawnUnderline
+                  className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                  delay={0.7}
+                  variant="scribble"
+                />
               </span>
             </h2>
           </div>
@@ -106,8 +120,12 @@ export function ServicesSection() {
 
                 <div className="relative">
                   <div className="flex items-start justify-between mb-10">
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] transition-colors duration-500">
-                      {m.index}
+                    <span className="number-roll text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] transition-colors duration-500">
+                      <span>
+                        {m.index}
+                        <br />
+                        →
+                      </span>
                     </span>
                     <span className="text-[11px] uppercase tracking-[0.24em] px-3 py-1 rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] group-hover:border-white/20 transition-colors duration-500">
                       {m.meta}

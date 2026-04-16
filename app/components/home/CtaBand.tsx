@@ -1,6 +1,8 @@
 // app/components/home/CtaBand.tsx
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { MagneticButton } from "~/components/motion/MagneticButton";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -40,18 +42,22 @@ export function CtaBand() {
             >
               07 — Klar, når I er klar
             </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
-              className="display-xxl text-white"
-            >
-              Book en tid{" "}
-              <span className="font-display italic font-light text-[color:var(--color-accent-warm-soft)]">
-                — i trygge hænder.
-              </span>
-            </motion.h2>
+            <h2 className="display-xxl text-white">
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="Book en tid"
+                className="block"
+                delay={0.05}
+              />
+              <AnimatedWords
+                as="span"
+                mode="inView"
+                text="— i trygge hænder."
+                className="block font-display italic font-light text-[color:var(--color-accent-warm-soft)]"
+                delay={0.2}
+              />
+            </h2>
           </div>
 
           <motion.div
@@ -66,14 +72,16 @@ export function CtaBand() {
               direkte for en uforpligtende samtale om forløbet.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link to="/booking" className="btn-gradient btn-on-dark">
-                Book tid
-                <span className="btn-arrow">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </span>
-              </Link>
+              <MagneticButton strength={6}>
+                <Link to="/booking" className="btn-gradient btn-on-dark">
+                  Book tid
+                  <span className="btn-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </Link>
+              </MagneticButton>
               <a href="tel:+4520763516" className="btn-gradient btn-outline-on-dark">
                 20 76 35 16
               </a>
