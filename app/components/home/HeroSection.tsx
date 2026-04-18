@@ -41,13 +41,13 @@ export function HeroSection() {
       {/* Grain */}
       <div aria-hidden className="absolute inset-0 grain pointer-events-none" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pt-36 md:pt-44 pb-20 md:pb-28">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pt-24 md:pt-28 pb-20 md:pb-28">
         {/* Top bar — clinic meta */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.05 }}
-          className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.24em] text-[color:var(--color-text-muted)] mb-14 md:mb-20"
+          className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.24em] text-[color:var(--color-text-muted)] mb-8 md:mb-10"
         >
           <span className="inline-flex items-center gap-2">
             <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500">
@@ -64,19 +64,6 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           {/* Headline block */}
           <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              className="mb-10 flex items-center gap-3"
-            >
-              <span className="sticker sticker-warm">
-                <span className="animate-wave text-base leading-none">👋</span>
-                Hej forældre
-              </span>
-              <span className="eyebrow">01 — Specialklinik Taastrup</span>
-            </motion.div>
-
             <h1 className="display-xxl text-[color:var(--color-ink)]">
               <AnimatedWords as="span" text="Tryghed" className="block" />
               <AnimatedWords

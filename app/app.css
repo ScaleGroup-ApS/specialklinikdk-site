@@ -3,7 +3,7 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    Specialklinik Taastrup — Editorial Clinical
    Design system: warm ivory + deep midnight + slate-blue accent
-   Display serif: "Fraunces" · Body: "Google Sans Flex"
+   Display serif: "Fraunces" · Body: "Public Sans"
    ───────────────────────────────────────────────────────────────────────── */
 
 @theme {
@@ -35,7 +35,7 @@
   /* Fonts */
   --font-display: "Fraunces", "Google Sans Flex", ui-serif, Georgia, serif;
   --font-heading: "Google Sans Flex", system-ui, -apple-system, sans-serif;
-  --font-body: "Google Sans Flex", system-ui, -apple-system, sans-serif;
+  --font-body: "Public Sans", "Google Sans Flex", system-ui, -apple-system, sans-serif;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────────── */

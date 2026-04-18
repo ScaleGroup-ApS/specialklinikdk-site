@@ -43,6 +43,7 @@ export function ProcessTimeline() {
       ref={ref}
       className="relative overflow-hidden"
       style={{
+        position: "relative",
         background:
           "linear-gradient(180deg, var(--color-surface-dim) 0%, #FFFFFF 100%)",
       }}

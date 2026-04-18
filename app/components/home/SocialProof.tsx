@@ -11,7 +11,6 @@ const STATS = [
   { value: "1000+", label: "Omskæringer foretaget", emoji: "👶" },
   { value: "10+", label: "År med klinisk erfaring", emoji: "🩺" },
   { value: "4.9", label: "Gennemsnitlig vurdering", emoji: "⭐" },
-  { value: "100%", label: "Autoriseret & lovlig klinik", emoji: "✅" },
 ];
 
 const MARQUEE = [
@@ -61,7 +60,7 @@ export function SocialProof() {
             </motion.p>
           </div>
 
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--color-border)] rounded-2xl overflow-hidden border border-[color:var(--color-border)]">
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-px bg-[color:var(--color-border)] rounded-2xl overflow-hidden border border-[color:var(--color-border)]">
             {STATS.map((s, i) => (
               <motion.div
                 key={s.label}
