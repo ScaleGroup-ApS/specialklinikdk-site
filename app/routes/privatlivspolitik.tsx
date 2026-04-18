@@ -1,9 +1,42 @@
+import { motion } from "framer-motion";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
+import { SubpageHero } from "~/components/shared/SubpageHero";
+import { ContentSection } from "~/components/shared/ContentSection";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 import type { WpSiteInfo } from "~/lib/wp-types";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const SECTIONS = [
+  {
+    title: "Introduktion",
+    body: "Når du besøger vores website, indsamles oplysninger om dig, som bruges til at tilpasse og forbedre vores indhold. Hvis du ikke ønsker, at der indsamles oplysninger, bør du slette dine cookies og undlade videre brug af websitet.",
+  },
+  {
+    title: "Cookies",
+    body: "Websitet anvender cookies, som er små tekstfiler, der gemmes på din enhed med det formål at genkende dig, huske indstillinger, udføre statistik og målrette indhold. Cookies kan ikke indeholde skadelig kode.",
+  },
+  {
+    title: "Personoplysninger",
+    body: "Personoplysninger er informationer, der kan henføres til dig. Vi behandler eksempelvis tekniske oplysninger, IP-adresse, geografisk placering og hvilke sider du besøger. Hvis du selv indtaster oplysninger, kan vi også behandle navn, telefonnummer, e-mail, adresse og betalingsoplysninger.",
+  },
+  {
+    title: "Sikkerhed",
+    body: "Vi behandler dine personoplysninger sikkert og fortroligt i overensstemmelse med gældende lovgivning, herunder persondataforordningen og databeskyttelsesloven. Oplysningerne bruges kun til de formål, de er indsamlet til, og slettes når de ikke længere er relevante.",
+  },
+  {
+    title: "Formål",
+    body: "Oplysninger bruges bl.a. til at identificere dig som bruger, levere services du efterspørger, registrere køb/betalinger og optimere website og indhold.",
+  },
+  {
+    title: "Opbevaring og videregivelse",
+    body: "Oplysninger opbevares kun så længe det er nødvendigt og lovligt. Data kan behandles af databehandlere på vores vegne. Videregivelse af personoplysninger som navn og e-mail sker kun ved samtykke.",
+  },
+];
 
 export async function loader({ request }: { request: Request }) {
   const siteUrl = new URL(request.url).origin;
@@ -43,92 +76,87 @@ export default function Privatlivspolitik({ loaderData }: { loaderData: { siteIn
     <div className="flex flex-col min-h-screen">
       <Header siteName={siteName} lightBg />
       <JsonLd data={buildWebsiteJsonLd(siteInfo, siteUrl)} />
-      <main className="flex-1 pt-28 pb-20">
-        <article className="max-w-5xl mx-auto px-6">
-          <h1 className="font-heading text-4xl md:text-5xl font-medium text-secondary mb-8">
-            Privatlivspolitik
-          </h1>
 
-          <div className="space-y-8 text-text-muted leading-[1.8]">
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Introduktion</h2>
-              <p>
-                Når du besøger vores website, indsamles oplysninger om dig, som bruges til at
-                tilpasse og forbedre vores indhold. Hvis du ikke ønsker, at der indsamles
-                oplysninger, bør du slette dine cookies og undlade videre brug af websitet.
-              </p>
-            </section>
+      <main className="flex-1">
+        <SubpageHero
+          eyebrow="Juridisk · Privatlivspolitik"
+          size="xl"
+          headline={
+            <AnimatedWords
+              as="span"
+              text="Privatlivspolitik"
+              className="block"
+              delay={0.1}
+            />
+          }
+        />
 
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Cookies</h2>
-              <p>
-                Websitet anvender cookies, som er små tekstfiler, der gemmes på din enhed med
-                det formål at genkende dig, huske indstillinger, udføre statistik og målrette
-                indhold. Cookies kan ikke indeholde skadelig kode.
-              </p>
-            </section>
+        <ContentSection bg="ivory" narrow>
+          <div className="space-y-12">
+            {SECTIONS.map((section, i) => (
+              <motion.section
+                key={section.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: EASE }}
+              >
+                <h2 className="display-lg text-[color:var(--color-ink)] mb-4">{section.title}</h2>
+                <p className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                  {section.body}
+                </p>
+              </motion.section>
+            ))}
 
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Personoplysninger</h2>
-              <p>
-                Personoplysninger er informationer, der kan henføres til dig. Vi behandler
-                eksempelvis tekniske oplysninger, IP-adresse, geografisk placering og hvilke
-                sider du besøger. Hvis du selv indtaster oplysninger, kan vi også behandle
-                navn, telefonnummer, e-mail, adresse og betalingsoplysninger.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Sikkerhed</h2>
-              <p>
-                Vi behandler dine personoplysninger sikkert og fortroligt i overensstemmelse
-                med gældende lovgivning, herunder persondataforordningen og
-                databeskyttelsesloven. Oplysningerne bruges kun til de formål, de er indsamlet
-                til, og slettes når de ikke længere er relevante.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Formål</h2>
-              <p>
-                Oplysninger bruges bl.a. til at identificere dig som bruger, levere services du
-                efterspørger, registrere køb/betalinger og optimere website og indhold.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Opbevaring og videregivelse</h2>
-              <p>
-                Oplysninger opbevares kun så længe det er nødvendigt og lovligt. Data kan
-                behandles af databehandlere på vores vegne. Videregivelse af personoplysninger
-                som navn og e-mail sker kun ved samtykke.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="font-heading text-2xl text-secondary mb-3">Indsigt og klager</h2>
-              <p>
+            <motion.section
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: EASE }}
+            >
+              <h2 className="display-lg text-[color:var(--color-ink)] mb-4">Indsigt og klager</h2>
+              <p className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]">
                 Du har ret til indsigt, berigtigelse, sletning og indsigelse. Du kan kontakte
-                os på <a href="mailto:kontakt@specialklinik.dk">kontakt@specialklinik.dk</a>.
+                os på{" "}
+                <a
+                  href="mailto:kontakt@specialklinik.dk"
+                  className="animated-link text-[color:var(--color-ink)] font-medium"
+                >
+                  kontakt@specialklinik.dk
+                </a>.
                 Du kan også klage til Datatilsynet.
               </p>
-            </section>
+            </motion.section>
 
-            <section className="glass-card p-6">
-              <h2 className="font-heading text-2xl text-secondary mb-3">Udgiver</h2>
-              <p>
-                Kirurgisk Klinik Brabrand v/Amin Bakhtyar Baram
-                <br />
-                Taastrup Hovedgade 80, 2. th, 2630 Taastrup
-                <br />
-                Telefon: 20 76 35 16
-                <br />
-                E-mail: kontakt@specialklinik.dk
-              </p>
-            </section>
+            <motion.section
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: EASE }}
+            >
+              <div className="card-elevated p-8">
+                <h2 className="display-lg text-[color:var(--color-ink)] mb-4">Udgiver</h2>
+                <p className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                  Kirurgisk Klinik Brabrand v/Amin Bakhtyar Baram
+                  <br />
+                  Taastrup Hovedgade 80, 2. th, 2630 Taastrup
+                  <br />
+                  Telefon: 20 76 35 16
+                  <br />
+                  E-mail:{" "}
+                  <a
+                    href="mailto:kontakt@specialklinik.dk"
+                    className="animated-link text-[color:var(--color-ink)] font-medium"
+                  >
+                    kontakt@specialklinik.dk
+                  </a>
+                </p>
+              </div>
+            </motion.section>
           </div>
-        </article>
+        </ContentSection>
       </main>
+
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />
     </div>
   );

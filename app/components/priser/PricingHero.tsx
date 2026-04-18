@@ -1,46 +1,71 @@
 // app/components/priser/PricingHero.tsx
 import { motion } from "framer-motion";
+import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function PricingHero() {
   return (
     <section
-      className="text-center"
+      className="relative overflow-hidden isolate"
       style={{
-        paddingTop: "160px",
-        paddingBottom: "96px",
-        background: "linear-gradient(to bottom, #FFFFFF 0%, #F8FAFC 100%)",
+        background:
+          "linear-gradient(180deg, #FFFFFF 0%, #FAF8F2 60%, #F3EFE3 100%)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute -top-1/3 left-1/4 w-[55%] h-[70%] rounded-full animate-blob"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(105,125,168,0.2) 0%, transparent 70%)",
+            filter: "blur(100px)",
+          }}
+        />
+      </div>
+      <div aria-hidden className="absolute inset-0 grain pointer-events-none" />
+
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pt-40 pb-24 md:pb-28">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-6"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="eyebrow mb-6"
         >
-          Transparente priser
+          Priser · Transparent & inkl. patientforsikring
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading text-5xl md:text-6xl font-medium text-secondary leading-[1.1] tracking-tight mb-8"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          Priser &{" "}
-          <span className="gradient-text">Forløb</span>
-        </motion.h1>
+        <h1 className="display-xxl text-[color:var(--color-ink)] max-w-[14ch]">
+          <AnimatedWords
+            as="span"
+            text="Tydelige priser"
+            className="block"
+            delay={0.1}
+          />
+          <span className="relative inline-block">
+            <AnimatedWords
+              as="span"
+              text="— ingen tillæg."
+              className="font-display italic font-light"
+              delay={0.3}
+            />
+            <HandDrawnUnderline
+              className="absolute left-0 right-0 -bottom-1 w-full h-3"
+              delay={1.1}
+            />
+          </span>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg text-text-muted leading-[1.7] mx-auto"
-          style={{ maxWidth: "600px" }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.25 }}
+          className="mt-10 text-[17px] leading-[1.75] text-[color:var(--color-text-muted)] max-w-xl"
         >
-          Vi tror på fuld transparens. Her finder du en oversigt over vores
-          priser. Kontakt os for et skræddersyet forløb.
+          Vores priser afspejler barnets alder og den metode, som vi sammen
+          vurderer er bedst. Alt er inklusive lovpligtig patientforsikring,
+          samtale og skriftlig efterbehandlingsvejledning.
         </motion.p>
       </div>
     </section>

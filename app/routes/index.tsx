@@ -1,8 +1,5 @@
 /**
- * Homepage Route
- *
- * Hybrid: Custom React sections (Hero, SocialProof, Services, Testimonials)
- * + optional WordPress supplementary content below.
+ * Homepage Route — editorial redesign.
  */
 import type { Route } from "./+types/index";
 import { Header } from "~/components/Header";
@@ -12,7 +9,10 @@ import { JsonLd } from "~/components/JsonLd";
 import { HeroSection } from "~/components/home/HeroSection";
 import { SocialProof } from "~/components/home/SocialProof";
 import { ServicesSection } from "~/components/home/ServicesSection";
+import { ProcessTimeline } from "~/components/home/ProcessTimeline";
 import { Testimonials } from "~/components/home/Testimonials";
+import { FaqTeaser } from "~/components/home/FaqTeaser";
+import { CtaBand } from "~/components/home/CtaBand";
 import { getFrontPage, getSiteInfo } from "~/lib/wp-api";
 import {
   buildMeta,
@@ -53,7 +53,7 @@ export function meta({ data }: Route.MetaArgs) {
   const description = page?.excerpt?.rendered
     ? stripHtml(page.excerpt.rendered)
     : siteInfo?.description ??
-      "Professionel omskæring i trygge rammer for drengebørn. Tryghed - hele vejen.";
+      "Professionel omskæring i trygge rammer for drengebørn. Tryghed — hele vejen.";
 
   return [
     ...buildMeta({
@@ -88,11 +88,13 @@ export default function Index({ loaderData }: Route.ComponentProps) {
         <HeroSection />
         <SocialProof />
         <ServicesSection />
+        <ProcessTimeline />
         <Testimonials />
+        <FaqTeaser />
+        <CtaBand />
 
-        {/* Supplementary WordPress content (rendered below the fold if configured) */}
         {page?.content?.rendered && (
-          <section className="py-24">
+          <section className="py-24 bg-white">
             <div className="max-w-4xl mx-auto px-6">
               <WpContent html={page.content.rendered} />
             </div>
