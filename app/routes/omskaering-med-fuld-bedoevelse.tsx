@@ -16,7 +16,7 @@ import type { WpSiteInfo } from "~/lib/wp-types";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const KEY_FACTS = [
-  { label: "Alderskrav", value: "Fyldt 4 år" },
+  { label: "Alderskrav", value: "Fyldt 2 år" },
   { label: "Minimumsvægt", value: "20 kg" },
   { label: "Tidsbestilling", value: "Kun via e-mail" },
 ];
@@ -100,7 +100,7 @@ export default function OmskaeringFuldBedoevelse({ loaderData }: Route.Component
                 className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
               >
                 Omskæring under narkose er forbeholdt drenge,
-                som er fyldt 4 år og vejer mindst 20 kg.
+                som er fyldt 2 år og vejer mindst 20 kg.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 24 }}
