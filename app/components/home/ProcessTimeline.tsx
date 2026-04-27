@@ -53,7 +53,6 @@ export function ProcessTimeline() {
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-24 md:py-32">
         <div className="grid lg:grid-cols-12 gap-10 mb-16 md:mb-24 items-end">
           <div className="lg:col-span-7">
-            <p className="eyebrow mb-5">05 — Jeres forløb</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
               <AnimatedWords
                 as="span"
@@ -139,11 +138,11 @@ export function ProcessTimeline() {
         <div className="mt-16 md:mt-20 flex flex-wrap items-center justify-between gap-6">
           <p className="text-[15px] text-[color:var(--color-text-muted)] max-w-lg">
             Er I i tvivl om forløbet eller hvilken metode der passer jeres barn?
-            Ring eller skriv — vi svarer altid hurtigt.
+            Skriv til os — vi svarer altid hurtigt.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/booking" className="btn-gradient">
-              Book tid online
+              Book tid
               <span className="btn-arrow">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
@@ -151,7 +150,7 @@ export function ProcessTimeline() {
               </span>
             </Link>
             <Link to="/kontakt-os" className="btn-outline">
-              Tal med klinikken
+              Skriv til klinikken
             </Link>
           </div>
         </div>

@@ -30,7 +30,6 @@ export function SocialProof() {
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-20 md:py-28">
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-5">02 — Klinikken i tal</p>
             <h2 className="display-lg text-[color:var(--color-ink)]">
               <AnimatedWords
                 as="span"

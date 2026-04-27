@@ -55,7 +55,6 @@ export function Testimonials() {
                 Forældre fortæller
               </span>
             </div>
-            <p className="eyebrow mb-4">04 — Forældreoplevelser</p>
             <h2 className="display-xl text-[color:var(--color-ink)] leading-[1.02]">
               <AnimatedWords
                 as="span"
