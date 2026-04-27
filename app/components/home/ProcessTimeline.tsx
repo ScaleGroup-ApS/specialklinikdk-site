@@ -11,12 +11,12 @@ const STEPS = [
   {
     step: "Trin 01",
     title: "Booking & forberedelse",
-    desc: "Book jeres tid online eller på telefon. Vi sender klare retningslinjer for hvordan I forbereder jeres barn inden aftalen.",
+    desc: "Book jeres tid online. Vi sender klare retningslinjer for hvordan I forbereder jeres barn inden aftalen.",
   },
   {
     step: "Trin 02",
     title: "Samtale i klinikken",
-    desc: "Ved ankomst tager vi en rolig samtale, svarer på spørgsmål og vurderer barnet, så vi vælger den rette metode og smertelindring.",
+    desc: "Ved ankomst tager vi en rolig samtale, svarer på spørgsmål og forbereder smertelindringen, så I er trygge og velinformerede inden indgrebet.",
   },
   {
     step: "Trin 03",
