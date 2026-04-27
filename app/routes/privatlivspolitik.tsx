@@ -141,8 +141,6 @@ export default function Privatlivspolitik({ loaderData }: { loaderData: { siteIn
                   <br />
                   Taastrup Hovedgade 80, 2. th, 2630 Taastrup
                   <br />
-                  Telefon: 20 76 35 16
-                  <br />
                   E-mail:{" "}
                   <a
                     href="mailto:kontakt@specialklinik.dk"

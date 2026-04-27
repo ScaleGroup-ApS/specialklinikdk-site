@@ -28,7 +28,7 @@ const INFO_CARDS = [
   },
   {
     title: "Afbestilling",
-    body: "Hvis I ikke kan komme, beder vi jer afbestille så tidligt som muligt i bookingmodulet eller via SMS til 20 76 35 16.",
+    body: "Hvis I ikke kan komme, beder vi jer afbestille så tidligt som muligt i bookingmodulet eller skrive til kontakt@specialklinik.dk.",
   },
 ];
 

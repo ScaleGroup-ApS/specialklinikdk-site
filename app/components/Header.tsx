@@ -34,10 +34,10 @@ export function Header({
             url: "/omskaering",
             children: [
               { title: "Om omskæring", url: "/omskaering" },
-              { title: "Forberedelse", url: "/forberedelse-inden-omskaering" },
-              { title: "Klassisk metode", url: "/omskaering-med-klassisk-metode" },
               { title: "Ringmetoden", url: "/omskaering-med-ringmetoden" },
+              { title: "Klassisk metode", url: "/omskaering-med-klassisk-metode" },
               { title: "Fuld bedøvelse", url: "/omskaering-med-fuld-bedoevelse" },
+              { title: "Forberedelse", url: "/forberedelse-inden-omskaering" },
             ],
           },
           { title: "Om os", url: "/om-os" },
@@ -82,15 +82,6 @@ export function Header({
 
         {/* Right cluster */}
         <div className="hidden lg:flex items-center gap-3">
-          <a
-            href="tel:+4520763516"
-            className={[
-              "text-sm font-medium transition-colors duration-300 animated-link",
-              solid ? "text-[color:var(--color-ink)]" : "text-white",
-            ].join(" ")}
-          >
-            20 76 35 16
-          </a>
           <a href="/booking" className="btn-gradient" style={{ padding: "0.65rem 1.3rem" }}>
             Book tid
             <span className="btn-arrow">
@@ -160,7 +151,7 @@ export function Header({
               onClick={() => setMobileOpen(false)}
               className="btn-gradient w-full"
             >
-              Book tid online
+              Book tid
               <span className="btn-arrow">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
@@ -168,11 +159,11 @@ export function Header({
               </span>
             </a>
             <a
-              href="tel:+4520763516"
+              href="/kontakt-os"
               onClick={() => setMobileOpen(false)}
               className="btn-outline w-full"
             >
-              Ring: 20 76 35 16
+              Kontakt klinikken
             </a>
           </div>
         </nav>

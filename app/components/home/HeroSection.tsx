@@ -53,7 +53,7 @@ export function HeroSection() {
             <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500">
               <span className="absolute inset-0 rounded-full bg-emerald-500 pulse-dot-outer" />
             </span>
-            Klinikken er åben
+            Åbent efter aftale
           </span>
           <span className="h-px w-6 bg-[color:var(--color-border-strong)]" />
           <span>Autoriseret læge · Styrelsen for Patientsikkerhed</span>
@@ -114,7 +114,7 @@ export function HeroSection() {
             >
               <MagneticButton strength={6}>
                 <Link to="/booking" className="btn-gradient">
-                  Book tid online
+                  Book tid
                   <span className="btn-arrow">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                       <path
@@ -127,23 +127,9 @@ export function HeroSection() {
                   </span>
                 </Link>
               </MagneticButton>
-              <Link to="/omskaering" className="btn-outline">
-                Læs om omskæring
+              <Link to="/priser" className="btn-outline">
+                Se priser
               </Link>
-              <a
-                href="tel:+4520763516"
-                className="ml-1 hidden sm:inline-flex items-center gap-2 text-sm text-[color:var(--color-ink)] animated-link"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.2l-2.25 1.1a11 11 0 005.5 5.5l1.1-2.25a1 1 0 011.2-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"
-                  />
-                </svg>
-                20 76 35 16
-              </a>
             </motion.div>
           </div>
 
@@ -172,7 +158,7 @@ export function HeroSection() {
                 className="absolute inset-0 w-full h-full object-cover animate-ken-burns"
               />
               <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-white/90">
-                <span>Est. 2015</span>
+                <span>Est. 2023</span>
                 <span>Taastrup, DK</span>
               </div>
               {/* Caption card */}

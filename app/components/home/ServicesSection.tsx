@@ -11,28 +11,31 @@ type Method = {
   title: string;
   tagline: string;
   description: string;
-  meta: string;
+  age: string;
+  ageLabel: string;
   href: string;
 };
 
 const METHODS: Method[] = [
   {
     index: "01",
-    title: "Klassisk metode",
-    tagline: "Erfaren, præcis, velafprøvet",
+    title: "Ringmetoden",
+    tagline: "Skånsom til nyfødte og spædbørn",
     description:
-      "Vores foretrukne tilgang til børn over et år. Indgrebet udføres skånsomt i lokalbedøvelse med fokus på præcision og et roligt forløb.",
-    meta: "Alder: 12 mdr. +",
-    href: "/omskaering-med-klassisk-metode",
+      "Circumplast® anvendes til de mindste børn. En særligt skånsom, sutur-fri metode der giver forudsigelig heling og minimal efterbehandling.",
+    age: "0–24 mdr.",
+    ageLabel: "Alder",
+    href: "/omskaering-med-ringmetoden",
   },
   {
     index: "02",
-    title: "Ringmetoden",
-    tagline: "Skånsom til nyfødte",
+    title: "Klassisk metode",
+    tagline: "Erfaren, præcis, velafprøvet",
     description:
-      "Circumplast® anvendes typisk til børn under et år. En særligt skånsom, sutur-fri metode der giver forudsigelig heling og minimal efterbehandling.",
-    meta: "Alder: 0–12 mdr.",
-    href: "/omskaering-med-ringmetoden",
+      "Vores foretrukne tilgang til større børn. Indgrebet udføres skånsomt i lokalbedøvelse med fokus på præcision og et roligt forløb.",
+    age: "6–11 år",
+    ageLabel: "Alder",
+    href: "/omskaering-med-klassisk-metode",
   },
   {
     index: "03",
@@ -40,7 +43,8 @@ const METHODS: Method[] = [
     tagline: "For de mellemstore børn",
     description:
       "For drengebørn i aldersgruppen, hvor lokalbedøvelse ikke er hensigtsmæssig, tilbyder vi omskæring under fuld bedøvelse i trygge rammer.",
-    meta: "Alder: 2–11 år",
+    age: "2–11 år",
+    ageLabel: "Alder",
     href: "/omskaering-med-fuld-bedoevelse",
   },
   {
@@ -49,7 +53,8 @@ const METHODS: Method[] = [
     tagline: "Før I møder op",
     description:
       "En praktisk guide med alt det, I som forældre skal være opmærksomme på inden aftalen — så dagen bliver så rolig som mulig for jer og barnet.",
-    meta: "For forældre",
+    age: "For forældre",
+    ageLabel: "Guide",
     href: "/forberedelse-inden-omskaering",
   },
 ];
@@ -67,7 +72,6 @@ export function ServicesSection() {
         {/* Section header */}
         <div className="grid lg:grid-cols-12 gap-10 mb-16 md:mb-20 items-end">
           <div className="lg:col-span-7">
-            <p className="eyebrow mb-5">03 — Metoder & forløb</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
               <AnimatedWords
                 as="span"
@@ -119,16 +123,17 @@ export function ServicesSection() {
                 />
 
                 <div className="relative">
-                  <div className="flex items-start justify-between mb-10">
-                    <span className="number-roll text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] transition-colors duration-500">
-                      <span>
-                        {m.index}
-                        <br />
-                        →
+                  <div className="flex items-start justify-between mb-10 gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[10px] uppercase tracking-[0.28em] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] transition-colors duration-500">
+                        {m.ageLabel}
                       </span>
-                    </span>
-                    <span className="text-[11px] uppercase tracking-[0.24em] px-3 py-1 rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] group-hover:border-white/20 transition-colors duration-500">
-                      {m.meta}
+                      <span className="font-display text-[2rem] md:text-[2.4rem] leading-[1.05] font-light text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent-warm-soft)] transition-colors duration-500">
+                        {m.age}
+                      </span>
+                    </div>
+                    <span className="number-roll text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-on-dark-muted)] transition-colors duration-500">
+                      <span>→</span>
                     </span>
                   </div>
 

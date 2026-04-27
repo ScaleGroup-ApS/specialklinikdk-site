@@ -37,7 +37,6 @@ export function FaqTeaser() {
                 Spørgsmål & svar
               </span>
             </div>
-            <p className="eyebrow mb-4">06 — Ofte stillede spørgsmål</p>
             <h2 className="display-xl text-[color:var(--color-ink)]">
               <AnimatedWords
                 as="span"

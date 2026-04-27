@@ -33,15 +33,6 @@ export function CtaBand() {
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-24 md:py-36">
         <div className="grid lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-8">
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: EASE }}
-              className="eyebrow eyebrow-light mb-6"
-            >
-              07 — Klar, når I er klar
-            </motion.p>
             <h2 className="display-xxl text-white">
               <AnimatedWords
                 as="span"
@@ -82,9 +73,9 @@ export function CtaBand() {
                   </span>
                 </Link>
               </MagneticButton>
-              <a href="tel:+4520763516" className="btn-gradient btn-outline-on-dark">
-                20 76 35 16
-              </a>
+              <Link to="/kontakt-os" className="btn-gradient btn-outline-on-dark">
+                Skriv til os
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -104,7 +95,9 @@ export function CtaBand() {
             <p className="text-[color:var(--color-text-on-dark)]">
               kontakt@specialklinik.dk
               <br />
-              +45 20 76 35 16
+              <Link to="/kontakt-os" className="animated-link">
+                Send os en besked
+              </Link>
             </p>
           </div>
           <div>
@@ -112,7 +105,7 @@ export function CtaBand() {
             <p className="text-[color:var(--color-text-on-dark)]">
               Kun efter aftale
               <br />
-              Book online eller ring
+              Book online
             </p>
           </div>
         </div>
