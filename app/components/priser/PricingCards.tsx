@@ -26,14 +26,12 @@ const TIERS: Tier[] = [
     unit: "kr. · inkl. forsikring",
   },
   {
-    ageGroup: "6 måneder – 1 år",
+    ageGroup: "6 – 24 måneder",
     method: "Ringmetoden",
     description:
       "Samme tilgang med ekstra tid og tilpasning. Lokalbedøvelse og beroligende hvor det er relevant.",
     price: "3.000",
     unit: "kr. · inkl. forsikring",
-    featured: true,
-    note: "Mest valgte",
   },
   {
     ageGroup: "6 – 11 år",
