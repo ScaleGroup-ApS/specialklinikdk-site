@@ -10,7 +10,7 @@ import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { WpContent } from "~/components/WpContent";
 import { JsonLd } from "~/components/JsonLd";
-import { PatientTestimonials } from "~/components/PatientTestimonials";
+import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { getPageBySlug, getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildPageJsonLd, getFeaturedImageUrl, stripHtml } from "~/lib/seo";
 import type { WpPage, WpSiteInfo } from "~/lib/wp-types";
@@ -86,7 +86,7 @@ export default function CatchAll({ loaderData }: Route.ComponentProps) {
           </div>
           <WpContent html={page.content.rendered} />
         </article>
-        <PatientTestimonials />
+        <ReviewsSlider />
       </main>
 
       <Footer siteName={siteName} siteDescription={siteInfo?.description} />

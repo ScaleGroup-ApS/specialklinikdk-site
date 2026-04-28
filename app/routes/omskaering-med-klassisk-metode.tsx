@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
-import { PatientTestimonials } from "~/components/PatientTestimonials";
+import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { CtaBand } from "~/components/home/CtaBand";
 import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
@@ -294,7 +294,7 @@ export default function OmskaeringKlassisk({ loaderData }: Route.ComponentProps)
           </div>
         </ContentSection>
 
-        <PatientTestimonials />
+        <ReviewsSlider />
         <CtaBand />
       </main>
 

@@ -6,7 +6,7 @@ import type { Route } from "./+types/priser";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
-import { PatientTestimonials } from "~/components/PatientTestimonials";
+import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { PricingHero } from "~/components/priser/PricingHero";
 import { PricingCards } from "~/components/priser/PricingCards";
 import { CtaBand } from "~/components/home/CtaBand";
@@ -66,7 +66,7 @@ export default function Priser({ loaderData }: Route.ComponentProps) {
       <main className="flex-1">
         <PricingHero />
         <PricingCards />
-        <PatientTestimonials />
+        <ReviewsSlider />
         <div className="h-20 md:h-28" />
         <CtaBand />
       </main>

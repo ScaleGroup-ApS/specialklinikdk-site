@@ -10,7 +10,7 @@ import { HeroSection } from "~/components/home/HeroSection";
 import { SocialProof } from "~/components/home/SocialProof";
 import { ServicesSection } from "~/components/home/ServicesSection";
 import { ProcessTimeline } from "~/components/home/ProcessTimeline";
-import { Testimonials } from "~/components/home/Testimonials";
+import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { FaqTeaser } from "~/components/home/FaqTeaser";
 import { CtaBand } from "~/components/home/CtaBand";
 import { getFrontPage, getSiteInfo } from "~/lib/wp-api";
@@ -89,7 +89,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
         <SocialProof />
         <ServicesSection />
         <ProcessTimeline />
-        <Testimonials />
+        <ReviewsSlider />
         <FaqTeaser />
         <CtaBand />
 

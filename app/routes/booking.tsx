@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
-import { PatientTestimonials } from "~/components/PatientTestimonials";
+import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { CtaBand } from "~/components/home/CtaBand";
 import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
@@ -99,6 +99,24 @@ export default function Booking({ loaderData }: Route.ComponentProps) {
           body="Her kan I booke en tid til at få jeres søn omskåret. Vær opmærksom på, at klinikken kun har åbent på bestemte dage."
         />
 
+        {/* Editorial image */}
+        <ContentSection bg="white">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="relative overflow-hidden rounded-[1.5rem] border border-[color:var(--color-border)] shadow-[0_50px_100px_-40px_rgba(11,16,32,0.25)]"
+          >
+            <img
+              src="/images/specialklinik-omskaering-scaled%20(1).jpg"
+              alt="Specialklinik Taastrup — klinikken"
+              className="w-full h-[280px] md:h-[420px] object-cover animate-ken-burns"
+              loading="lazy"
+            />
+          </motion.div>
+        </ContentSection>
+
         {/* Info cards */}
         <ContentSection bg="ivory">
           <div className="grid md:grid-cols-3 gap-5">
@@ -180,7 +198,7 @@ export default function Booking({ loaderData }: Route.ComponentProps) {
           </motion.div>
         </ContentSection>
 
-        <PatientTestimonials />
+        <ReviewsSlider />
         <CtaBand />
       </main>
 

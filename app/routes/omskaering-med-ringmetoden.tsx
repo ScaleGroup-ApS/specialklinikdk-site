@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
-import { PatientTestimonials } from "~/components/PatientTestimonials";
+import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { CtaBand } from "~/components/home/CtaBand";
 import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
@@ -159,7 +159,7 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
           >
             <div className="relative overflow-hidden rounded-[1.5rem] border border-[color:var(--color-border)] shadow-[0_50px_100px_-40px_rgba(11,16,32,0.25)]">
               <img
-                src="/images/Forside-specialklinik-Taastrup%20(2).jpg"
+                src="/images/Klinikken-scaled%20(1).jpg"
                 alt="Trygge omgivelser hos Specialklinik Taastrup"
                 className="w-full h-[280px] md:h-[400px] object-cover animate-ken-burns"
                 loading="lazy"
@@ -300,7 +300,7 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
           </div>
         </ContentSection>
 
-        <PatientTestimonials />
+        <ReviewsSlider />
         <CtaBand />
       </main>
 

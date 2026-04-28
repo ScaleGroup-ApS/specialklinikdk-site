@@ -70,6 +70,15 @@ export function FaqTeaser() {
                 </svg>
               </span>
             </Link>
+
+            <div className="hidden lg:block mt-12 relative overflow-hidden rounded-[1.25rem] border border-[color:var(--color-border)] shadow-[0_30px_60px_-30px_rgba(11,16,32,0.2)]">
+              <img
+                src="/images/Klinikken-scaled%20(1).jpg"
+                alt="Specialklinik Taastrup — kliniklokaler"
+                className="w-full h-[260px] object-cover animate-ken-burns"
+                loading="lazy"
+              />
+            </div>
           </div>
 
           <div className="lg:col-span-7">
