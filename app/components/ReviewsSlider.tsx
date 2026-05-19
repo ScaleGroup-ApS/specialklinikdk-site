@@ -2,8 +2,6 @@
 // Unified review slider — surfaces reviews from Google and Trustpilot with a
 // per-review source badge, drag/keyboard/arrow/dot navigation.
 //
-// TODO: Replace the REVIEWS array below with the real Google + Trustpilot
-// reviews. Keep the same shape — `source` must be "google" or "trustpilot".
 import { AnimatePresence, motion, useMotionValue, useTransform } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
@@ -22,9 +20,16 @@ export type Review = {
   context?: string;
 };
 
-// Real reviews from Trustpilot. Add Google reviews to this same array
-// with `source: "google"` when available.
+// Real reviews from Trustpilot + Google, sorted newest first.
 const REVIEWS: Review[] = [
+  {
+    source: "google",
+    name: "Hasan Za",
+    date: "maj 2026",
+    rating: 5,
+    quote:
+      "Mottagningen erbjuder professional behandling, och läkaren var informativ under hela behandlingen. Väldigt trevligt bemötande och hjälpsamma.",
+  },
   {
     source: "trustpilot",
     name: "Zeno Jaff",
@@ -72,6 +77,23 @@ const REVIEWS: Review[] = [
     rating: 5,
     quote:
       "Som dansk familie uden religiøs baggrund var det vigtigt for os at finde den helt rette klinik til vores søns omskæring. Vi startede med en konsultation hos Amin på Specialklinik for at se omgivelserne og møde lægen, og vi følte os trygge fra første minut. Amin og hans sygeplejerske er utroligt dygtige, rare og professionelle. Vi har sat stor pris på den lynhurtige svarfrist på vores mange opfølgende spørgsmål, hvilket gav os stor ro i processen. En fantastisk oplevelse fra start til slut.",
+  },
+  {
+    source: "google",
+    name: "dada bakayoko",
+    date: "mar. 2026",
+    rating: 5,
+    quote:
+      "It was an amazing experience at Specialklinik Taastrup. The doctors are nice and our baby was treated so well. Though we are still in the healing process, we are happy with everything.",
+  },
+  {
+    source: "google",
+    name: "Maj-Brit L.",
+    date: "mar. 2026",
+    rating: 5,
+    quote:
+      "Havde en god oplevelse med indgrebet. Vores dreng var 8 uger. Der var god information inden fra hjemmesiden og uddybende og fyldestgørende information før, under og efter indgrebet.",
+    context: "Ringmetoden · 8 uger",
   },
   {
     source: "trustpilot",
@@ -140,6 +162,14 @@ const REVIEWS: Review[] = [
     context: "Ringmetoden · 2 mdr.",
   },
   {
+    source: "google",
+    name: "Ali Mahmoud",
+    date: "nov. 2025",
+    rating: 5,
+    quote:
+      "Super god oplevelse hos klinikken fra start til slut. Lægen og assistenten var super professionelle og rare og gav masser information undervejs.",
+  },
+  {
     source: "trustpilot",
     name: "Mustafa Güler",
     date: "17. nov. 2025",
@@ -153,6 +183,14 @@ const REVIEWS: Review[] = [
     rating: 5,
     quote:
       "Alt gik godt fra start til slut, og de var hurtige til at svare på beskeder, hvis man havde spørgsmål eller bekymringer ift. omskæringen.",
+  },
+  {
+    source: "google",
+    name: "Michala Bromberg",
+    date: "okt. 2025",
+    rating: 5,
+    quote:
+      "Rigtig fint forløb! Vi kom ind til Amin og hans medarbejder, som udførte omskæringen. De var begge meget professionelle, og proceduren var ren og steril udført.",
   },
   {
     source: "trustpilot",
@@ -184,6 +222,105 @@ const REVIEWS: Review[] = [
     rating: 5,
     quote:
       "Vi har haft en virkelig god oplevelse i forbindelse med omskæringen af vores søn. Hele forløbet har været super professionelt fra start til slut. Vi følte os meget trygge og godt informeret hele vejen igennem — både før, under og efter indgrebet. Personalet var imødekommende, rolige og kompetente, og vi oplevede en rigtig fin og omsorgsfuld tilgang til både barn og forældre. Nu, cirka en uge efter indgrebet, er det gået rigtig godt. Helingen forløber helt som den skal, og vi er så lettede og taknemmelige. Vi kan varmt anbefale klinikken til andre forældre, der står overfor samme beslutning.",
+  },
+  {
+    source: "google",
+    name: "m.bachir lghali",
+    date: "jun. 2025",
+    rating: 5,
+    quote: "God service. Alt gik rigtig godt. Tak.",
+  },
+  {
+    source: "google",
+    name: "Camilla Jensen",
+    date: "maj 2025",
+    rating: 5,
+    quote:
+      "Vi havde et godt og trygt forløb fra start til slut. Amin og hans assistent er yderst dygtige og professionelle, hvilket hans resultater bestemt vidner om. Derudover er han hurtig til at besvare mails og vurdere, når man skriver til ham.",
+  },
+  {
+    source: "google",
+    name: "Burhan Filikci",
+    date: "maj 2025",
+    rating: 5,
+    quote:
+      "Meget professionel behandling. Kan varmt anbefales. En dygtig læge og en dygtig assistent. De var rigtig imødekommende overfor børnene.",
+  },
+  {
+    source: "google",
+    name: "Memet Simsir",
+    date: "maj 2025",
+    rating: 5,
+    quote: "Venligt personale. Ønsker dem alt det bedste.",
+  },
+  {
+    source: "google",
+    name: "Walid Husein",
+    date: "maj 2025",
+    rating: 5,
+    quote: "Han er meget dygtig, og mange tak for hjælpen.",
+  },
+  {
+    source: "google",
+    name: "Huda Jassem Al-Mandy",
+    date: "maj 2025",
+    rating: 5,
+    quote:
+      "Mange tak for et fantastisk forløb! Vi blev taget godt imod og velinformeret om omskæringsforløbet. Det var en yderst professionel behandling, og vi var trygge hele vejen igennem.",
+  },
+  {
+    source: "google",
+    name: "Zehra S",
+    date: "maj 2025",
+    rating: 5,
+    quote:
+      "En stor tak til Specialklinik Taastrup! Mine to sønner blev omskåret her, og vi oplevede en yderst professionel og tryg behandling. Amin og hans dygtige team gjorde forløbet trygt for hele familien.",
+  },
+  {
+    source: "google",
+    name: "Patricia Gambula Larsen",
+    date: "2024",
+    rating: 5,
+    quote:
+      "Glad for resultatet. Jeg var meget nervøs for min søn både før og efter indgrebet. Amin var professionel og har været god til at svare på mine spørgsmål og berolige mig i helingsprocessen — det har været meget betryggende.",
+  },
+  {
+    source: "google",
+    name: "Oguzhan Demir",
+    date: "2024",
+    rating: 5,
+    quote:
+      "Det er altid et ømt punkt, når det omhandler ens barn, og man er derfor ekstra nervøs. Det klarede klinikken super godt. Vi blev mødt af super professionelle medarbejdere.",
+  },
+  {
+    source: "google",
+    name: "Zeinab Naz",
+    date: "2024",
+    rating: 5,
+    quote:
+      "Meget tilfreds med omskæring af vores søn hos Specialklinik Taastrup. Amin er meget dygtig, og hele forløbet tog max 15 min. Vores søn havde ingen gener efterfølgende, god heling og rigtig flot resultat. Varmeste anbefaling herfra.",
+  },
+  {
+    source: "google",
+    name: "Christina Schoop",
+    date: "2024",
+    rating: 5,
+    quote:
+      "Fantastisk sød og dygtig læge. Alt gik godt, og det var nemt at kommunikere med klinikken, hvis der var tvivl og spørgsmål.",
+  },
+  {
+    source: "google",
+    name: "Owaid Qasem",
+    date: "2024",
+    rating: 5,
+    quote: "Fantastisk dygtig læge. Alt gik godt og nemt.",
+  },
+  {
+    source: "google",
+    name: "Omer Salahadeen",
+    date: "2024",
+    rating: 5,
+    quote: "Super service, dygtig læge — stor anbefaling herfra!",
   },
 ];
 
