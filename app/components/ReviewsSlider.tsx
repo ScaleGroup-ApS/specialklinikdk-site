@@ -22,61 +22,168 @@ export type Review = {
   context?: string;
 };
 
-// Placeholder data — replace with real reviews from Google + Trustpilot.
+// Real reviews from Trustpilot. Add Google reviews to this same array
+// with `source: "google"` when available.
 const REVIEWS: Review[] = [
   {
-    source: "google",
-    name: "Mette & Anders",
-    date: "2025",
+    source: "trustpilot",
+    name: "Zeno Jaff",
+    date: "8. maj 2026",
     rating: 5,
     quote:
-      "Vi følte os trygge fra første kontakt. Informationen før og efter indgrebet var tydelig, og personalet var imødekommende og rolige hele vejen igennem.",
-    context: "Ringmetoden · 4 mdr.",
+      "Vi var velinformeret og følte os tryg. Man er i gode hænder hos Amin.",
   },
   {
     source: "trustpilot",
-    name: "Sara H.",
-    date: "2025",
+    name: "Haidar Nadem",
+    date: "26. apr. 2026",
     rating: 5,
     quote:
-      "Hele forløbet var professionelt og uhyre roligt. Vi fik klare råd om smertelindring og præcist hvad vi skulle være opmærksomme på derhjemme.",
-    context: "Klassisk metode · 7 år",
-  },
-  {
-    source: "google",
-    name: "Yusuf & Amal",
-    date: "2024",
-    rating: 5,
-    quote:
-      "Booking og kommunikation fungerede virkelig godt. Klinikken svarede hurtigt på vores spørgsmål, og vi følte os i sikre hænder på dagen.",
-    context: "Fuld bedøvelse · 5 år",
+      "Vi havde en rigtig god oplevelse. Alt i alt en positiv oplevelse, som vi varmt kan anbefale. 5 stjerner herfra.",
   },
   {
     source: "trustpilot",
-    name: "Familien Hansen",
-    date: "2024",
+    name: "Faiga Sahebzadeh",
+    date: "16. apr. 2026",
     rating: 5,
     quote:
-      "Amin er dygtig og rolig. Indgrebet tog få minutter, helingen forløb perfekt og vi blev passet på undervejs.",
-    context: "Ringmetoden · 8 mdr.",
-  },
-  {
-    source: "google",
-    name: "Layla M.",
-    date: "2024",
-    rating: 5,
-    quote:
-      "Klinikken er ren, pæn og personalet er virkelig venligt. Vi kunne mærke den store erfaring de har med små børn.",
-    context: "Ringmetoden · 3 mdr.",
+      "Meget nemt at booke tid. Fantastisk og dygtig læge og assistent samt god og grundig information mundtligt og skriftligt. Og smertefri operation.",
   },
   {
     source: "trustpilot",
-    name: "Familien Khan",
-    date: "2024",
+    name: "Jalle",
+    date: "9. apr. 2026",
     rating: 5,
     quote:
-      "Vores dreng var helt rolig hele vejen igennem. Lægen var grundig og forklarede alt før, under og efter. Vi anbefaler klinikken på det varmeste.",
-    context: "Klassisk metode · 9 år",
+      "Vi havde en rigtig god oplevelse med klinikken, der udførte omskæringen af vores søn. Alt forløb helt uden problemer, og vi følte os trygge fra start til slut. Personalet var yderst professionelt, imødekommende og tog sig god tid til at forklare hele processen samt besvare vores spørgsmål. Selve indgrebet blev udført med stor omhu, og opfølgningen efterfølgende var også meget betryggende. Vi oplevede ingen komplikationer, og vores søn kom sig hurtigt. Vi kan varmt anbefale klinikken til andre forældre, der ønsker et trygt og professionelt forløb.",
+  },
+  {
+    source: "trustpilot",
+    name: "Maria Rasmussen",
+    date: "1. apr. 2026",
+    rating: 5,
+    quote:
+      "Alt gik bedre end forventet. En meget nervøs mor der forestillede sig det værste. Amin tog hånd om det og forklarede alt før, under og efter — og han svarede med det samme på SMS, hvis man var i tvivl om noget efter behandlingen.",
+  },
+  {
+    source: "trustpilot",
+    name: "Philip",
+    date: "28. mar. 2026",
+    rating: 5,
+    quote:
+      "Som dansk familie uden religiøs baggrund var det vigtigt for os at finde den helt rette klinik til vores søns omskæring. Vi startede med en konsultation hos Amin på Specialklinik for at se omgivelserne og møde lægen, og vi følte os trygge fra første minut. Amin og hans sygeplejerske er utroligt dygtige, rare og professionelle. Vi har sat stor pris på den lynhurtige svarfrist på vores mange opfølgende spørgsmål, hvilket gav os stor ro i processen. En fantastisk oplevelse fra start til slut.",
+  },
+  {
+    source: "trustpilot",
+    name: "EB",
+    date: "6. mar. 2026",
+    rating: 5,
+    quote:
+      "Vores søn blev omskåret hos Amin for en uge siden. Vi havde en rigtig god oplevelse. Hele forløbet gik rigtig godt, og vi følte os trygge. Vi er meget tilfredse og kan varmt anbefale klinikken.",
+  },
+  {
+    source: "trustpilot",
+    name: "Ra 19",
+    date: "2. mar. 2026",
+    rating: 5,
+    quote:
+      "Super flinke og super fint arbejde. De tog imod os professionelt, og resultatet blev rigtig flot. Kan varmt anbefales.",
+  },
+  {
+    source: "trustpilot",
+    name: "Maj-Brit Lützhøft",
+    date: "2. mar. 2026",
+    rating: 4,
+    quote:
+      "En god oplevelse med højt informationsniveau. Vi følte os trygge under indgrebet, og der blev givet tydelige instrukser og informationer om tiden efter. Desuden oplevede jeg, at der var hurtig respons på mails med de spørgsmål og bekymringer, der var i de første dage. Vi kan godt anbefale specialklinikken.",
+  },
+  {
+    source: "trustpilot",
+    name: "Rezan Ibrahim",
+    date: "20. jan. 2026",
+    rating: 5,
+    quote:
+      "Professionelt personale. Amin er en meget dygtig læge. Alt gik som det skal. Vi var rigtig glade for, at vi besøgte klinikken.",
+  },
+  {
+    source: "trustpilot",
+    name: "Adis Palic",
+    date: "13. jan. 2026",
+    rating: 5,
+    quote:
+      "Jeg var meget tilfreds med klinikken og hele forløbet omkring min søns omskæring. Personalet var yderst professionelle og gav en grundig og tryg forklaring både før og under proceduren. Det var tydeligt, at de var velforberedte på alle tænkelige situationer, hvilket gav stor ro som forælder. Kommunikation og vejledning undervejs var betryggende og meget værdsat. Jeg kan varmt anbefale klinikken.",
+  },
+  {
+    source: "trustpilot",
+    name: "Mohamad Farid Yaqubi",
+    date: "2. jan. 2026",
+    rating: 5,
+    quote:
+      "Fra første kontakt med Specialklinik i Taastrup blev vi mødt med en professionalisme udover det sædvanlige. Hele forløbet fra booking til operation og den efterfølgende vejledning var præget af høj faglighed og empati. Resultatet blev rigtig flot, og det er vi taknemlige for. Klinikken står til rådighed ved mindste bekymring — også i ferien. Det har vi aldrig oplevet andre steder. Tusind tak for en virkelig god behandling.",
+  },
+  {
+    source: "trustpilot",
+    name: "Hossein",
+    date: "30. dec. 2025",
+    rating: 5,
+    quote:
+      "Min søn på 6 år blev omskåret hos Amin for en uge siden i fuld narkose. Vi havde en rigtig tryg og positiv oplevelse. Amin og hans team er professionelt og tog sig god tid til at forklare hele forløbet. Han leverer gode resultater og er nem at kontakte gennem hele forløbet. Vores søn kom igennem forløbet UDEN smerter, hvilket er fremragende. 10/10.",
+    context: "Fuld bedøvelse · 6 år",
+  },
+  {
+    source: "trustpilot",
+    name: "Nazli Gøktas",
+    date: "27. dec. 2025",
+    rating: 5,
+    quote:
+      "Vi fik vores søn på 2 mdr. omskåret her, og det var den mest beroligende oplevelse. Hvis man ønsker at føle sig tryg, skal man helt klart komme her. De var så gode og søde ved min søn. Tak for det!",
+    context: "Ringmetoden · 2 mdr.",
+  },
+  {
+    source: "trustpilot",
+    name: "Mustafa Güler",
+    date: "17. nov. 2025",
+    rating: 5,
+    quote: "Perfekt oplevelse hele vejen igennem.",
+  },
+  {
+    source: "trustpilot",
+    name: "Musa",
+    date: "30. okt. 2025",
+    rating: 5,
+    quote:
+      "Alt gik godt fra start til slut, og de var hurtige til at svare på beskeder, hvis man havde spørgsmål eller bekymringer ift. omskæringen.",
+  },
+  {
+    source: "trustpilot",
+    name: "Anonym kunde",
+    date: "6. sep. 2025",
+    rating: 5,
+    quote:
+      "Hurtig og enkel omskæring. De er professionelle, hvilket skabte tryghed hos mig og min mand. Mange tak.",
+  },
+  {
+    source: "trustpilot",
+    name: "Yasmin Al Malla",
+    date: "18. aug. 2025",
+    rating: 5,
+    quote: "De udfører arbejdet til UG. Søde og smilende på samme tid.",
+  },
+  {
+    source: "trustpilot",
+    name: "Consumer",
+    date: "8. jul. 2025",
+    rating: 5,
+    quote:
+      "En fantastisk og professionel forløb! I skaber en tryg atmosfære og et godt forløb fra start til slut. Amin leverer gode resultater og er nem at kontakte gennem hele forløbet. Man bliver grundigt informeret inden indgrebet og vejledes efterfølgende om pleje mm. Kan varmt anbefales!",
+  },
+  {
+    source: "trustpilot",
+    name: "Michelle",
+    date: "26. jun. 2025",
+    rating: 5,
+    quote:
+      "Vi har haft en virkelig god oplevelse i forbindelse med omskæringen af vores søn. Hele forløbet har været super professionelt fra start til slut. Vi følte os meget trygge og godt informeret hele vejen igennem — både før, under og efter indgrebet. Personalet var imødekommende, rolige og kompetente, og vi oplevede en rigtig fin og omsorgsfuld tilgang til både barn og forældre. Nu, cirka en uge efter indgrebet, er det gået rigtig godt. Helingen forløber helt som den skal, og vi er så lettede og taknemmelige. Vi kan varmt anbefale klinikken til andre forældre, der står overfor samme beslutning.",
   },
 ];
 
