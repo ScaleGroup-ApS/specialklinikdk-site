@@ -14,6 +14,8 @@ type Tier = {
   unit: string;
   featured?: boolean;
   note?: string;
+  /** Full-anaesthesia tiers can only be arranged by e-mail, not booked online. */
+  bookOnline?: boolean;
 };
 
 const TIERS: Tier[] = [
@@ -24,6 +26,7 @@ const TIERS: Tier[] = [
       "Skånsom, sutur-fri metode med forudsigelig heling. Ideel til nyfødte og spædbørn.",
     price: "2.500",
     unit: "kr. · inkl. forsikring",
+    bookOnline: true,
   },
   {
     ageGroup: "6 – 24 måneder",
@@ -32,31 +35,32 @@ const TIERS: Tier[] = [
       "Samme tilgang med ekstra tid og tilpasning. Lokalbedøvelse og beroligende hvor det er relevant.",
     price: "3.000",
     unit: "kr. · inkl. forsikring",
+    bookOnline: true,
   },
   {
     ageGroup: "6 – 11 år",
     method: "Klassisk metode · lokalbedøvelse",
     description:
-      "Rolig gennemgang, grundig smertelindring og fokus på tryghed igennem hele besøget.",
+      "Rolig gennemgang, grundig smertelindring og fokus på tryghed. Forudsætter, at barnet kan samarbejde til indgrebet i lokalbedøvelse — se vigtig information nedenfor.",
     price: "3.500",
     unit: "kr. · inkl. forsikring",
-  },
-  {
-    ageGroup: "2 – 6 år",
-    method: "Fuld bedøvelse",
-    description:
-      "Udføres i fuld bedøvelse. Aftale laves individuelt — kontakt klinikken på mail for planlægning.",
-    price: "Efter aftale",
-    unit: "Kontakt os",
+    bookOnline: true,
   },
   {
     ageGroup: "2 – 11 år",
     method: "Fuld bedøvelse · narkoseteam",
     description:
-      "Indgreb under fuld bedøvelse med komplet narkoseforløb og efterforløb.",
+      "Indgreb under fuld bedøvelse med komplet narkoseforløb og efterforløb. Børn på 2 – 6 år kan kun omskæres i fuld bedøvelse. Tidsbestilling kun via e-mail.",
     price: "9.000",
     unit: "kr. · inkl. forsikring",
+    bookOnline: false,
   },
+];
+
+const IMPORTANT_INFO = [
+  "Børn på 6 – 11 år: Omskæring i lokalbedøvelse forudsætter, at jeres barn inddrages i beslutningen i det omfang, dets modenhed tillader det, og at han kan samarbejde til at få indgrebet udført i lokalbedøvelse.",
+  "Børn på 2 – 6 år: Omskæring foretages i fuld bedøvelse. Tidsbestilling til fuld bedøvelse eller sedation kan ikke foretages online — kontakt klinikken på e-mail for planlægning.",
+  "Alle priser er inklusive lovpligtig patientforsikring, forsamtale inden indgrebet og skriftlig efterbehandlingsvejledning.",
 ];
 
 function Row({ t, i }: { t: Tier; i: number }) {
@@ -117,15 +121,27 @@ function Row({ t, i }: { t: Tier; i: number }) {
       </div>
 
       <div className="md:col-span-2 md:justify-self-end">
-        <Link
-          to="/booking"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--color-ink)] animated-link"
-        >
-          Book tid
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </Link>
+        {t.bookOnline === false ? (
+          <a
+            href="mailto:kontakt@specialklinik.dk"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--color-ink)] animated-link"
+          >
+            Skriv til klinikken
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        ) : (
+          <Link
+            to="/booking"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--color-ink)] animated-link"
+          >
+            Book tid
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
+        )}
       </div>
     </motion.article>
   );
@@ -169,10 +185,25 @@ export function PricingCards() {
           ))}
         </div>
 
+        {/* Vigtig information */}
+        <div className="mt-16 rounded-[1.5rem] border border-[color:var(--color-border)] bg-[color:var(--color-surface-dim)] p-8 md:p-10">
+          <p className="eyebrow mb-5">Vigtig information</p>
+          <ul className="space-y-4 max-w-3xl">
+            {IMPORTANT_INFO.map((item, i) => (
+              <li key={i} className="flex items-start gap-4">
+                <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent-warm)] shrink-0" />
+                <p className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                  {item}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <div className="mt-14 flex flex-wrap items-center justify-between gap-6">
           <p className="text-[15px] text-[color:var(--color-text-muted)] max-w-lg">
-            Vi anbefaler ofte omskæring i fuld bedøvelse til børn over
-            spædbarnsalderen. Kontakt klinikken for individuel rådgivning.
+            Er I i tvivl om, hvad der er bedst for jeres barn? Kontakt klinikken
+            for individuel rådgivning, inden I booker.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/booking" className="btn-gradient">

@@ -116,6 +116,56 @@ export default function OmskaeringKlassisk({ loaderData }: Route.ComponentProps)
           body="Denne side beskriver, hvordan omskæring med den klassiske metode foregår, hvad I kan forvente efter omskæringen, og hvilke forholdsregler der gælder."
         />
 
+        {/* Intro + prerequisite */}
+        <ContentSection bg="white">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            <div className="lg:col-span-7 space-y-6">
+              <motion.p
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: EASE }}
+                className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
+              >
+                Omskæring med den klassiske metode i lokalbedøvelse tilbydes til børn på
+                6 – 11 år og koster 3.500 kr. inkl. lovpligtig patientforsikring. Forhuden
+                fjernes med kirurgiske instrumenter, og hudens indre og ydre blad sys sammen
+                med selvopløselig tråd, der forsvinder af sig selv i løbet af 3 – 4 uger.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
+                className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
+              >
+                Lokalbedøvelsen anlægges gennem to indstikssteder omkring penis, så barnet
+                ikke mærker smerte under indgrebet. Er barnet under 6 år, foretages omskæring
+                i fuld bedøvelse i stedet.
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
+              className="lg:col-span-4 lg:col-start-9"
+            >
+              <div className="card-elevated p-8 border-l-4 border-l-[color:var(--color-accent-warm)]">
+                <span className="sticker sticker-warm mb-5 inline-flex">
+                  Vigtig information
+                </span>
+                <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                  Det er en forudsætning, at jeres barn inddrages i beslutningen i det
+                  omfang, dets modenhed tillader det, og at han kan samarbejde til at få
+                  indgrebet udført i lokalbedøvelse.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </ContentSection>
+
         {/* Feature image */}
         <ContentSection bg="ivory">
           <motion.div
