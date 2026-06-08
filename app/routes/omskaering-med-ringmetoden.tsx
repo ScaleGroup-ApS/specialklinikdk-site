@@ -24,17 +24,31 @@ const PROCEDURE = [
   {
     num: "02",
     title: "Proceduren",
-    body: "Forhuden løsnes fra glans penis. En plastikring placeres omkring penishovedet, huden trækkes ud over ringen, og en stram snor bindes på niveauet for omskæringen. Overskydende hud klippes væk, og ringen falder typisk af efter 5-14 dage.",
+    body: "Forhuden løsnes fra glans penis. En plastikring placeres omkring penishovedet, huden trækkes ud over ringen, og en stram snor bindes på niveauet for omskæringen. Overskydende hud klippes væk, og ringen falder typisk selv af efter 5-10 dage.",
   },
 ];
 
 const AFTERCARE = [
-  "Skærm området mod afføring med tørt papirtørklæde/vaskeklud i bleen.",
-  "Smertebehandling med Panodil Junior 24 mg/ml: 0,5 ml pr. kilo kropsvægt hver 6. time i 3 dage, derefter ved behov.",
-  "Sørg for ubesværet vandladning. Kontakt klinikken hvis barnet ikke lader vandet inden for 6 timer.",
-  "Mindre blodpletter er normalt. Ved større eller aktiv blødning kontaktes klinikken straks.",
-  "Start Fucidin salve 2% dagen efter omskæring, morgen og aften i en uge.",
-  "Giv dagligt karbad i 5-10 min for at fremskynde processen, hvor ringen slipper.",
+  "Læg et tørt papirtørklæde eller en vaskeklud i bleen for at skærme operationsområdet mod afføring og urenheder.",
+  "Smertebehandling med Panodil Junior 24 mg/ml: 0,5 ml pr. kilo kropsvægt hver 6. time i 2 dage, derefter ved behov.",
+  "Sørg for ubesværet vandladning inden for 6-8 timer efter indgrebet. Sker det ikke, kontakt klinikken.",
+  "Det første døgn: kig i bleen cirka hver time – og et par gange om natten – for at sikre, at der ikke er en aktiv blødning. 1-2 dråber blod i området eller bleen er normalt; ved pågående blødning kontaktes klinikken eller vagtlægen.",
+  "Skyl med håndbruser efter hvert bleskifte, hvis der er afføring eller en stor våd ble.",
+  "Karbad efter behov i cirka 5 minutter. I må gerne bruge babyolie eller babyshampoo i vandet.",
+  "Fra dag 2 smøres med Fucidin salve 2% morgen og aften i 7 dage – et tyndt lag på den overskydende hud udenpå ringen. Træk ikke i snorene eller i ringen.",
+];
+
+const HIDDEN_PENIS = [
+  "Hos nogle spæd- og småbørn er der et større fedtlag omkring penis på maveskindet, og huden omkring penis dækker ofte en del af penishovedet. Fedtet kan skubbe huden frem, så penis ligger gemt i en ’fedtpude’ – nogle forældre oplever, at det ser ud, som om barnet ikke er omskåret. Det er en helt normal tilstand.",
+  "Skub i de tilfælde forsigtigt huden tilbage, i det omfang den dækker glans penis, for at forebygge adhærencer (sammenklistring) mellem huden og penishovedet. Smør jævnligt en fed creme eller vaseline mellem huden og kanten af penishovedet for at forebygge, at det klistrer sammen.",
+  "Hos nogle spædbørn kan penis gemme sig i maveskindet i måneder til år. Det er normalt og ikke en følge af omskæringen. Skub blot huden ned med jævne mellemrum, og rens området, så der ikke samler sig urenheder. Når barnet vokser og taber sig, kommer penis mere frem og bliver synlig.",
+];
+
+const INFLAMMATION = [
+  "Let hævelse, misfarvning og rødme kan være til stede, indtil ringen falder af, og aftager herefter. Hævelsen kan tiltage og aftage flere gange i løbet af helingsperioden.",
+  "Sårbelægninger/fibrin rundt om ringen og hvide/gule belægninger inde i ringen på glans penis er normalt og skal ikke forsøges fjernet. De tørrer ud og falder selv af i løbet af et par uger.",
+  "Let misfarvning ved indstiksstedet og på undersiden af penis, mellem penis og pungen, er normalt.",
+  "Helingstiden er normalt cirka to uger, mens der kan være let hævelse i op til tre-fire uger. Det kosmetiske resultat kan først vurderes efter cirka seks uger.",
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -251,8 +265,10 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
           >
             <div className="card-ivory p-8 rounded-[1.25rem] border-l-4 border-l-[color:var(--color-accent-warm)]">
               <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
-                Sjældent falder ringen ikke af inden for 14 dage. I sådanne tilfælde eller ved
-                besværet vandladning og mange smerter skal klinikken kontaktes.
+                Ringen falder selv af efter 5-10 dage sammen med den overskydende hud, der
+                gradvist nekrotiserer og bliver bleg eller evt. sort. Falder ringen ikke af
+                inden for 14 dage – eller er der voldsom hævelse, smerter og besværet
+                vandladning – skal klinikken kontaktes.
               </p>
             </div>
           </motion.div>
@@ -267,10 +283,44 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
             transition={{ duration: 0.7, ease: EASE }}
             className="eyebrow mb-4"
           >
+            Normal heling
+          </motion.p>
+          <h2 className="display-lg text-[color:var(--color-ink)] mb-10">
+            <AnimatedWords as="span" mode="inView" text="Inflammation og belægninger" className="block" />
+          </h2>
+
+          <div className="space-y-4 max-w-3xl">
+            {INFLAMMATION.map((item, i) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE, delay: i * 0.06 }}
+                className="flex items-start gap-4"
+              >
+                <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent-warm)] shrink-0" />
+                <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                  {item}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </ContentSection>
+
+        {/* Complications */}
+        <ContentSection bg="white">
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="eyebrow mb-4"
+          >
             Vigtig information
           </motion.p>
           <h2 className="display-lg text-[color:var(--color-ink)] mb-8">
-            <AnimatedWords as="span" mode="inView" text="Inflammation og komplikationer" className="block" />
+            <AnimatedWords as="span" mode="inView" text="Komplikationer" className="block" />
           </h2>
 
           <div className="max-w-3xl space-y-6">
@@ -281,10 +331,8 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
               transition={{ duration: 0.8, ease: EASE }}
               className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
             >
-              Let til moderat hævelse, rødme og belægninger kan være en normal del af
-              helingen. Der er en mindre risiko for blødning i det første døgn og en sjælden
-              risiko for infektion. Ved tegn på infektion, feber, pus eller besværet
-              vandladning skal klinikken kontaktes.
+              Der er en mindre risiko for blødning i det første døgn. Ved en pågående blødning
+              skal klinikken kontaktes – ved akutte tilfælde kontaktes vagtlægen.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 24 }}
@@ -293,10 +341,41 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
               transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
               className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
             >
-              Når ringen er faldet af og såret er helet, kan jævnlig pleje med fed creme eller
-              vaseline hjælpe med at forebygge sammenklistring hos børn med tendens til
-              skjult penis.
+              Infektionsrisikoen er til stede, men meget sjælden. Ved tegn som voldsom
+              hævelse, sivning af pus, rødme, varme, feber, påvirket almentilstand eller
+              besværet vandladning skal klinikken kontaktes.
             </motion.p>
+          </div>
+        </ContentSection>
+
+        {/* Hidden penis / fat pad */}
+        <ContentSection bg="ivory">
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="eyebrow mb-4"
+          >
+            Efter ringen er faldet af
+          </motion.p>
+          <h2 className="display-lg text-[color:var(--color-ink)] mb-8">
+            <AnimatedWords as="span" mode="inView" text="Skjult penis (fedtpude)" className="block" />
+          </h2>
+
+          <div className="max-w-3xl space-y-6">
+            {HIDDEN_PENIS.map((para, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: EASE, delay: i * 0.08 }}
+                className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
+              >
+                {para}
+              </motion.p>
+            ))}
           </div>
         </ContentSection>
 

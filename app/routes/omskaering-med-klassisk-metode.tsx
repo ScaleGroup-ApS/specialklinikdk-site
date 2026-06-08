@@ -29,18 +29,24 @@ const PROCEDURE = [
 ];
 
 const PRECAUTIONS = [
-  "Læg et tørt papirtørklæde eller en vaskeklud i bleen for at skærme forbindingen mod afføring.",
+  "Læg et tørt papirtørklæde eller en vaskeklud i bleen for at skærme forbindingen mod afføring og urenheder.",
   "Smerter behandles med Panodil Junior 24 mg/ml. Dosering: 0,5 ml pr. kilo kropsvægt hver 6. time i 3 dage, derefter ved behov.",
-  "Sørg for ubesværet vandladning. Hvis barnet ikke lader vandet inden for 4 timer, kontakt klinikken.",
-  "Mindre sivning af blod er normalt. Ved større eller aktiv blødning skal klinikken kontaktes.",
+  "Sørg for ubesværet vandladning inden for 4-6 timer efter indgrebet. Sker det ikke, kontakt klinikken.",
+  "Mindre blod på forbindingen eller en blodplet i bleen er normalt. Ved pågående sivning eller større blødning presses på såret (kompression). Stopper det ikke i løbet af få minutter, kontakt klinikken eller vagtlægen.",
 ];
 
 const INFLAMMATION = [
   "Let hævelse i området.",
-  "Rødme og hævelse af penishovedet.",
-  "Hvide/gule fibrinbelægninger, som tørrer ud og falder af over cirka en uge.",
-  "Let misfarvning ved indstiksstedet og på undersiden af penis.",
-  "Helingstid er normalt ca. 2 uger, med let hævelse op til 3-4 uger.",
+  "Hvide/gule fibrinbelægninger på såret og glans penis, som tørrer ud og falder selv af i løbet af cirka en uge.",
+  "Let misfarvning ved indstiksstedet og på undersiden af penis, mellem penis og pungen, er normalt.",
+  "Helingstiden er normalt cirka to uger, mens der kan være let hævelse i op til tre-fire uger.",
+  "Det kosmetiske resultat kan først vurderes efter cirka seks uger.",
+];
+
+const HIDDEN_PENIS = [
+  "Hos nogle spæd- og småbørn er der et større fedtlag omkring penis på maveskindet. Fedtet kan skubbe huden frem, så penis ligger gemt i en ’fedtpude’ – nogle forældre oplever, at det ser ud, som om barnet ikke er omskåret. Det er en helt normal tilstand.",
+  "Skub i de tilfælde forsigtigt huden tilbage, i det omfang den dækker glans penis, for at forebygge adhærencer (sammenklistring) mellem huden og penishovedet. Den første uge skal I dog være varsomme, da såret stadig heler – herefter kan I begynde. Smør jævnligt en fed creme eller vaseline mellem huden og kanten af penishovedet for at forebygge, at det klistrer sammen.",
+  "Hos nogle spædbørn kan penis gemme sig i maveskindet i måneder til år. Det er normalt og ikke en følge af omskæringen. Skub blot huden ned med jævne mellemrum, og rens området, så der ikke samler sig urenheder. Når barnet vokser og taber sig, kommer penis mere frem og bliver synlig.",
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -210,11 +216,16 @@ export default function OmskaeringKlassisk({ loaderData }: Route.ComponentProps)
             transition={{ duration: 0.8, ease: EASE }}
             className="mt-10 max-w-3xl"
           >
-            <div className="card-ivory p-8 rounded-[1.25rem] border-l-4 border-l-[color:var(--color-accent-warm)]">
+            <div className="card-ivory p-8 rounded-[1.25rem] border-l-4 border-l-[color:var(--color-accent-warm)] space-y-4">
               <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
-                Efter 24 timer skal forbindingen blødgøres og fjernes under rindende vand.
-                Herefter smøres med Fucidin salve 2% morgen og aften i 7 dage. Vaseline kan
-                bruges for at lindre og forhindre fastklistring til ble.
+                Efter cirka 24 timer blødgøres forbindingen under rindende vand og fjernes
+                forsigtigt. Sidder den fast, kan den løsnes med saltvand eller lidt babyolie.
+              </p>
+              <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                Når såret er tørt, smøres med Fucidin salve 2% morgen og aften i 7 dage –
+                klinikken laver en elektronisk recept. I kan desuden bruge klorhexidinpudder
+                1-2 gange dagligt (fås i håndkøb på apoteket), men ikke samtidig med Fucidin –
+                brug det i andre perioder af dagen.
               </p>
             </div>
           </motion.div>
@@ -254,8 +265,39 @@ export default function OmskaeringKlassisk({ loaderData }: Route.ComponentProps)
           </div>
         </ContentSection>
 
-        {/* Complications */}
+        {/* Hidden penis / fat pad */}
         <ContentSection bg="ivory">
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="eyebrow mb-4"
+          >
+            Efter heling
+          </motion.p>
+          <h2 className="display-lg text-[color:var(--color-ink)] mb-8">
+            <AnimatedWords as="span" mode="inView" text="Skjult penis (fedtpude)" className="block" />
+          </h2>
+
+          <div className="max-w-3xl space-y-6">
+            {HIDDEN_PENIS.map((para, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: EASE, delay: i * 0.08 }}
+                className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
+              >
+                {para}
+              </motion.p>
+            ))}
+          </div>
+        </ContentSection>
+
+        {/* Complications */}
+        <ContentSection bg="white">
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
