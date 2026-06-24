@@ -12,56 +12,10 @@ import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
+import { FAQ_ITEMS } from "~/lib/faq";
 import type { WpSiteInfo } from "~/lib/wp-types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-const FAQ_ITEMS = [
-  {
-    q: "Hvornår er den bedste alder for omskæring?",
-    a: "Vi anbefaler ofte, at omskæring finder sted når barnet er 2-8 uger gammelt, da indgrebet her typisk er mest skånsomt.",
-  },
-  {
-    q: "Er omskæring farligt?",
-    a: "Forekomsten af komplikationer er lav ved korrekt udført omskæring. Derfor bør indgrebet kun udføres af autoriserede og erfarne sundhedspersoner.",
-  },
-  {
-    q: "Hvilke risici er forbundet med omskæring?",
-    a: "De væsentligste risici er blødning og infektion. Klinikken vejleder altid grundigt i, hvad I skal holde øje med efter indgrebet.",
-  },
-  {
-    q: "Er omskæring af drengebørn ulovligt?",
-    a: "Omskæring er ikke ulovligt i Danmark, når det foretages af autoriserede sundhedspersoner og efter gældende regler.",
-  },
-  {
-    q: "Mit barn er forkølet, skal jeg aflyse tiden?",
-    a: "Hvis barnet er alment påvirket med fx feber, sløvhed eller nedsat appetit, bør tiden aflyses. Ved let forkølelse kan indgrebet ofte stadig gennemføres.",
-  },
-  {
-    q: "Hvad skal jeg medbringe til klinikken?",
-    a: "Barnets CPR/sygesikringskort, evt. sukkervand i sutteflaske, evt. modermælk/modermælkserstatning samt ekstra bleer og tøj.",
-  },
-  {
-    q: "Hvordan foregår betalingen?",
-    a: "Betalingen foregår ved fremmøde i klinikken.",
-  },
-  {
-    q: "Hvilken operationsmetode bruger I?",
-    a: "Der anvendes enten klassisk metode eller ringmetoden Circumplast. Metoden vælges i dialog med forældrene.",
-  },
-  {
-    q: "Hvor længe har barnet ondt efter omskæring?",
-    a: "Som regel lette smerter i 2-3 dage, som typisk kan håndteres med relevant smertestillende behandling.",
-  },
-  {
-    q: "Hvor længe går der før såret er helet?",
-    a: "Såret heler som regel på 1-2 uger. Let hævelse kan ses i flere uger, og det kosmetiske resultat vurderes først senere.",
-  },
-  {
-    q: "Skal begge forældre komme med i klinikken?",
-    a: "Begge forældre anbefales at møde op. Hvis kun den ene møder, kan samtykke/fuldmagt fra den anden forælder være nødvendig ved fælles forældremyndighed.",
-  },
-];
 
 export async function loader({ request }: Route.LoaderArgs) {
   const siteUrl = new URL(request.url).origin;

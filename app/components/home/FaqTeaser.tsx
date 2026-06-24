@@ -3,27 +3,11 @@ import { Link } from "react-router";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 import { AccordionList } from "~/components/shared/AccordionList";
+import { FRONTPAGE_FAQ } from "~/lib/faq";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const FAQ = [
-  {
-    q: "Er omskæring smertefuldt for barnet?",
-    a: "Vi anvender effektiv smertelindring tilpasset barnets alder — lokalbedøvelse, beroligende eller fuld bedøvelse hvor det er relevant. Vores mål er at holde barnet så smertefrit og trygt som muligt før, under og efter indgrebet.",
-  },
-  {
-    q: "Hvilken metode er bedst til mit barn?",
-    a: "Valget af metode afhænger primært af barnets alder. Vi anvender typisk ringmetoden (Circumplast®) til børn under ét år og den klassiske metode til større børn. Ved samtalen i klinikken rådgiver vi om det rette valg for netop jeres barn.",
-  },
-  {
-    q: "Hvor lang tid tager selve indgrebet?",
-    a: "Selve det kirurgiske indgreb tager typisk 10–20 minutter. Regn med ca. en time i klinikken i alt, så der er god tid til samtale, forberedelse og ro efter indgrebet.",
-  },
-  {
-    q: "Hvad sker der bagefter og hvem kan jeg kontakte?",
-    a: "I får udleveret skriftlig vejledning om efterbehandling og smertelindring derhjemme. Klinikken er tilgængelig via telefon og mail gennem hele helingsforløbet — I er ikke alene når I kommer hjem.",
-  },
-];
+const FAQ = FRONTPAGE_FAQ;
 
 export function FaqTeaser() {
   return (

@@ -7,6 +7,13 @@ import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { CtaBand } from "~/components/home/CtaBand";
 import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
+import {
+  InfoSection,
+  BulletList,
+  Prose,
+  Callout,
+  SubHeading,
+} from "~/components/shared/InfoBlock";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 import { getSiteInfo } from "~/lib/wp-api";
@@ -19,36 +26,56 @@ const PROCEDURE = [
   {
     num: "01",
     title: "Bedøvelse",
-    body: "Barnet bedøves med lokalbedøvelse gennem to indstikssteder omkring penis. Tryllecreme inden fremmøde anbefales. Efter anlæggelse af bedøvelse ventes ca. 10-20 minutter for fuld effekt.",
+    body: "Barnet bedøves med lokalbedøvelse gennem to indstikssteder omkring penis. Vi anbefaler tryllecreme inden fremmøde, og sukkervand på sutteflaske virker beroligende. Efter anlæggelse ventes ca. 10-20 minutter for fuld effekt.",
   },
   {
     num: "02",
     title: "Proceduren",
-    body: "Forhuden løsnes fra glans penis. En plastikring placeres omkring penishovedet, huden trækkes ud over ringen, og en stram snor bindes på niveauet for omskæringen. Overskydende hud klippes væk, og ringen falder typisk selv af efter 5-10 dage.",
+    body: "Forhuden løsnes fra glans penis. En plastikring placeres omkring penishovedet, huden trækkes ud over ringen, og en stram snor bindes på niveauet for omskæringen. Overskydende hud klippes væk, og ringen falder selv af efter 5-10 dage.",
   },
 ];
 
-const AFTERCARE = [
-  "Læg et tørt papirtørklæde eller en vaskeklud i bleen for at skærme operationsområdet mod afføring og urenheder.",
-  "Smertebehandling med Panodil Junior 24 mg/ml: 0,5 ml pr. kilo kropsvægt hver 6. time i 2 dage, derefter ved behov.",
-  "Sørg for ubesværet vandladning inden for 6-8 timer efter indgrebet. Sker det ikke, kontakt klinikken.",
-  "Det første døgn: kig i bleen cirka hver time – og et par gange om natten – for at sikre, at der ikke er en aktiv blødning. 1-2 dråber blod i området eller bleen er normalt; ved pågående blødning kontaktes klinikken eller vagtlægen.",
-  "Skyl med håndbruser efter hvert bleskifte, hvis der er afføring eller en stor våd ble.",
-  "Karbad efter behov i cirka 5 minutter. I må gerne bruge babyolie eller babyshampoo i vandet.",
-  "Fra dag 2 smøres med Fucidin salve 2% morgen og aften i 7 dage – et tyndt lag på den overskydende hud udenpå ringen. Træk ikke i snorene eller i ringen.",
-];
-
-const HIDDEN_PENIS = [
-  "Hos nogle spæd- og småbørn er der et større fedtlag omkring penis på maveskindet, og huden omkring penis dækker ofte en del af penishovedet. Fedtet kan skubbe huden frem, så penis ligger gemt i en ’fedtpude’ – nogle forældre oplever, at det ser ud, som om barnet ikke er omskåret. Det er en helt normal tilstand.",
-  "Skub i de tilfælde forsigtigt huden tilbage, i det omfang den dækker glans penis, for at forebygge adhærencer (sammenklistring) mellem huden og penishovedet. Smør jævnligt en fed creme eller vaseline mellem huden og kanten af penishovedet for at forebygge, at det klistrer sammen.",
-  "Hos nogle spædbørn kan penis gemme sig i maveskindet i måneder til år. Det er normalt og ikke en følge af omskæringen. Skub blot huden ned med jævne mellemrum, og rens området, så der ikke samler sig urenheder. Når barnet vokser og taber sig, kommer penis mere frem og bliver synlig.",
+const PRECAUTIONS = [
+  "Dæk operationsområdet i bleen med en tør forbinding, fx et stykke Mesoft®, for at forebygge forurening med afføring og urin.",
+  "Smertestillende: Panodil Junior 24 mg/ml — 0,5 ml pr. kg kropsvægt hver 6. time i 2 dage, herefter efter behov.",
+  "Sørg for, at barnet har vandladning inden for 6-8 timer efter indgrebet.",
+  "Hygiejne: skyl området forsigtigt med håndbruser efter hvert bleskift, hvis der er afføring eller en meget våd ble. Barnet må gerne få et kort karbad på ca. 5 minutter efter behov — babyolie og mild babyshampoo må anvendes i vandet.",
+  "Fucidin® salve 2% fra dag 2: smør et tyndt lag morgen og aften i 7 dage på den overskydende hud uden på ringen. Træk ikke i ringen eller snorene. Klinikken laver en elektronisk recept.",
 ];
 
 const INFLAMMATION = [
-  "Let hævelse, misfarvning og rødme kan være til stede, indtil ringen falder af, og aftager herefter. Hævelsen kan tiltage og aftage flere gange i løbet af helingsperioden.",
-  "Sårbelægninger/fibrin rundt om ringen og hvide/gule belægninger inde i ringen på glans penis er normalt og skal ikke forsøges fjernet. De tørrer ud og falder selv af i løbet af et par uger.",
-  "Let misfarvning ved indstiksstedet og på undersiden af penis, mellem penis og pungen, er normalt.",
-  "Helingstiden er normalt cirka to uger, mens der kan være let hævelse i op til tre-fire uger. Det kosmetiske resultat kan først vurderes efter cirka seks uger.",
+  "Moderat hævelse, rødme og misfarvning af huden kan være til stede, indtil ringen falder af, og aftager derefter gradvist. Hævelsen kan variere gennem helingsperioden.",
+  "Sårbelægninger: hvide eller gullige belægninger på penishovedet (glans) og fibrinbelægninger omkring såret og ringen er normalt. De skal ikke fjernes og forsvinder af sig selv i løbet af nogle uger.",
+  "Let blålig eller mørkere misfarvning omkring indstiksstederne og på undersiden af penis, mellem penis og pung, er normalt og forsvinder gradvist.",
+  "Den normale helingstid er cirka 2 uger. Let hævelse kan vare i op til 3-4 uger, og det endelige kosmetiske resultat kan først vurderes efter cirka 6 uger.",
+];
+
+const INFECTION_SIGNS = [
+  "Udtalt hævelse",
+  "Tiltagende rødme eller varme",
+  "Pus eller gulligt sekret fra såret",
+  "Feber",
+  "Påvirket almentilstand",
+  "Besvær med vandladning",
+];
+
+const PRESSURE_RECOMMEND = [
+  "Brug løst tøj.",
+  "Lad være med at lukke knapper på bodystocking hen over operationsområdet.",
+  "Undgå tryk mod penis, når barnet bæres eller bøvses.",
+  "Stram ikke sikkerhedsseler i autostol unødigt over operationsområdet.",
+];
+
+const PRESSURE_AVOID = [
+  "Mavetid.",
+  "Bæreseler.",
+  "Andre hjælpemidler eller aktiviteter, der giver direkte tryk mod operationsområdet.",
+  "At lade barnet ligge uden ble — spædbørn sparker ofte med benene og kan ramme operationsområdet, hvilket kan give smerter, irritation eller blødning.",
+];
+
+const HIDDEN_PENIS = [
+  "Træk jævnligt huden blidt tilbage i det omfang, den dækker penishovedet.",
+  "Smør med en fed creme eller vaseline mellem huden og kanten af penishovedet.",
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -70,7 +97,7 @@ export function meta({ data }: Route.MetaArgs) {
     ...buildMeta({
       title: `Omskæring med ringmetoden | ${siteName}`,
       description:
-        "Information om Circumplast® ringmetoden: procedure, efterforløb, inflammation og komplikationer.",
+        "Information om Circumplast® ringmetoden: hvorfor den er bedre end Plastibell, procedure, efterforløb, normale reaktioner og komplikationer.",
       url: `${siteUrl}/omskaering-med-ringmetoden`,
       siteName,
       siteUrl,
@@ -117,10 +144,19 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
           }
         />
 
-        {/* Intro */}
+        {/* Intro — Circumplast® vs. Plastibell */}
         <ContentSection bg="ivory">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             <div className="lg:col-span-7 space-y-6">
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: EASE }}
+                className="eyebrow"
+              >
+                Ringmetoden med Circumplast®
+              </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -128,9 +164,15 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
                 transition={{ duration: 0.8, ease: EASE }}
                 className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
               >
-                Specialklinik Taastrup tilbyder ringmetoden med Circumplast®. Circumplast® er
-                en avanceret ring til omskæring af drenge, som i flere studier er forbundet med
-                lavere risiko for komplikationer sammenlignet med traditionelle ringe.
+                Specialklinik Taastrup er stolt af at kunne præsentere Circumplast® i Danmark.
+                Circumplast® er en avanceret ring til omskæring af drenge, som er overlegen i
+                forhold til den traditionelle Plastibell-ring. Det er blevet påvist i flere
+                studier, at brugen af Circumplast® er forbundet med en lavere risiko for
+                komplikationer. Særligt er den velkendte risiko for, at ringen forskyder sig
+                ned og sidder fast omkring penisskaftet med voldsomme smerter og besværet
+                vandladning til følge, ikke til stede med Circumplast® i forhold til
+                Plastibell. Dette bliver belyst i en artikel fra 2023, hvor der blev foretaget
+                1.000 omskæringer med Circumplast®.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 24 }}
@@ -139,8 +181,12 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
                 transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
                 className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
               >
-                Circumplast® har en unik cylindrisk form og er produceret af Novadien
-                Healthcare. Ringen er godkendt af både FDA og UKCA.
+                Det skyldes Circumplasts® helt unikke cylindriske form, som adskiller sig fra
+                den traditionelle Plastibell-ring. Circumplast® er produceret af den engelske
+                medicotekniske virksomhed Novadien Healthcare og er godkendt af både den
+                amerikanske lægemiddelstyrelse FDA og UKCA-mærket i Storbritannien. Der findes
+                desuden en video, der sammenligner operationsteknikken med Circumplast® og
+                Plastibell.
               </motion.p>
             </div>
 
@@ -156,7 +202,11 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
                   FDA & UKCA godkendt
                 </span>
                 <p className="font-display italic font-light text-[1.25rem] leading-[1.4] text-[color:var(--color-ink)]">
-                  Lavere risiko for komplikationer sammenlignet med traditionelle ringe.
+                  Lavere risiko for komplikationer sammenlignet med den traditionelle
+                  Plastibell-ring.
+                </p>
+                <p className="mt-5 text-[14px] leading-[1.7] text-[color:var(--color-text-muted)]">
+                  Dokumenteret i et studie fra 2023 med 1.000 omskæringer med Circumplast®.
                 </p>
               </div>
             </motion.div>
@@ -221,163 +271,107 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
           </div>
         </ContentSection>
 
-        {/* Aftercare */}
-        <ContentSection bg="white">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="eyebrow mb-4"
-          >
-            Forholdsregler
-          </motion.p>
-          <h2 className="display-lg text-[color:var(--color-ink)] mb-10">
-            <AnimatedWords as="span" mode="inView" text="Efter omskæring" className="block" />
-          </h2>
+        {/* Forholdsregler */}
+        <InfoSection bg="white" eyebrow="Forholdsregler" title="Efter omskæringen">
+          <BulletList items={PRECAUTIONS} />
+        </InfoSection>
 
-          <div className="space-y-4 max-w-3xl">
-            {AFTERCARE.map((item, i) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
-                className="flex items-start gap-5"
-              >
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-accent-warm)] text-[12px] font-semibold shrink-0 mt-0.5">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
-                  {item}
-                </p>
-              </motion.div>
-            ))}
+        {/* Smerter & blødning */}
+        <InfoSection bg="ivory" eyebrow="Det første døgn" title="Smerter og blødning">
+          <Prose
+            paragraphs={[
+              "Bedøvelsen aftager normalt efter 1-2 timer. Det er helt normalt, at barnet har smerter efter omskæringen — typisk mest udtalte på operationsdagen, hvorefter de aftager gradvist. Når ringen begynder at løsne sig, kan der igen opstå ømhed eller smerter.",
+              "Vær opmærksom på blødning fra operationsområdet. Det første døgn anbefales det at kontrollere bleen cirka én gang i timen i dagtimerne og et par gange i løbet af natten. Let pletblødning gennem helingsperioden er normalt.",
+              "Ved vedvarende sivning eller egentlig blødning skal I kontakte klinikken. Ved akut eller kraftig blødning kontaktes klinikken telefonisk. Kan klinikken ikke kontaktes, og vurderes situationen akut uden for åbningstid, skal I kontakte vagtlægen.",
+            ]}
+          />
+        </InfoSection>
+
+        {/* Ringen */}
+        <InfoSection bg="white" eyebrow="Vigtig information" title="Ringen falder selv af">
+          <Prose
+            paragraphs={[
+              "Ringen falder normalt af sig selv efter 5-10 dage sammen med den overskydende hud, som gradvist tørrer ind og bliver bleg, brun eller sort. Hvis ringen kun er delvist løsnet, skal I lade den sidde, indtil den falder helt af af sig selv.",
+            ]}
+          />
+          <Callout>
+            Hvis ringen ikke er faldet af efter 14 dage, eller hvis der opstår udtalt hævelse,
+            stærke smerter eller besvær med vandladning, bedes I kontakte klinikken via e-mail.
+            Ved akutte problemer kontaktes klinikken telefonisk.
+          </Callout>
+        </InfoSection>
+
+        {/* Normale reaktioner */}
+        <InfoSection bg="ivory" eyebrow="Normale reaktioner" title="Inflammation, belægninger og heling">
+          <BulletList items={INFLAMMATION} />
+        </InfoSection>
+
+        {/* Infektion */}
+        <InfoSection bg="white" eyebrow="Vær opmærksom" title="Tegn på infektion">
+          <Prose
+            paragraphs={[
+              "Infektion efter omskæring er sjælden, men kan forekomme. Kontakt klinikken, hvis I bemærker et eller flere af følgende:",
+            ]}
+          />
+          <div className="mt-6">
+            <BulletList items={INFECTION_SIGNS} />
           </div>
+          <Callout>
+            Ved mistanke om infektion bedes I kontakte klinikken via e-mail. Ved påvirket
+            almentilstand eller andre akutte symptomer kontaktes klinikken telefonisk.
+          </Callout>
+        </InfoSection>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="mt-10 max-w-3xl"
-          >
-            <div className="card-ivory p-8 rounded-[1.25rem] border-l-4 border-l-[color:var(--color-accent-warm)]">
-              <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
-                Ringen falder selv af efter 5-10 dage sammen med den overskydende hud, der
-                gradvist nekrotiserer og bliver bleg eller evt. sort. Falder ringen ikke af
-                inden for 14 dage – eller er der voldsom hævelse, smerter og besværet
-                vandladning – skal klinikken kontaktes.
-              </p>
-            </div>
-          </motion.div>
-        </ContentSection>
-
-        {/* Inflammation */}
-        <ContentSection bg="ivory">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="eyebrow mb-4"
-          >
-            Normal heling
-          </motion.p>
-          <h2 className="display-lg text-[color:var(--color-ink)] mb-10">
-            <AnimatedWords as="span" mode="inView" text="Inflammation og belægninger" className="block" />
-          </h2>
-
-          <div className="space-y-4 max-w-3xl">
-            {INFLAMMATION.map((item, i) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: EASE, delay: i * 0.06 }}
-                className="flex items-start gap-4"
-              >
-                <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent-warm)] shrink-0" />
-                <p className="text-[16px] leading-[1.8] text-[color:var(--color-text-muted)]">
-                  {item}
-                </p>
-              </motion.div>
-            ))}
+        {/* Undgå tryk */}
+        <InfoSection bg="ivory" eyebrow="Mens ringen sidder på" title="Undgå tryk på operationsområdet">
+          <Prose
+            paragraphs={[
+              "Så længe ringen sidder på, bør unødigt tryk på operationsområdet undgås.",
+            ]}
+          />
+          <div className="mt-8">
+            <SubHeading>Vi anbefaler</SubHeading>
+            <BulletList items={PRESSURE_RECOMMEND} />
           </div>
-        </ContentSection>
-
-        {/* Complications */}
-        <ContentSection bg="white">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="eyebrow mb-4"
-          >
-            Vigtig information
-          </motion.p>
-          <h2 className="display-lg text-[color:var(--color-ink)] mb-8">
-            <AnimatedWords as="span" mode="inView" text="Komplikationer" className="block" />
-          </h2>
-
-          <div className="max-w-3xl space-y-6">
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: EASE }}
-              className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
-            >
-              Der er en mindre risiko for blødning i det første døgn. Ved en pågående blødning
-              skal klinikken kontaktes – ved akutte tilfælde kontaktes vagtlægen.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
-              className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
-            >
-              Infektionsrisikoen er til stede, men meget sjælden. Ved tegn som voldsom
-              hævelse, sivning af pus, rødme, varme, feber, påvirket almentilstand eller
-              besværet vandladning skal klinikken kontaktes.
-            </motion.p>
+          <div className="mt-8">
+            <SubHeading>Undgå desuden</SubHeading>
+            <BulletList items={PRESSURE_AVOID} />
           </div>
-        </ContentSection>
+          <Callout>
+            Barnet må gerne sidde i autostol, så længe selen ikke strammes unødigt over
+            operationsområdet.
+          </Callout>
+        </InfoSection>
 
-        {/* Hidden penis / fat pad */}
-        <ContentSection bg="ivory">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="eyebrow mb-4"
-          >
-            Efter ringen er faldet af
-          </motion.p>
-          <h2 className="display-lg text-[color:var(--color-ink)] mb-8">
-            <AnimatedWords as="span" mode="inView" text="Skjult penis (fedtpude)" className="block" />
-          </h2>
-
-          <div className="max-w-3xl space-y-6">
-            {HIDDEN_PENIS.map((para, i) => (
-              <motion.p
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: EASE, delay: i * 0.08 }}
-                className="text-[17px] leading-[1.8] text-[color:var(--color-text-muted)]"
-              >
-                {para}
-              </motion.p>
-            ))}
+        {/* Efter ringen er faldet af */}
+        <InfoSection bg="white" eyebrow="Efter ringen er faldet af" title="Skjult penis (fedtpude)">
+          <Prose
+            paragraphs={[
+              "Hos nogle spæd- og småbørn er der en naturlig fedtpude over kønsbenet, som kan få penis til at se kortere ud eller delvist skjult. Det kan betyde, at huden omkring penis dækker en del af penishovedet, og nogle forældre oplever derfor, at det ser ud, som om barnet ikke er omskåret.",
+              "For at forebygge sammenvoksninger (adhærencer) mellem huden og penishovedet anbefales det:",
+            ]}
+          />
+          <div className="mt-6">
+            <BulletList items={HIDDEN_PENIS} />
           </div>
-        </ContentSection>
+          <div className="mt-8">
+            <Prose
+              paragraphs={[
+                "Hos nogle børn kan penis være delvist skjult i fedtpuden i måneder til år. Det er en normal anatomisk variation og ikke en komplikation til omskæringen. Hold jævnligt området rent, og forebyg sammenvoksninger ved at holde huden mobil omkring penishovedet. Efterhånden som barnet vokser, vil penis som regel blive mere synlig.",
+              ]}
+            />
+          </div>
+        </InfoSection>
+
+        {/* Kontakt */}
+        <InfoSection bg="ivory" eyebrow="Spørgsmål i helingsperioden" title="Kontakt til klinikken">
+          <Prose
+            paragraphs={[
+              "Ved spørgsmål eller bekymringer i helingsperioden bedes I kontakte klinikken via e-mail på kontakt@specialklinik.dk. Vi bestræber os på at besvare alle henvendelser inden for få timer.",
+              "Ved akutte problemer — herunder vedvarende blødning, betydelige smerter, besvær med vandladning eller andre forhold, der kræver akut vurdering — bedes I kontakte klinikken telefonisk på 20 76 35 16. Kan klinikken ikke kontaktes, og vurderes situationen akut uden for åbningstid, skal I kontakte vagtlægen.",
+            ]}
+          />
+        </InfoSection>
 
         <ReviewsSlider />
         <CtaBand />

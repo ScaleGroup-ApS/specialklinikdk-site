@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import type { FaqItem } from "~/lib/faq";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface AccordionListProps {
-  items: { q: string; a: string }[];
+  items: FaqItem[];
   defaultOpen?: number;
 }
 
@@ -62,9 +63,35 @@ export function AccordionList({ items, defaultOpen = 0 }: AccordionListProps) {
                   transition={{ duration: 0.5, ease: EASE }}
                   className="overflow-hidden"
                 >
-                  <p className="pl-14 pb-8 pr-10 text-[15px] leading-[1.8] text-[color:var(--color-text-muted)] max-w-prose">
-                    {item.a}
-                  </p>
+                  <div className="pl-14 pb-8 pr-10 max-w-prose space-y-4">
+                    {item.blocks
+                      ? item.blocks.map((block, bi) =>
+                          block.type === "ul" ? (
+                            <ul key={bi} className="space-y-2.5">
+                              {block.items.map((li, li_i) => (
+                                <li key={li_i} className="flex items-start gap-3">
+                                  <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent-warm)] shrink-0" />
+                                  <span className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                                    {li}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p
+                              key={bi}
+                              className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)]"
+                            >
+                              {block.text}
+                            </p>
+                          ),
+                        )
+                      : (
+                          <p className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)]">
+                            {item.a}
+                          </p>
+                        )}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
