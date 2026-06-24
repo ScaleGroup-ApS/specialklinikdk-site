@@ -22,6 +22,15 @@ import type { WpSiteInfo } from "~/lib/wp-types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// External references for the Circumplast® intro.
+const STUDY_URL =
+  "https://www.sciencedirect.com/science/article/pii/S2213576623000295?via%3Dihub";
+const CIRCUMPLAST_URL = "https://www.novadien.com/circumplast";
+const VIDEO_URL = "https://www.youtube.com/watch?v=x4x5O1Q0GeY";
+
+const refLink =
+  "underline decoration-[color:var(--color-accent-warm)] decoration-1 underline-offset-4 hover:text-[color:var(--color-ink)] transition-colors";
+
 const PROCEDURE = [
   {
     num: "01",
@@ -172,7 +181,11 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
                 ned og sidder fast omkring penisskaftet med voldsomme smerter og besværet
                 vandladning til følge, ikke til stede med Circumplast® i forhold til
                 Plastibell. Dette bliver belyst i en artikel fra 2023, hvor der blev foretaget
-                1.000 omskæringer med Circumplast®.
+                1.000 omskæringer med Circumplast® (
+                <a href={STUDY_URL} target="_blank" rel="noopener noreferrer" className={refLink}>
+                  læs studiet
+                </a>
+                ).
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 24 }}
@@ -184,9 +197,16 @@ export default function OmskaeringRingmetoden({ loaderData }: Route.ComponentPro
                 Det skyldes Circumplasts® helt unikke cylindriske form, som adskiller sig fra
                 den traditionelle Plastibell-ring. Circumplast® er produceret af den engelske
                 medicotekniske virksomhed Novadien Healthcare og er godkendt af både den
-                amerikanske lægemiddelstyrelse FDA og UKCA-mærket i Storbritannien. Der findes
-                desuden en video, der sammenligner operationsteknikken med Circumplast® og
-                Plastibell.
+                amerikanske lægemiddelstyrelse FDA og UKCA-mærket i Storbritannien. Du kan
+                læse mere om Circumplast®{" "}
+                <a href={CIRCUMPLAST_URL} target="_blank" rel="noopener noreferrer" className={refLink}>
+                  her
+                </a>
+                , og se{" "}
+                <a href={VIDEO_URL} target="_blank" rel="noopener noreferrer" className={refLink}>
+                  videoen
+                </a>{" "}
+                med en sammenligning af operationsteknikken med Circumplast® og Plastibell.
               </motion.p>
             </div>
 
