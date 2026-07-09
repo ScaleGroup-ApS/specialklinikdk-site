@@ -68,7 +68,9 @@ spec:
               memory: 64Mi
             limits:
               cpu: 200m
-              memory: 128Mi
+              # Node SSR baseline is ~115Mi; 128Mi left <10% headroom and paged
+              # CustomerPodMemoryNearLimit (2026-07-10). Matches CRM stack templates (CRM#433).
+              memory: 256Mi
 
       imagePullSecrets:
         - name: registry-credentials
