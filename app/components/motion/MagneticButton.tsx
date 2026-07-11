@@ -1,13 +1,15 @@
 // app/components/motion/MagneticButton.tsx
 // Tasteful magnetic hover — the child drifts toward the cursor.
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import {
-  useRef,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
+  motion,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+  type HTMLMotionProps,
+} from "framer-motion";
+import { useRef, type ReactNode } from "react";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends HTMLMotionProps<"div"> {
   children: ReactNode;
   /** Pull strength (px). Keep small for restraint. */
   strength?: number;

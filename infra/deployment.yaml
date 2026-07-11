@@ -1,8 +1,8 @@
 ---
-# Customer Site Deployment (React Router 7 SSR via Node.js)
+# Customer Site Deployment (React Router 8 SSR via Node.js)
 #
 # Serves the customer's public-facing website via server-side rendering.
-# Fetches content from the WordPress WP-REST API.
+# Content is code-defined in the site repo (no external CMS).
 # Each customer has a unique Docker image built from their forked repo.
 #
 apiVersion: apps/v1
@@ -62,10 +62,13 @@ spec:
 
           resources:
             requests:
-              cpu: 50m
+              cpu: 100m
               memory: 64Mi
             limits:
-              cpu: 200m
+              # SSR is bursty: the old 200m limit CFS-throttled ~30% of periods
+              # even under light traffic, driving variable TTFB. 1 core gives PHP-free
+              # Node SSR room to burst per request.
+              cpu: 1000m
               # Node SSR baseline is ~115Mi; 128Mi left <10% headroom and paged
               # CustomerPodMemoryNearLimit (2026-07-10). Matches CRM stack templates (CRM#433).
               memory: 256Mi
