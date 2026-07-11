@@ -9,9 +9,7 @@ import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
-import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
-import type { WpSiteInfo } from "~/lib/wp-types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -40,19 +38,13 @@ const CHECKLIST = [
 
 export async function loader({ request }: Route.LoaderArgs) {
   const siteUrl = new URL(request.url).origin;
-  let siteInfo: WpSiteInfo | null = null;
-  try {
-    siteInfo = await getSiteInfo().catch(() => null);
-  } catch {
-    // graceful degradation
-  }
-  return { siteInfo, siteUrl };
+  return { siteUrl };
 }
 
 export function meta({ data }: Route.MetaArgs) {
   if (!data) return [{ title: "Forberedelse inden omskæring | Specialklinik Taastrup" }];
-  const { siteInfo, siteUrl } = data;
-  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
+  const { siteUrl } = data;
+  const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
       title: `Forberedelse inden omskæring | ${siteName}`,
@@ -69,13 +61,13 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export default function Forberedelse({ loaderData }: Route.ComponentProps) {
-  const { siteInfo, siteUrl } = loaderData;
-  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
+  const { siteUrl } = loaderData;
+  const siteName = "Specialklinik Taastrup";
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header siteName={siteName} lightBg />
-      <JsonLd data={buildWebsiteJsonLd(siteInfo, siteUrl)} />
+      <JsonLd data={buildWebsiteJsonLd(siteUrl)} />
 
       <main className="flex-1">
         <SubpageHero
@@ -221,7 +213,7 @@ export default function Forberedelse({ loaderData }: Route.ComponentProps) {
         <CtaBand />
       </main>
 
-      <Footer siteName={siteName} siteDescription={siteInfo?.description} />
+      <Footer siteName={siteName} />
     </div>
   );
 }

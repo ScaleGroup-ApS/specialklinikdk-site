@@ -5,9 +5,7 @@ import { JsonLd } from "~/components/JsonLd";
 import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
-import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
-import type { WpSiteInfo } from "~/lib/wp-types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -40,19 +38,13 @@ const SECTIONS = [
 
 export async function loader({ request }: { request: Request }) {
   const siteUrl = new URL(request.url).origin;
-  let siteInfo: WpSiteInfo | null = null;
-  try {
-    siteInfo = await getSiteInfo().catch(() => null);
-  } catch {
-    // graceful degradation
-  }
-  return { siteInfo, siteUrl };
+  return { siteUrl };
 }
 
-export function meta({ data }: { data?: { siteInfo: WpSiteInfo | null; siteUrl: string } }) {
+export function meta({ data }: { data?: { siteUrl: string } }) {
   if (!data) return [{ title: "Privatlivspolitik | Specialklinik Taastrup" }];
-  const { siteInfo, siteUrl } = data;
-  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
+  const { siteUrl } = data;
+  const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
       title: `Privatlivspolitik | ${siteName}`,
@@ -68,14 +60,14 @@ export function meta({ data }: { data?: { siteInfo: WpSiteInfo | null; siteUrl: 
   ];
 }
 
-export default function Privatlivspolitik({ loaderData }: { loaderData: { siteInfo: WpSiteInfo | null; siteUrl: string } }) {
-  const { siteInfo, siteUrl } = loaderData;
-  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
+export default function Privatlivspolitik({ loaderData }: { loaderData: { siteUrl: string } }) {
+  const { siteUrl } = loaderData;
+  const siteName = "Specialklinik Taastrup";
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header siteName={siteName} lightBg />
-      <JsonLd data={buildWebsiteJsonLd(siteInfo, siteUrl)} />
+      <JsonLd data={buildWebsiteJsonLd(siteUrl)} />
 
       <main className="flex-1">
         <SubpageHero
@@ -155,7 +147,7 @@ export default function Privatlivspolitik({ loaderData }: { loaderData: { siteIn
         </ContentSection>
       </main>
 
-      <Footer siteName={siteName} siteDescription={siteInfo?.description} />
+      <Footer siteName={siteName} />
     </div>
   );
 }

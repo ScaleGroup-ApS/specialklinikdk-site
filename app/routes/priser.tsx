@@ -10,23 +10,13 @@ import { ReviewsSlider } from "~/components/ReviewsSlider";
 import { PricingHero } from "~/components/priser/PricingHero";
 import { PricingCards } from "~/components/priser/PricingCards";
 import { CtaBand } from "~/components/home/CtaBand";
-import { getSiteInfo } from "~/lib/wp-api";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
-import type { WpSiteInfo } from "~/lib/wp-types";
 
 // ── Loader ────────────────────────────────────────────────────────────────────
 
 export async function loader({ request }: Route.LoaderArgs) {
   const siteUrl = new URL(request.url).origin;
-  let siteInfo: WpSiteInfo | null = null;
-
-  try {
-    siteInfo = await getSiteInfo().catch(() => null);
-  } catch {
-    // graceful degradation
-  }
-
-  return { siteInfo, siteUrl };
+  return { siteUrl };
 }
 
 // ── Meta ──────────────────────────────────────────────────────────────────────
@@ -34,8 +24,8 @@ export async function loader({ request }: Route.LoaderArgs) {
 export function meta({ data }: Route.MetaArgs) {
   if (!data) return [{ title: "Priser | Specialklinik Taastrup" }];
 
-  const { siteInfo, siteUrl } = data;
-  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
+  const { siteUrl } = data;
+  const siteName = "Specialklinik Taastrup";
 
   return [
     ...buildMeta({
@@ -55,13 +45,13 @@ export function meta({ data }: Route.MetaArgs) {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function Priser({ loaderData }: Route.ComponentProps) {
-  const { siteInfo, siteUrl } = loaderData;
-  const siteName = siteInfo?.name ?? "Specialklinik Taastrup";
+  const { siteUrl } = loaderData;
+  const siteName = "Specialklinik Taastrup";
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header siteName={siteName} lightBg />
-      <JsonLd data={buildWebsiteJsonLd(siteInfo, siteUrl)} />
+      <JsonLd data={buildWebsiteJsonLd(siteUrl)} />
 
       <main className="flex-1">
         <PricingHero />
@@ -71,7 +61,7 @@ export default function Priser({ loaderData }: Route.ComponentProps) {
         <CtaBand />
       </main>
 
-      <Footer siteName={siteName} siteDescription={siteInfo?.description} />
+      <Footer siteName={siteName} />
     </div>
   );
 }
