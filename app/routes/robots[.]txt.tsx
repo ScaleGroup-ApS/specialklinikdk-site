@@ -12,11 +12,6 @@ export function loader({ request }: Route.LoaderArgs) {
     "User-agent: *",
     "Allow: /",
     "",
-    "# WordPress admin — not publicly relevant",
-    "Disallow: /wp-admin/",
-    "Disallow: /wp-login.php",
-    "Disallow: /wp-json/",
-    "",
     `Sitemap: ${siteUrl}/sitemap.xml`,
   ].join("\n");
 

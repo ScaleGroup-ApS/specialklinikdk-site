@@ -3,8 +3,6 @@
 // Generates meta tags, Open Graph, JSON-LD structured data, and canonical URLs.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import type { WpPage, WpPost, WpSiteInfo } from "./wp-types";
-
 interface SeoOptions {
   title: string;
   description?: string;
@@ -84,89 +82,17 @@ export function buildMeta(opts: SeoOptions) {
 }
 
 /**
- * Generate JSON-LD structured data for a page.
- */
-export function buildPageJsonLd(opts: {
-  page: WpPage | WpPost;
-  siteInfo?: WpSiteInfo | null;
-  siteUrl: string;
-  type?: "WebPage" | "Article" | "BlogPosting";
-}) {
-  const { page, siteInfo, siteUrl, type = "WebPage" } = opts;
-
-  const jsonLd: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type": type,
-    name: stripHtml(page.title.rendered),
-    headline: stripHtml(page.title.rendered),
-    url: `${siteUrl}/${page.slug}`,
-    datePublished: page.date_gmt,
-    dateModified: page.modified_gmt,
-  };
-
-  if (page.excerpt?.rendered) {
-    jsonLd.description = stripHtml(page.excerpt.rendered);
-  }
-
-  // Featured image
-  const media = page._embedded?.["wp:featuredmedia"]?.[0];
-  if (media) {
-    jsonLd.image = {
-      "@type": "ImageObject",
-      url: media.source_url,
-      width: media.media_details?.width,
-      height: media.media_details?.height,
-    };
-  }
-
-  if (siteInfo) {
-    jsonLd.publisher = {
-      "@type": "Organization",
-      name: siteInfo.name,
-      url: siteUrl,
-    };
-  }
-
-  // BreadcrumbList
-  jsonLd.mainEntity = {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Forside",
-        item: siteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: stripHtml(page.title.rendered),
-        item: `${siteUrl}/${page.slug}`,
-      },
-    ],
-  };
-
-  return jsonLd;
-}
-
-/**
  * Generate WebSite JSON-LD (for the homepage).
  */
-export function buildWebsiteJsonLd(siteInfo: WpSiteInfo | null, siteUrl: string) {
+export function buildWebsiteJsonLd(siteUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteInfo?.name ?? "Website",
-    description: siteInfo?.description ?? "",
+    name: "Specialklinik Taastrup",
+    description:
+      "Professionel omskæring i trygge rammer for drengebørn. Tryghed — hele vejen.",
     url: siteUrl,
   };
-}
-
-/**
- * Extract the featured image URL from a WP page/post with _embed.
- */
-export function getFeaturedImageUrl(page: WpPage | WpPost): string | undefined {
-  return page._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
 }
 
 /** Strip HTML tags from a string (for use in meta descriptions). */

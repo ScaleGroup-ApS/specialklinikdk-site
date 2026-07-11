@@ -16,5 +16,4 @@ export default [
   route("priser", "routes/priser.tsx"),
   route("privatlivspolitik", "routes/privatlivspolitik.tsx"),
   route("cookiepolitik", "routes/cookiepolitik.tsx"),
-  route("*", "routes/$.tsx"),
 ] satisfies RouteConfig;
