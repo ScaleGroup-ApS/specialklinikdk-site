@@ -23,10 +23,10 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 // ── Meta ─────────────────────────────────────────────────────────────────────
 
-export function meta({ data }: Route.MetaArgs) {
-  if (!data) return [{ title: "Specialklinik Taastrup" }];
+export function meta({ loaderData }: Route.MetaArgs) {
+  if (!loaderData) return [{ title: "Specialklinik Taastrup" }];
 
-  const { siteUrl } = data;
+  const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   const description =
     "Professionel omskæring i trygge rammer for drengebørn. Tryghed — hele vejen.";

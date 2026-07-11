@@ -42,9 +42,9 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { siteUrl };
 }
 
-export function meta({ data }: Route.MetaArgs) {
-  if (!data) return [{ title: "Omskæring | Specialklinik Taastrup" }];
-  const { siteUrl } = data;
+export function meta({ loaderData }: Route.MetaArgs) {
+  if (!loaderData) return [{ title: "Omskæring | Specialklinik Taastrup" }];
+  const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({

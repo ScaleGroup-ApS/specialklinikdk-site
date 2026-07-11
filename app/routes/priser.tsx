@@ -21,10 +21,10 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 // ── Meta ──────────────────────────────────────────────────────────────────────
 
-export function meta({ data }: Route.MetaArgs) {
-  if (!data) return [{ title: "Priser | Specialklinik Taastrup" }];
+export function meta({ loaderData }: Route.MetaArgs) {
+  if (!loaderData) return [{ title: "Priser | Specialklinik Taastrup" }];
 
-  const { siteUrl } = data;
+  const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
 
   return [

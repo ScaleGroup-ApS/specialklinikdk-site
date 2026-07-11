@@ -14,9 +14,9 @@ export async function loader({ request }: { request: Request }) {
   return { siteUrl };
 }
 
-export function meta({ data }: { data?: { siteUrl: string } }) {
-  if (!data) return [{ title: "Cookiepolitik | Specialklinik Taastrup" }];
-  const { siteUrl } = data;
+export function meta({ loaderData }: { loaderData?: { siteUrl: string } }) {
+  if (!loaderData) return [{ title: "Cookiepolitik | Specialklinik Taastrup" }];
+  const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
