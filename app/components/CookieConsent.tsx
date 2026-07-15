@@ -70,12 +70,14 @@ export function openCookieSettings() {
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [hasConsent, setHasConsent] = useState(false);
   const [draft, setDraft] = useState<ConsentChoice>({ statistics: false, marketing: false });
 
   useEffect(() => {
     const stored = readStoredConsent();
     if (stored) {
       applyConsent(stored);
+      setHasConsent(true);
     } else {
       setVisible(true);
     }
@@ -94,19 +96,50 @@ export function CookieConsent() {
     applyConsent(consent);
     setVisible(false);
     setExpanded(false);
+    setHasConsent(true);
   }
 
-  if (!visible) return null;
+  function reopen() {
+    setDraft(readStoredConsent() ?? { statistics: false, marketing: false });
+    setExpanded(true);
+    setVisible(true);
+  }
+
+  if (!visible) {
+    if (!hasConsent) return null;
+    return (
+      <button
+        type="button"
+        onClick={reopen}
+        aria-label="Åbn cookieindstillinger"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] flex h-12 w-12 items-center justify-center rounded-full bg-white border border-[color:var(--color-border)] shadow-[0_15px_40px_-15px_rgba(11,16,32,0.4)] transition-transform hover:scale-105"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          className="h-6 w-6"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="9" fill="var(--color-accent-warm)" stroke="var(--color-ink)" strokeWidth="0.5" />
+          <circle cx="9" cy="9" r="1.2" fill="var(--color-ink)" />
+          <circle cx="14.5" cy="8.5" r="1" fill="var(--color-ink)" />
+          <circle cx="15.5" cy="13.5" r="1.2" fill="var(--color-ink)" />
+          <circle cx="10" cy="15" r="1" fill="var(--color-ink)" />
+          <circle cx="8" cy="12.5" r="0.8" fill="var(--color-ink)" />
+        </svg>
+      </button>
+    );
+  }
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Cookiesamtykke"
-      className="fixed inset-x-0 bottom-0 z-[100] px-4 pb-4 sm:px-6 sm:pb-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[color:var(--color-ink)]/45 backdrop-blur-sm p-4"
     >
-      <div className="mx-auto max-w-2xl rounded-2xl border border-[color:var(--color-border)] bg-white shadow-[0_30px_80px_-30px_rgba(11,16,32,0.4)] p-6 sm:p-7">
-        <p className="font-heading text-[16px] font-medium text-[color:var(--color-ink)] mb-2">
+      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-[color:var(--color-border)] bg-white shadow-[0_40px_100px_-30px_rgba(11,16,32,0.5)] p-7 sm:p-9">
+        <p className="font-heading text-[19px] font-medium text-[color:var(--color-ink)] mb-3">
           Vi bruger cookies
         </p>
         <p className="text-[14px] leading-[1.7] text-[color:var(--color-text-muted)]">
@@ -118,7 +151,7 @@ export function CookieConsent() {
         </p>
 
         {expanded && (
-          <div className="mt-5 space-y-3 border-t border-[color:var(--color-border)] pt-5">
+          <div className="mt-6 space-y-4 border-t border-[color:var(--color-border)] pt-6">
             <label className="flex items-start gap-3">
               <input
                 type="checkbox"
@@ -158,11 +191,11 @@ export function CookieConsent() {
           </div>
         )}
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        <div className="mt-8 flex flex-col gap-3">
           <button
             type="button"
             onClick={() => save({ statistics: true, marketing: true })}
-            className="btn-gradient justify-center"
+            className="btn-gradient w-full justify-center"
           >
             Accepter alle
           </button>
@@ -170,7 +203,7 @@ export function CookieConsent() {
             <button
               type="button"
               onClick={() => save(draft)}
-              className="btn-outline justify-center"
+              className="btn-outline w-full justify-center"
             >
               Gem valg
             </button>
@@ -181,7 +214,7 @@ export function CookieConsent() {
                 setDraft(readStoredConsent() ?? { statistics: false, marketing: false });
                 setExpanded(true);
               }}
-              className="btn-outline justify-center"
+              className="btn-outline w-full justify-center"
             >
               Indstillinger
             </button>
@@ -189,7 +222,7 @@ export function CookieConsent() {
           <button
             type="button"
             onClick={() => save({ statistics: false, marketing: false })}
-            className="btn-ghost justify-center text-[13px] font-medium"
+            className="btn-ghost w-full justify-center text-[13px] font-medium"
           >
             Afvis ikke-nødvendige
           </button>
