@@ -42,12 +42,12 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export function meta({ loaderData }: { loaderData?: { siteUrl: string } }) {
-  if (!loaderData) return [{ title: "Privatlivspolitik | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Privatlivspolitik - Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Privatlivspolitik | ${siteName}`,
+      title: `Privatlivspolitik - ${siteName}`,
       description:
         "Læs hvordan vi behandler personoplysninger, cookies, datalagring, videregivelse og dine rettigheder.",
       url: `${siteUrl}/privatlivspolitik`,

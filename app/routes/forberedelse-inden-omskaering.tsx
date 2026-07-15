@@ -42,14 +42,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Forberedelse inden omskæring | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Forberedelse inden omskæring | Sådan forbereder du dig på en omskæringsprocedure" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Forberedelse inden omskæring | ${siteName}`,
+      title: "Forberedelse inden omskæring | Sådan forbereder du dig på en omskæringsprocedure",
       description:
-        "Sådan forbereder I jer før omskæringsproceduren: tryllecreme, sukkervand, dokumenter og praktiske forhold.",
+        "Få tips og råd til, hvordan du bedst forbereder dig til en omskæringsprocedure på vores side om forberedelse inden omskæring. Hos Specialklinik Taastrup er vi specialiserede i omskæringsprocedurer og tilbyder vores patienter en sikker og effektiv behandling.",
       url: `${siteUrl}/forberedelse-inden-omskaering`,
       siteName,
       siteUrl,

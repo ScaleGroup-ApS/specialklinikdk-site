@@ -27,6 +27,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <link rel="icon" type="image/svg+xml" href="/images/ikon_alene.svg" />
         <link
           rel="preload"
           as="style"

@@ -13,7 +13,9 @@ export default [
   route("faq", "routes/faq.tsx"),
   route("kontakt-os", "routes/kontaktos.tsx"),
   route("booking", "routes/booking.tsx"),
+  route("tak-for-din-booking", "routes/tak-for-din-booking.tsx"),
   route("priser", "routes/priser.tsx"),
   route("privatlivspolitik", "routes/privatlivspolitik.tsx"),
   route("cookiepolitik", "routes/cookiepolitik.tsx"),
+  route("*", "routes/catch-all.tsx"),
 ] satisfies RouteConfig;

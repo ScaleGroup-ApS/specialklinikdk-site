@@ -15,12 +15,12 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export function meta({ loaderData }: { loaderData?: { siteUrl: string } }) {
-  if (!loaderData) return [{ title: "Cookiepolitik | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Cookiepolitik - Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Cookiepolitik | ${siteName}`,
+      title: `Cookiepolitik - ${siteName}`,
       description:
         "Læs hvordan vi anvender cookies, hvilke typer der bruges, og hvordan du kan slette eller blokere dem.",
       url: `${siteUrl}/cookiepolitik`,

@@ -10,7 +10,7 @@ import { ContentSection } from "~/components/shared/ContentSection";
 import { AccordionList } from "~/components/shared/AccordionList";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
-import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
+import { buildMeta, buildWebsiteJsonLd, buildFaqJsonLd } from "~/lib/seo";
 import { FAQ_ITEMS } from "~/lib/faq";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -21,14 +21,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "FAQ | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Omskærings-FAQ | Spørgsmål og svar om omskæring" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `FAQ | ${siteName}`,
+      title: "Omskærings-FAQ | Spørgsmål og svar om omskæring",
       description:
-        "Ofte stillede spørgsmål om omskæring, forberedelse, smertelindring, efterforløb og sikkerhed.",
+        "Få svar på alle dine spørgsmål om omskæring på vores FAQ-side. Hos Specialklinik Taastrup er vi specialiserede i omskæringsprocedurer og har samlet en liste over de mest almindelige spørgsmål, som vores patienter stiller os. Lær mere om proceduren, dens fordele og ulemper, og hvordan man forbereder sig på operationen.",
       url: `${siteUrl}/faq`,
       siteName,
       siteUrl,
@@ -47,6 +47,7 @@ export default function FAQ({ loaderData }: Route.ComponentProps) {
     <div className="flex flex-col min-h-screen">
       <Header siteName={siteName} lightBg />
       <JsonLd data={buildWebsiteJsonLd(siteUrl)} />
+      <JsonLd data={buildFaqJsonLd(FAQ_ITEMS)} />
 
       <main className="flex-1">
         <SubpageHero
