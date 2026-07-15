@@ -5,6 +5,7 @@ import { JsonLd } from "~/components/JsonLd";
 import { SubpageHero } from "~/components/shared/SubpageHero";
 import { ContentSection } from "~/components/shared/ContentSection";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { openCookieSettings } from "~/components/CookieConsent";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -121,6 +122,13 @@ export default function Cookiepolitik({ loaderData }: { loaderData: { siteUrl: s
                   minecookies.org/cookiehandtering
                 </a>
               </p>
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="btn-outline mt-6"
+              >
+                Genåbn cookieindstillinger
+              </button>
             </motion.section>
 
             <motion.section

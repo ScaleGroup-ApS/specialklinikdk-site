@@ -163,9 +163,8 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                         20 76 35 16
                       </a>
                       <p className="mt-2 text-[13px] leading-[1.7] text-[color:var(--color-text-muted)]">
-                        Telefonnummeret benyttes til akutte henvendelser efter
-                        omskæring. Alle ikke akutte henvendelser referer vi til
-                        mailkorrespondance.
+                        Kun akutte henvendelser efter omskæring – øvrige
+                        spørgsmål bedes sendt på mail.
                       </p>
                     </div>
                   </div>

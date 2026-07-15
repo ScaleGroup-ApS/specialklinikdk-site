@@ -41,7 +41,7 @@ export function HeroSection() {
       {/* Grain */}
       <div aria-hidden className="absolute inset-0 grain pointer-events-none" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pt-24 md:pt-28 pb-20 md:pb-28">
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pt-36 md:pt-40 pb-20 md:pb-28">
         {/* Top bar — clinic meta */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { AnimatedWords } from "~/components/motion/AnimatedWords";
+import { openCookieSettings } from "~/components/CookieConsent";
 
 interface FooterProps {
   siteName?: string;
@@ -73,9 +74,9 @@ export function Footer({
           <div className="col-span-2 lg:col-span-4">
             <Link to="/" className="inline-flex items-center">
               <img
-                src="/images/Specialklinik_logo.svg"
+                src="/images/logo_hvid_baggrund.svg"
                 alt={siteName}
-                className="h-14 w-auto object-contain brightness-0 invert"
+                className="h-20 w-auto object-contain rounded-lg"
               />
             </Link>
             <p className="mt-5 text-[14px] leading-[1.8] text-[color:var(--color-text-on-dark-muted)] max-w-xs">
@@ -85,18 +86,30 @@ export function Footer({
 
             <ul className="mt-8 space-y-3 text-[13px] text-[color:var(--color-text-on-dark)]">
               <li className="flex items-start gap-3">
-                <IconPin />
-                Taastrup Hovedgade 80, 2. th, 2630 Taastrup
-              </li>
-              <li className="flex items-start gap-3">
                 <IconMail />
                 <a href="mailto:kontakt@specialklinik.dk" className="animated-link">
                   kontakt@specialklinik.dk
                 </a>
               </li>
               <li className="flex items-start gap-3">
+                <IconPin />
+                Taastrup Hovedgade 80, 2. th, 2630 Taastrup
+              </li>
+              <li className="flex items-start gap-3">
                 <IconDoc />
                 CVR 44505975
+              </li>
+              <li className="flex items-start gap-3">
+                <IconPhone />
+                <span>
+                  <a href="tel:+4520763516" className="animated-link">
+                    20 76 35 16
+                  </a>
+                  <span className="block mt-1 text-[color:var(--color-text-on-dark-muted)]">
+                    Kun akutte henvendelser efter omskæring – øvrige spørgsmål
+                    bedes sendt på mail.
+                  </span>
+                </span>
               </li>
             </ul>
           </div>
@@ -128,6 +141,15 @@ export function Footer({
             <ul className="space-y-3">
               <FooterLink to="/privatlivspolitik" label="Privatlivspolitik" />
               <FooterLink to="/cookiepolitik" label="Cookie-politik" />
+              <li>
+                <button
+                  type="button"
+                  onClick={openCookieSettings}
+                  className="animated-link text-[14px] text-[color:var(--color-text-on-dark-muted)] hover:text-white transition-colors text-left"
+                >
+                  Cookieindstillinger
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -186,6 +208,13 @@ function IconMail() {
   return (
     <svg className="w-4 h-4 mt-0.5 shrink-0 text-[color:var(--color-accent-warm-soft)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  );
+}
+function IconPhone() {
+  return (
+    <svg className="w-4 h-4 mt-0.5 shrink-0 text-[color:var(--color-accent-warm-soft)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
     </svg>
   );
 }

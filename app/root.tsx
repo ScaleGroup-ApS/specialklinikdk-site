@@ -8,6 +8,7 @@ import {
 } from "react-router";
 import type { ReactNode } from "react";
 import type { Route } from "./+types/root";
+import { CookieConsent } from "~/components/CookieConsent";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -27,6 +28,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <link rel="icon" type="image/svg+xml" href="/images/ikon_alene.svg" />
         <link
           rel="preload"
           as="style"
@@ -43,8 +45,8 @@ export function Layout({ children }: { children: ReactNode }) {
             href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap"
           />
         </noscript>
+        {/* Google Consent Mode v2 default state — everything denied until CookieConsent updates it */}
         <script
-          data-cookieconsent="ignore"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -64,15 +66,6 @@ export function Layout({ children }: { children: ReactNode }) {
             `,
           }}
         />
-        <script
-          type="text/javascript"
-          id="Cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid="6112a7b2-a31a-484a-ac22-5ea85e43ef52"
-          data-culture="DA"
-          data-blockingmode="auto"
-          async
-        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES7V2VYL1D" />
         <script
           dangerouslySetInnerHTML={{
@@ -82,16 +75,6 @@ export function Layout({ children }: { children: ReactNode }) {
               gtag('js', new Date());
               gtag('config', 'G-ES7V2VYL1D');
               gtag('config', 'AW-11172242203');
-              var _paq = window._paq = window._paq || [];
-              window.addEventListener('load', function () {
-                _paq.push(['trackPageView']);
-                _paq.push(['enableLinkTracking']);
-                var u="https://scaleweb.matomo.cloud/";
-                _paq.push(['setTrackerUrl', u+'matomo.php']);
-                _paq.push(['setSiteId', '44']);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.async=true; g.src='https://cdn.matomo.cloud/scaleweb.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-              });
             `,
           }}
         />
@@ -99,6 +82,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </head>
       <body className="min-h-screen bg-surface text-text antialiased">
         {children}
+        <CookieConsent />
         <ScrollRestoration />
         <Scripts />
       </body>
