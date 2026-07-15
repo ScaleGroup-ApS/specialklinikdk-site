@@ -63,13 +63,13 @@ export function Header({
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center justify-between gap-3 sm:gap-6">
         {/* Logo */}
-        <a href="/" className="inline-flex items-center gap-3 shrink-0 group">
+        <a href="/" className="inline-flex items-center gap-3 shrink-0 group min-w-0">
           <img
             src="/images/logo_hvid_baggrund.svg"
             alt={siteName}
-            className="h-16 md:h-[76px] w-auto object-contain transition-opacity duration-300"
+            className="h-14 sm:h-16 lg:h-[76px] w-auto object-contain transition-opacity duration-300"
           />
         </a>
 
@@ -102,7 +102,7 @@ export function Header({
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className={[
-            "lg:hidden inline-flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300",
+            "lg:hidden shrink-0 inline-flex items-center gap-2 px-2 py-2 sm:px-3 rounded-full border transition-all duration-300",
             solid
               ? "border-[color:var(--color-border)] text-[color:var(--color-ink)]"
               : "border-white/40 text-white",
@@ -130,7 +130,7 @@ export function Header({
               }
             />
           </span>
-          <span className="text-[11px] uppercase tracking-[0.24em]">{mobileOpen ? "Luk" : "Menu"}</span>
+          <span className="hidden sm:inline text-[11px] uppercase tracking-[0.24em]">{mobileOpen ? "Luk" : "Menu"}</span>
         </button>
       </div>
 
