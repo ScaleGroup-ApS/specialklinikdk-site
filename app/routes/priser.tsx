@@ -22,14 +22,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 // ── Meta ──────────────────────────────────────────────────────────────────────
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Priser | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Priser - Specialklinik Taastrup" }];
 
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
 
   return [
     ...buildMeta({
-      title: `Priser | ${siteName}`,
+      title: `Priser - ${siteName}`,
       description:
         "Tydelige priser for omskæring — efter alder og metode. Alt inklusive lovpligtig patientforsikring.",
       url: `${siteUrl}/priser`,

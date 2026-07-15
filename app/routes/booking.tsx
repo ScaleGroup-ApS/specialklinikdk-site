@@ -36,14 +36,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Booking | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Book tid til omskæring hos Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Booking | ${siteName}`,
+      title: `Book tid til omskæring hos ${siteName}`,
       description:
-        "Book tid online til omskæring. Læs forberedelse og praktisk information før tidsbestilling.",
+        "Book en tid til en professionel omskæringsprocedure hos Specialklinik Taastrup. Vi tilbyder vores patienter en sikker og effektiv behandling, udført af erfarne læger og sundhedsprofessionelle. Kontakt os i dag for at bestille en tid og få svar på eventuelle spørgsmål, du måtte have om proceduren og dens fordele. Vi glæder os til at høre fra dig!",
       url: `${siteUrl}/booking`,
       siteName,
       siteUrl,

@@ -25,14 +25,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Omskæring med fuld bedøvelse | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Omskæring med fuld bedøvelse - Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Omskæring med fuld bedøvelse | ${siteName}`,
+      title: `Omskæring med fuld bedøvelse - ${siteName}`,
       description:
-        "Information om omskæring under narkose eller sedation, booking og praktiske kriterier.",
+        "Hos Specialklinik sætter vi sikkerhed, tryghed og komfort i højsædet, og vi forstår, at nogle forældre foretrækker, at deres sønner får denne procedure udført under narkose eller sedation. Omskæring under narkose er forbeholdt drenge som er fyldt 2 år.",
       url: `${siteUrl}/omskaering-med-fuld-bedoevelse`,
       siteName,
       siteUrl,

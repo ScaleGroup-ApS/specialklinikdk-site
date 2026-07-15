@@ -24,16 +24,16 @@ export async function loader({ request }: Route.LoaderArgs) {
 // ── Meta ─────────────────────────────────────────────────────────────────────
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Specialklinik Taastrup | Professionel omskæring i trygge rammer" }];
 
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   const description =
-    "Professionel omskæring i trygge rammer for drengebørn. Tryghed — hele vejen.";
+    "Hos Specialklinik Taastrup tilbyder vi professionelle omskæringsprocedurer udført af erfarne læger og sundhedsprofessionelle. Vi er specialiserede i omskæringsbehandlinger og sørger altid for at give vores patienter en sikker og effektiv behandling.";
 
   return [
     ...buildMeta({
-      title: siteName,
+      title: "Specialklinik Taastrup | Professionel omskæring i trygge rammer",
       description,
       url: siteUrl,
       siteName,

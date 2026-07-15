@@ -26,14 +26,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Om os | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Om Specialklinik Taastrup | Erfarne læger i trygge rammer" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Om os | ${siteName}`,
+      title: "Om Specialklinik Taastrup | Erfarne læger i trygge rammer",
       description:
-        "Specialklinik Taastrup er en underafdeling af Kirurgisk Klinik Brabrand med mange års erfaring i rituel drengeomskæring.",
+        "Specialklinik Taastrup er specialiseret i omskæringsprocedurer og tilbyder vores patienter en sikker og effektiv behandling udført af erfarne læger og sundhedsprofessionelle. Vores klinik er udstyret med den nyeste teknologi og er designet til at give vores patienter en behagelig oplevelse i trygge rammer.",
       url: `${siteUrl}/om-os`,
       siteName,
       siteUrl,

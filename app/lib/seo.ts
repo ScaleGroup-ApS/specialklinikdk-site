@@ -73,26 +73,84 @@ export function buildMeta(opts: SeoOptions) {
     }
   }
 
-  // Robots
+  // Robots — noindex,follow (not nofollow) so link equity still flows
+  // through pages like the booking confirmation screen.
   if (opts.noindex) {
-    meta.push({ name: "robots", content: "noindex, nofollow" });
+    meta.push({ name: "robots", content: "noindex, follow" });
   }
 
   return meta;
 }
 
 /**
- * Generate WebSite JSON-LD (for the homepage).
+ * Generate MedicalClinic JSON-LD (site-wide entity/NAP data).
+ * Used on every page so Google, the Knowledge Graph, and AI answer
+ * engines (AI Overviews, Perplexity, ChatGPT search) can resolve a
+ * single, consistent entity for the clinic.
  */
 export function buildWebsiteJsonLd(siteUrl: string) {
   return {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "MedicalClinic",
+    "@id": `${siteUrl}/#organization`,
     name: "Specialklinik Taastrup",
+    alternateName: "Specialklinik Taastrup / ABB Medical ApS",
     description:
       "Professionel omskæring i trygge rammer for drengebørn. Tryghed — hele vejen.",
     url: siteUrl,
+    telephone: "+4520763516",
+    email: "kontakt@specialklinik.dk",
+    priceRange: "kr.",
+    medicalSpecialty: "Surgical",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Taastrup Hovedgade 80, 2. th",
+      postalCode: "2630",
+      addressLocality: "Taastrup",
+      addressCountry: "DK",
+    },
+    areaServed: "DK",
+    availableService: {
+      "@type": "MedicalProcedure",
+      name: "Rituel drengeomskæring",
+      procedureType: "https://schema.org/PercutaneousProcedure",
+    },
   };
+}
+
+/**
+ * Generate FAQPage JSON-LD for a set of question/answer pairs.
+ * FAQPage markup is heavily used by AI Overviews and answer engines to
+ * source direct answers, in addition to classic rich-result snippets.
+ */
+export function buildFaqJsonLd(
+  items: Array<{
+    q: string;
+    a?: string;
+    blocks?: Array<{ type: "p" | "ul"; text?: string; items?: string[] }>;
+  }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a ?? flattenFaqBlocks(item.blocks ?? []),
+      },
+    })),
+  };
+}
+
+function flattenFaqBlocks(
+  blocks: Array<{ type: "p" | "ul"; text?: string; items?: string[] }>,
+): string {
+  return blocks
+    .map((block) => (block.type === "ul" ? (block.items ?? []).join(" ") : block.text))
+    .filter(Boolean)
+    .join(" ");
 }
 
 /** Strip HTML tags from a string (for use in meta descriptions). */

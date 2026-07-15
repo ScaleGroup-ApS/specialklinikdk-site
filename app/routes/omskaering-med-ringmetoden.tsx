@@ -91,12 +91,12 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Omskæring med ringmetoden | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Omskæring med ringmetoden - Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Omskæring med ringmetoden | ${siteName}`,
+      title: `Omskæring med ringmetoden - ${siteName}`,
       description:
         "Information om Circumplast® ringmetoden: hvorfor den er bedre end Plastibell, procedure, efterforløb, normale reaktioner og komplikationer.",
       url: `${siteUrl}/omskaering-med-ringmetoden`,

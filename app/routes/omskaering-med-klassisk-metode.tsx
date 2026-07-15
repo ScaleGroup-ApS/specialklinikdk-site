@@ -73,12 +73,12 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Omskæring med klassisk metode | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Omskæring med klassisk metode - Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Omskæring med klassisk metode | ${siteName}`,
+      title: `Omskæring med klassisk metode - ${siteName}`,
       description:
         "Information om omskæring med den klassiske metode: bedøvelse, procedure, efterforløb, aktivitet og hvile, normale reaktioner og komplikationer.",
       url: `${siteUrl}/omskaering-med-klassisk-metode`,

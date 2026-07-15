@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface HeaderProps {
   siteName?: string;
@@ -16,14 +16,6 @@ export function Header({
   lightBg = false,
 }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const navItems =
     menuItems.length > 0
@@ -46,22 +38,36 @@ export function Header({
           { title: "Kontakt", url: "/kontakt-os" },
         ];
 
-  const solid = scrolled || lightBg || mobileOpen;
+  const solid = true;
 
   return (
     <header
-      className={[
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        solid
-          ? "bg-white/90 backdrop-blur-xl border-b border-[color:var(--color-border)]"
-          : "bg-transparent",
-      ].join(" ")}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white border-b border-[color:var(--color-border)]"
     >
+      {/* Announcement bar */}
+      <div
+        className={[
+          "transition-colors duration-500",
+          solid ? "bg-[color:var(--color-ink)] text-white" : "bg-black/20 text-white",
+        ].join(" ")}
+      >
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-9 flex items-center justify-center">
+          <a
+            href="https://cityvestklinik.dk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="animated-link text-[12px] font-medium tracking-[0.02em] text-center"
+          >
+            Besøg også vores klinik i Brabrand →
+          </a>
+        </div>
+      </div>
+
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
         {/* Logo */}
         <a href="/" className="inline-flex items-center gap-3 shrink-0 group">
           <img
-            src="/images/Specialklinik_logo.svg"
+            src="/images/logo_hvid_baggrund.svg"
             alt={siteName}
             className="h-14 md:h-[68px] w-auto object-contain transition-opacity duration-300"
           />
