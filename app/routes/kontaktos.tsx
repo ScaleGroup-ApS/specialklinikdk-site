@@ -33,14 +33,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Kontakt os | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Kontakt Specialklinik Taastrup | Få svar på dine spørgsmål om omskæring" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Kontakt os | ${siteName}`,
+      title: "Kontakt Specialklinik Taastrup | Få svar på dine spørgsmål om omskæring",
       description:
-        "Kontakt Specialklinik Taastrup ved spørgsmål om omskæring, booking og forberedelse.",
+        "Har du spørgsmål om omskæring, eller vil du booke en tid til en professionel omskæringsprocedure? Kontakt Specialklinik Taastrup i dag. Vi tilbyder vores patienter en sikker og effektiv behandling, udført af erfarne læger.",
       url: `${siteUrl}/kontakt-os`,
       siteName,
       siteUrl,

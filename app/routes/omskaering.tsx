@@ -43,14 +43,14 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Omskæring | Specialklinik Taastrup" }];
+  if (!loaderData) return [{ title: "Omskæring i Danmark | Professionelle procedurer hos Specialklinik Taastrup" }];
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
   return [
     ...buildMeta({
-      title: `Omskæring | ${siteName}`,
+      title: `Omskæring i Danmark | Professionelle procedurer hos ${siteName}`,
       description:
-        "Information om rituel drengeomskæring, sikkerhed, regler og metoder hos Specialklinik Taastrup.",
+        "Specialklinik Taastrup er specialiseret i omskæringsprocedurer i Danmark og tilbyder vores patienter en sikker og effektiv behandling udført af erfarne læger og sundhedsprofessionelle. Vi tilbyder flere forskellige procedurer.",
       url: `${siteUrl}/omskaering`,
       siteName,
       siteUrl,

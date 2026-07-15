@@ -31,6 +31,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
       siteUrl,
       type: "website",
       locale: "da_DK",
+      noindex: true,
     }),
     { tagName: "link", rel: "canonical", href: `${siteUrl}/tak-for-din-booking` },
   ];
