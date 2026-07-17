@@ -53,6 +53,8 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    console.error(`kontakt-send: CRM rejected submission (${res.status})`, body);
     return data({ ok: false, error: "Beskeden kunne ikke sendes. Prøv igen." }, { status: 502 });
   }
 
