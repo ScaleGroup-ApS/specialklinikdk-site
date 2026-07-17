@@ -1,5 +1,6 @@
 import type { Route } from "./+types/kontaktos";
 import { motion } from "framer-motion";
+import { useFetcher } from "react-router";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
 import { JsonLd } from "~/components/JsonLd";
@@ -11,6 +12,7 @@ import { AnimatedWords } from "~/components/motion/AnimatedWords";
 import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 import { MagneticButton } from "~/components/motion/MagneticButton";
 import { buildMeta, buildWebsiteJsonLd } from "~/lib/seo";
+import type { action as kontaktSendAction } from "./kontakt-send";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -54,6 +56,8 @@ export function meta({ loaderData }: Route.MetaArgs) {
 export default function KontaktOs({ loaderData }: Route.ComponentProps) {
   const { siteUrl } = loaderData;
   const siteName = "Specialklinik Taastrup";
+  const fetcher = useFetcher<typeof kontaktSendAction>();
+  const isSubmitting = fetcher.state !== "idle";
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -187,6 +191,133 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                   loading="lazy"
                 />
               </div>
+            </motion.div>
+          </div>
+        </ContentSection>
+
+        {/* Contact form */}
+        <ContentSection bg="white">
+          <div className="max-w-3xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="eyebrow mb-4"
+            >
+              Kontaktformular
+            </motion.p>
+            <h2 className="display-lg text-[color:var(--color-ink)] mb-4">
+              <AnimatedWords as="span" mode="inView" text="Send os en besked" className="block" />
+            </h2>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
+              className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)] mb-10"
+            >
+              Udfyld formularen, så vender vi tilbage hurtigst muligt.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: EASE }}
+            >
+              <fetcher.Form
+                method="post"
+                action="/kontakt-send"
+                className="card-elevated p-8 md:p-10"
+              >
+                {/* Honeypot — hidden from real visitors, invisible to screen readers via
+                    aria-hidden, and skipped in tab order. Bots that fill every field
+                    blindly trip it; the action route silently no-ops on a filled value. */}
+                <div aria-hidden className="absolute w-0 h-0 overflow-hidden opacity-0">
+                  <label>
+                    Website
+                    <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <label className="block">
+                    <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
+                      Fulde navn *
+                    </span>
+                    <input
+                      type="text"
+                      name="fulde_navn"
+                      required
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
+                      Telefon
+                    </span>
+                    <input
+                      type="tel"
+                      name="telefon"
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                    />
+                  </label>
+
+                  <label className="block md:col-span-2">
+                    <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
+                      Email *
+                    </span>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                    />
+                  </label>
+
+                  <label className="block md:col-span-2">
+                    <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
+                      Besked
+                    </span>
+                    <textarea
+                      name="besked"
+                      rows={5}
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow resize-y"
+                    />
+                  </label>
+                </div>
+
+                {fetcher.data && (
+                  <p
+                    role="status"
+                    className={`mt-6 text-[14px] ${
+                      fetcher.data.ok
+                        ? "text-[color:var(--color-ink)]"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {fetcher.data.ok
+                      ? "Tak for din besked! Vi vender tilbage til dig hurtigst muligt."
+                      : ("error" in fetcher.data ? fetcher.data.error : undefined) ??
+                        "Der opstod en fejl. Prøv venligst igen."}
+                  </p>
+                )}
+
+                <div className="mt-6">
+                  <MagneticButton strength={6}>
+                    <button type="submit" disabled={isSubmitting} className="btn-gradient disabled:opacity-60">
+                      {isSubmitting ? "Sender..." : "Send besked"}
+                      <span className="btn-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                      </span>
+                    </button>
+                  </MagneticButton>
+                </div>
+              </fetcher.Form>
             </motion.div>
           </div>
         </ContentSection>

@@ -12,6 +12,7 @@ export default [
   route("om-os", "routes/omos.tsx"),
   route("faq", "routes/faq.tsx"),
   route("kontakt-os", "routes/kontaktos.tsx"),
+  route("kontakt-send", "routes/kontakt-send.tsx"),
   route("booking", "routes/booking.tsx"),
   route("tak-for-din-booking", "routes/tak-for-din-booking.tsx"),
   route("priser", "routes/priser.tsx"),

@@ -42,6 +42,21 @@ spec:
             - name: PORT
               value: "3000"
 
+            # Contact form (#kontakt-form): lets the SSR app call the CRM's
+            # cluster-internal POST /internal/site-submission, which stores the
+            # submission and emails it to the clinic via Resend. CRM_API_TOKEN
+            # is a copy of the platform's AGENT_API_TOKEN — see infra/README or
+            # the deploy runbook for how it's provisioned into this namespace.
+            - name: CRM_API_URL
+              value: "http://crm-backend.crm-system.svc.cluster.local:5000"
+            - name: SITE_SLUG
+              value: "{{CUSTOMER_SLUG}}"
+            - name: CRM_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: crm-internal
+                  key: CRM_API_TOKEN
+
           livenessProbe:
             httpGet:
               path: /
