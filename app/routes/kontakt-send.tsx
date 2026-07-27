@@ -32,11 +32,17 @@ export async function action({ request }: Route.ActionArgs) {
   const name = String(formData.get("fulde_navn") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const phone = String(formData.get("telefon") ?? "").trim();
+  const topic = String(formData.get("emne") ?? "").trim();
   const message = String(formData.get("besked") ?? "").trim();
 
   if (!name || !email) {
     return data({ ok: false, error: "Udfyld venligst navn og email." }, { status: 400 });
   }
+
+  // The topic <select> is optional and not part of the CRM contract, so fold it
+  // into the free-text message the clinic receives rather than dropping it.
+  const composedMessage =
+    [topic ? `Emne: ${topic}` : null, message || null].filter(Boolean).join("\n\n") || undefined;
 
   let res: Response;
   try {
@@ -44,7 +50,7 @@ export async function action({ request }: Route.ActionArgs) {
       name,
       email,
       phone: phone || undefined,
-      message: message || undefined,
+      message: composedMessage,
       sourceUrl: request.headers.get("referer") ?? undefined,
     });
   } catch (error) {
