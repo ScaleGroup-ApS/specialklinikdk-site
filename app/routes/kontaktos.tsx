@@ -29,6 +29,36 @@ const CONTACT_ITEMS = [
   },
 ];
 
+// Reassurance points shown alongside the form — reduces friction and answers
+// the "what happens if I send this" hesitation that costs conversions.
+const TRUST_POINTS = [
+  {
+    title: "Svar inden for 24 timer",
+    body: "På hverdage vender vi tilbage samme eller næste dag.",
+    icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+  {
+    title: "Fortroligt og diskret",
+    body: "Dine oplysninger behandles GDPR-sikkert og deles aldrig.",
+    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+  },
+  {
+    title: "Helt uforpligtende",
+    body: "Still spørgsmål frit — du binder dig ikke til noget.",
+    icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+];
+
+// Optional topic — guides the visitor and pre-qualifies the enquiry for the
+// clinic. Folded into the message body server-side (see /kontakt-send action).
+const CONTACT_TOPICS = [
+  "Book en tid til omskæring",
+  "Spørgsmål om priser",
+  "Spørgsmål om metode eller bedøvelse",
+  "Forberedelse og efterforløb",
+  "Andet",
+];
+
 export async function loader({ request }: Route.LoaderArgs) {
   const siteUrl = new URL(request.url).origin;
   return { siteUrl };
@@ -197,34 +227,88 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
 
         {/* Contact form */}
         <ContentSection bg="white">
-          <div className="max-w-3xl mx-auto">
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: EASE }}
-              className="eyebrow mb-4"
-            >
-              Kontaktformular
-            </motion.p>
-            <h2 className="display-lg text-[color:var(--color-ink)] mb-4">
-              <AnimatedWords as="span" mode="inView" text="Send os en besked" className="block" />
-            </h2>
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-              className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)] mb-10"
-            >
-              Udfyld formularen, så vender vi tilbage hurtigst muligt.
-            </motion.p>
-
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            {/* Reassurance / value panel */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: EASE }}
+              className="lg:col-span-5 lg:sticky lg:top-28"
+            >
+              <p className="eyebrow mb-4">Kontaktformular</p>
+              <h2 className="display-lg text-[color:var(--color-ink)] mb-5">
+                <AnimatedWords as="span" mode="inView" text="Send os en" className="block" />
+                <span className="relative inline-block">
+                  <span className="font-display italic font-light">besked.</span>
+                  <HandDrawnUnderline
+                    className="absolute left-0 right-0 -bottom-1 w-full h-3"
+                    delay={0.6}
+                  />
+                </span>
+              </h2>
+              <p className="text-[15px] leading-[1.8] text-[color:var(--color-text-muted)] mb-9 max-w-md">
+                Skriv til os om omskæring, priser eller forberedelse — vi læser
+                hver besked personligt og vender tilbage med et klart, konkret
+                svar. Det tager under et minut at udfylde.
+              </p>
+
+              <ul className="space-y-5 mb-9">
+                {TRUST_POINTS.map((point) => (
+                  <li key={point.title} className="flex items-start gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--color-surface-dim)] border border-[color:var(--color-border)]">
+                      <svg
+                        className="w-5 h-5 text-[color:var(--color-accent-warm)]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d={point.icon}
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="text-[15px] font-semibold text-[color:var(--color-ink)]">
+                        {point.title}
+                      </p>
+                      <p className="mt-0.5 text-[13px] leading-[1.6] text-[color:var(--color-text-muted)]">
+                        {point.body}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Social proof — mirrors the numbers used across the site */}
+              <div className="flex items-center gap-4 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-dim)] p-4">
+                <div
+                  className="flex text-[color:var(--color-accent-warm)]"
+                  aria-hidden
+                >
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg key={i} className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l2.39 4.84L20 8l-4 3.9.94 5.47L12 14.77 7.06 17.37 8 11.9 4 8l5.61-1.16L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-[13px] leading-[1.5] text-[color:var(--color-ink)]">
+                  <span className="font-semibold">4.9 / 5</span> i vurdering ·
+                  1000+ familier har valgt Specialklinik Taastrup
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: EASE, delay: 0.15 }}
+              className="lg:col-span-7"
             >
               <fetcher.Form
                 method="post"
@@ -241,16 +325,22 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                   </label>
                 </div>
 
+                <p className="text-[13px] text-[color:var(--color-text-muted)] mb-6">
+                  Felter markeret med <span className="text-[color:var(--color-accent-warm)]">*</span> er påkrævet.
+                </p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <label className="block">
                     <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
-                      Fulde navn *
+                      Fulde navn <span className="text-[color:var(--color-accent-warm)]">*</span>
                     </span>
                     <input
                       type="text"
                       name="fulde_navn"
                       required
-                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                      autoComplete="name"
+                      placeholder="Fx Sara Hansen"
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] placeholder:text-[color:var(--color-text-muted)]/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
                     />
                   </label>
 
@@ -261,20 +351,44 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                     <input
                       type="tel"
                       name="telefon"
-                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                      autoComplete="tel"
+                      placeholder="Fx 20 76 35 16"
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] placeholder:text-[color:var(--color-text-muted)]/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
                     />
                   </label>
 
                   <label className="block md:col-span-2">
                     <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
-                      Email *
+                      Email <span className="text-[color:var(--color-accent-warm)]">*</span>
                     </span>
                     <input
                       type="email"
                       name="email"
                       required
-                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                      autoComplete="email"
+                      placeholder="din@email.dk"
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] placeholder:text-[color:var(--color-text-muted)]/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
                     />
+                  </label>
+
+                  <label className="block md:col-span-2">
+                    <span className="text-[13px] font-semibold text-[color:var(--color-ink)] mb-1.5 block">
+                      Hvad drejer det sig om?
+                    </span>
+                    <select
+                      name="emne"
+                      defaultValue=""
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow"
+                    >
+                      <option value="" disabled>
+                        Vælg et emne (valgfrit)
+                      </option>
+                      {CONTACT_TOPICS.map((topic) => (
+                        <option key={topic} value={topic}>
+                          {topic}
+                        </option>
+                      ))}
+                    </select>
                   </label>
 
                   <label className="block md:col-span-2">
@@ -284,7 +398,8 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                     <textarea
                       name="besked"
                       rows={5}
-                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow resize-y"
+                      placeholder="Skriv gerne dit spørgsmål eller ønsket tidspunkt, så kan vi svare præcist."
+                      className="w-full rounded-lg border border-[color:var(--color-border)] bg-white px-4 py-3 text-[color:var(--color-ink)] placeholder:text-[color:var(--color-text-muted)]/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40 transition-shadow resize-y"
                     />
                   </label>
                 </div>
@@ -292,22 +407,29 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                 {fetcher.data && (
                   <p
                     role="status"
-                    className={`mt-6 text-[14px] ${
+                    className={`mt-6 flex items-start gap-2 text-[14px] ${
                       fetcher.data.ok
                         ? "text-[color:var(--color-ink)]"
                         : "text-red-600"
                     }`}
                   >
-                    {fetcher.data.ok
-                      ? "Tak for din besked! Vi vender tilbage til dig hurtigst muligt."
-                      : ("error" in fetcher.data ? fetcher.data.error : undefined) ??
-                        "Der opstod en fejl. Prøv venligst igen."}
+                    {fetcher.data.ok && (
+                      <svg className="w-5 h-5 shrink-0 text-[color:var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    )}
+                    <span>
+                      {fetcher.data.ok
+                        ? "Tak for din besked! Vi vender tilbage til dig hurtigst muligt."
+                        : ("error" in fetcher.data ? fetcher.data.error : undefined) ??
+                          "Der opstod en fejl. Prøv venligst igen."}
+                    </span>
                   </p>
                 )}
 
-                <div className="mt-6">
+                <div className="mt-7">
                   <MagneticButton strength={6}>
-                    <button type="submit" disabled={isSubmitting} className="btn-gradient disabled:opacity-60">
+                    <button type="submit" disabled={isSubmitting} className="btn-gradient w-full sm:w-auto disabled:opacity-60">
                       {isSubmitting ? "Sender..." : "Send besked"}
                       <span className="btn-arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -316,6 +438,14 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                       </span>
                     </button>
                   </MagneticButton>
+
+                  <p className="mt-4 flex items-start gap-2 text-[13px] leading-[1.6] text-[color:var(--color-text-muted)]">
+                    <svg className="w-4 h-4 mt-0.5 shrink-0 text-[color:var(--color-accent-warm)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Vi svarer typisk inden for 24 timer. Dine oplysninger
+                    behandles fortroligt og deles aldrig med tredjepart.
+                  </p>
                 </div>
               </fetcher.Form>
             </motion.div>
