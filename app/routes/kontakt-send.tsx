@@ -1,3 +1,4 @@
+import { CONTACT_SPAM_ERROR, verifyContactSubmission } from '~/lib/contact-spam.server';
 import { data, Link, useActionData } from "react-router";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
@@ -43,6 +44,10 @@ export async function action({ request }: Route.ActionArgs) {
   // into the free-text message the clinic receives rather than dropping it.
   const composedMessage =
     [topic ? `Emne: ${topic}` : null, message || null].filter(Boolean).join("\n\n") || undefined;
+
+  if (!(await verifyContactSubmission(formData))) {
+    return data({ ok: false, error: CONTACT_SPAM_ERROR }, { status: 422 });
+  }
 
   let res: Response;
   try {
