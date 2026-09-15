@@ -1,3 +1,4 @@
+import { ContactSpamProtection } from "~/components/ContactSpamProtection";
 import type { Route } from "./+types/kontaktos";
 import { motion } from "framer-motion";
 import { useFetcher } from "react-router";
@@ -427,7 +428,8 @@ export default function KontaktOs({ loaderData }: Route.ComponentProps) {
                   </p>
                 )}
 
-                <div className="mt-7">
+                <div className="mt-7 flex flex-col items-start gap-6">
+                  <ContactSpamProtection />
                   <MagneticButton strength={6}>
                     <button type="submit" disabled={isSubmitting} className="btn-gradient w-full sm:w-auto disabled:opacity-60">
                       {isSubmitting ? "Sender..." : "Send besked"}

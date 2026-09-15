@@ -24,6 +24,7 @@ spec:
   template:
     metadata:
       labels:
+        scaleweb.dk/altcha-client: "true"
         app: customer-site
         customer: "{{CUSTOMER_ID}}"
     spec:
@@ -37,6 +38,13 @@ spec:
               protocol: TCP
 
           env:
+            # ALTCHA pilot tenant secret; public settings live in web-env.
+            - name: ALTCHA_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: contact-altcha
+                  key: ALTCHA_SECRET_KEY
+                  optional: true
             - name: NODE_ENV
               value: "production"
             - name: PORT

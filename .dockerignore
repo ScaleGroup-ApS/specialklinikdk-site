@@ -2,3 +2,8 @@
 build/
 node_modules/
 .turbo/
+
+.git/
+.env
+.env.*
+tests/
