@@ -14,6 +14,12 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const TRUSTPILOT_URL = "https://dk.trustpilot.com/review/specialklinik.dk";
 const GOOGLE_URL = "https://www.google.com/maps?cid=16535002851184095999";
 
+// Total public review counts shown on the stat cards. The slider rotates a
+// curated subset, so these track the live profile totals rather than the
+// number of quotes in REVIEWS — keep them in sync when checking the profiles.
+const GOOGLE_TOTAL = 44;
+const TRUSTPILOT_TOTAL = 45;
+
 export type ReviewSource = "google" | "trustpilot";
 
 export type Review = {
@@ -488,14 +494,6 @@ export function ReviewsSlider({ reviews = REVIEWS }: { reviews?: Review[] }) {
 
   const r = reviews[index];
 
-  const counts = reviews.reduce(
-    (acc, rv) => {
-      acc[rv.source] += 1;
-      return acc;
-    },
-    { google: 0, trustpilot: 0 } as Record<ReviewSource, number>,
-  );
-
   const variants = {
     enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
     center: { x: 0, opacity: 1 },
@@ -531,13 +529,13 @@ export function ReviewsSlider({ reviews = REVIEWS }: { reviews?: Review[] }) {
               <SourceStatCard
                 source="google"
                 label="Google"
-                count={counts.google}
+                count={GOOGLE_TOTAL}
                 href={GOOGLE_URL}
               />
               <SourceStatCard
                 source="trustpilot"
                 label="Trustpilot"
-                count={counts.trustpilot}
+                count={TRUSTPILOT_TOTAL}
                 href={TRUSTPILOT_URL}
               />
             </div>
