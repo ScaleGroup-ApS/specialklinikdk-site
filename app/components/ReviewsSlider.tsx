@@ -12,7 +12,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 // Public profile pages the stat cards link out to. Leave a value empty to
 // render that card as plain text (no link) instead of a broken anchor.
 const TRUSTPILOT_URL = "https://dk.trustpilot.com/review/specialklinik.dk";
-const GOOGLE_URL = "";
+const GOOGLE_URL = "https://www.google.com/maps?cid=16535002851184095999";
 
 export type ReviewSource = "google" | "trustpilot";
 
