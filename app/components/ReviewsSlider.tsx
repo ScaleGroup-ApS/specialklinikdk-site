@@ -9,6 +9,11 @@ import { HandDrawnUnderline } from "~/components/motion/HandDrawnUnderline";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// Public profile pages the stat cards link out to. Leave a value empty to
+// render that card as plain text (no link) instead of a broken anchor.
+const TRUSTPILOT_URL = "https://dk.trustpilot.com/review/specialklinik.dk";
+const GOOGLE_URL = "";
+
 export type ReviewSource = "google" | "trustpilot";
 
 export type Review = {
@@ -22,6 +27,107 @@ export type Review = {
 
 // Real reviews from Trustpilot + Google, sorted newest first.
 const REVIEWS: Review[] = [
+  {
+    source: "trustpilot",
+    name: "Zainab Khan",
+    date: "28. okt. 2026",
+    rating: 5,
+    quote:
+      "Tusind tak! Vi har haft en rigtig god oplevelse med Amin hos Specialklinik Taastrup i forbindelse med vores søns omskæring med ringmetoden (Circumplast). Hele forløbet var præget af professionalisme, omsorg og tryghed. Ved spørgsmål eller bekymringer fik jeg altid hurtige og beroligende svar. En stor tak og mine varmeste anbefalinger!",
+    context: "Ringmetoden",
+  },
+  {
+    source: "trustpilot",
+    name: "Murat Kutlu",
+    date: "10. okt. 2026",
+    rating: 5,
+    quote:
+      "Meget god oplevelse for os som forældre og vores lille søn på 3 mdr. Kan helt klart anbefales.",
+    context: "3 mdr.",
+  },
+  {
+    source: "trustpilot",
+    name: "Mahmoud Ghneim",
+    date: "21. sep. 2026",
+    rating: 4,
+    quote:
+      "Rigtig god og tryg oplevelse. Personalet var professionelle, venlige og tog sig godt af os hele vejen igennem. Man følte sig i gode hænder, og alt blev håndteret roligt og kompetent. Kan anbefales.",
+  },
+  {
+    source: "trustpilot",
+    name: "Nadeen Als",
+    date: "20. sep. 2026",
+    rating: 5,
+    quote:
+      "Vi er meget tilfredse med forløbet hos Specialklinik Taastrup i forbindelse med vores søns omskæring. Amin er yderst kompetent og professionel. Vi oplevede hele vejen igennem en høj grad af tryghed og professionalisme. Amin tog sig tid til at forklare hele forløbet grundigt — før, under og efter — og indgrebet blev udført med stor omhu og faglighed, hvilket gav os tryghed som forældre. Vi kan i høj grad anbefale klinikken til andre forældre, som ønsker et trygt og professionelt forløb. Kæmpe ros til Amin og sygeplejersken.",
+  },
+  {
+    source: "trustpilot",
+    name: "Ali",
+    date: "30. aug. 2026",
+    rating: 5,
+    quote:
+      "Vi er rigtig glade for vores oplevelse hos klinikken. Fra første kontakt følte vi os trygge og godt informeret, og personalet var både professionelle, venlige og omsorgsfulde over for vores søn. Vi kom fra Sverige for at få vores søn omskåret, og hele forløbet var nemt og trygt. Vi fik god vejledning både før og efter behandlingen, og personalet tog sig tid til at besvare vores spørgsmål og bekymringer. Vi valgte Circumplast-metoden, og samlet set har det været et rigtig godt forløb. Vi kan varmt anbefale klinikken — også til familier, der bor i Sverige og overvejer at tage til Danmark for omskæring. Vi følte os i trygge hænder hele vejen igennem.",
+    context: "Circumplast",
+  },
+  {
+    source: "trustpilot",
+    name: "Samir Ghazal",
+    date: "18. jul. 2026",
+    rating: 5,
+    quote:
+      "Dygtige mennesker, og man sendes hjem med al den information, man har behov for.",
+  },
+  {
+    source: "trustpilot",
+    name: "Ala Kamel",
+    date: "13. jul. 2026",
+    rating: 5,
+    quote:
+      "Jeg er meget glad på min søns vegne. Jeg kunne tydeligt mærke, at han ikke græd nær så meget, som min ældste gjorde, da han blev omskåret et andet sted. Her på klinikken var jeg rigtig glad for forløbet. Hilsen en glad mor.",
+  },
+  {
+    source: "trustpilot",
+    name: "Zokar Hasra",
+    date: "20. jun. 2026",
+    rating: 4,
+    quote:
+      "Godt forløb fra start til slut med god information om omskæringen undervejs.",
+  },
+  {
+    source: "trustpilot",
+    name: "Nassima",
+    date: "9. jun. 2026",
+    rating: 5,
+    quote:
+      "Tryg og professionel oplevelse. Hele vejen igennem god stemning og løbende information. Både Amin og hans assistent er behagelige og omhyggelige. Hurtig procedure, og vores lille gut på 4 uger har ikke mærket det store til det efterfølgende. Anbefaler klart klinikken.",
+    context: "4 uger",
+  },
+  {
+    source: "trustpilot",
+    name: "Seco",
+    date: "8. jun. 2026",
+    rating: 5,
+    quote:
+      "Min søn på 4 mdr. blev omskåret af Amin. Det var en god oplevelse, og han havde ikke de store gener efterfølgende. Selve operationen var smertefri og hurtigt overstået. Både Amin og hans assistent var super dygtige og behagelige. Amin har derudover været super hurtig til at besvare spørgsmål på mail — inden for få minutter — hvilket har været virkelig beroligende for os som forældre. Vi vil klart anbefale specialklinikken.",
+    context: "4 mdr.",
+  },
+  {
+    source: "trustpilot",
+    name: "Sarah Nielsen",
+    date: "3. jun. 2026",
+    rating: 5,
+    quote:
+      "10/10 behandling, der var styr på tingene. Vi som forældre var i lige så trygge hænder, som vores søn var. Han havde ingen smerter efterfølgende og har ikke mærket til omskæringen på noget tidspunkt. Vi har virkelig været glade for forløbet — under og efter — og for valget af klinik.",
+  },
+  {
+    source: "trustpilot",
+    name: "Tareq",
+    date: "1. jun. 2026",
+    rating: 5,
+    quote:
+      "God og tryg oplevelse hos Amin. Høj faglighed og god information hele vejen igennem. Derudover er Amin super hurtig til at svare. Vi fik en hurtig tid, efter at vi havde skrevet os op på ventelisten.",
+  },
   {
     source: "google",
     name: "Hasan Za",
@@ -422,34 +528,18 @@ export function ReviewsSlider({ reviews = REVIEWS }: { reviews?: Review[] }) {
 
             {/* Source meta */}
             <div className="mt-10 grid grid-cols-2 gap-3 max-w-sm">
-              <div className="rounded-xl border border-[color:var(--color-border)] bg-white p-4">
-                <div className="flex items-center gap-2">
-                  <GoogleMark className="w-5 h-5" />
-                  <span className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)]">
-                    Google
-                  </span>
-                </div>
-                <p className="mt-3 font-display text-3xl font-light text-[color:var(--color-ink)]">
-                  {counts.google}
-                </p>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)] mt-1">
-                  Anmeldelser
-                </p>
-              </div>
-              <div className="rounded-xl border border-[color:var(--color-border)] bg-white p-4">
-                <div className="flex items-center gap-2">
-                  <TrustpilotMark className="w-5 h-5" />
-                  <span className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)]">
-                    Trustpilot
-                  </span>
-                </div>
-                <p className="mt-3 font-display text-3xl font-light text-[color:var(--color-ink)]">
-                  {counts.trustpilot}
-                </p>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)] mt-1">
-                  Anmeldelser
-                </p>
-              </div>
+              <SourceStatCard
+                source="google"
+                label="Google"
+                count={counts.google}
+                href={GOOGLE_URL}
+              />
+              <SourceStatCard
+                source="trustpilot"
+                label="Trustpilot"
+                count={counts.trustpilot}
+                href={TRUSTPILOT_URL}
+              />
             </div>
 
             {/* Controls */}
@@ -585,6 +675,61 @@ export function ReviewsSlider({ reviews = REVIEWS }: { reviews?: Review[] }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function SourceStatCard({
+  source,
+  label,
+  count,
+  href,
+}: {
+  source: ReviewSource;
+  label: string;
+  count: number;
+  href?: string;
+}) {
+  const Mark = source === "google" ? GoogleMark : TrustpilotMark;
+  const inner = (
+    <>
+      <div className="flex items-center gap-2">
+        <Mark className="w-5 h-5" />
+        <span className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)]">
+          {label}
+        </span>
+      </div>
+      <p className="mt-3 font-display text-3xl font-light text-[color:var(--color-ink)]">
+        {count}
+      </p>
+      <p className="text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-text-muted)] mt-1">
+        Anmeldelser
+      </p>
+    </>
+  );
+
+  if (!href) {
+    return (
+      <div className="rounded-xl border border-[color:var(--color-border)] bg-white p-4">
+        {inner}
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group rounded-xl border border-[color:var(--color-border)] bg-white p-4 transition-colors hover:border-[color:var(--color-border-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ink)]"
+    >
+      {inner}
+      <span className="mt-3 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.18em] text-[color:var(--color-text-muted)] transition-colors group-hover:text-[color:var(--color-ink)]">
+        Se alle
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-3 h-3">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M7 17L17 7M9 7h8v8" />
+        </svg>
+      </span>
+    </a>
   );
 }
 
