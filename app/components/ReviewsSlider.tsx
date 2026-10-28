@@ -43,6 +43,14 @@ const REVIEWS: Review[] = [
     context: "Ringmetoden",
   },
   {
+    source: "google",
+    name: "afraa boumediane",
+    date: "okt. 2026",
+    rating: 5,
+    quote:
+      "I would like to express my sincere gratitude to Dr. Amin and the nurse who assisted him. They were both absolutely wonderful — kind, professional, and always smiling.",
+  },
+  {
     source: "trustpilot",
     name: "Murat Kutlu",
     date: "10. okt. 2026",
@@ -50,6 +58,22 @@ const REVIEWS: Review[] = [
     quote:
       "Meget god oplevelse for os som forældre og vores lille søn på 3 mdr. Kan helt klart anbefales.",
     context: "3 mdr.",
+  },
+  {
+    source: "google",
+    name: "Sonia Sega",
+    date: "okt. 2026",
+    rating: 5,
+    quote:
+      "An experience I will always be grateful for. Choosing a clinic for my baby's circumcision was not an easy decision. After researching carefully and communicating with Specialklinik Taastrup, I felt more and more confident that we had made the right choice. Having gone through the entire experience, I can honestly say that I am extremely and overwhelmingly satisfied.",
+  },
+  {
+    source: "google",
+    name: "Biwar Hessin",
+    date: "sep. 2026",
+    rating: 5,
+    quote:
+      "Meget professionel håndtering af både patient og forældre. De er rigtig gode til at informere, og man føler sig i trygge hænder.",
   },
   {
     source: "trustpilot",
@@ -77,6 +101,47 @@ const REVIEWS: Review[] = [
     context: "Circumplast",
   },
   {
+    source: "google",
+    name: "Fisk",
+    date: "aug. 2026",
+    rating: 5,
+    quote:
+      "100% stedet man skal vælge. Vi har ikke fortrudt et sekund. Perfekt resultat for den lille. Rutinen må gøre, at de ved, hvad de laver bedst. Kan kun anbefale.",
+  },
+  {
+    source: "google",
+    name: "Iman Khazen",
+    date: "aug. 2026",
+    rating: 5,
+    quote:
+      "Jeg kan varmt anbefale denne klinik. Jeg havde min søn med til omskæring, og vi havde en rigtig god oplevelse fra start til slut. Både lægen og assistenten var meget professionelle, venlige og omsorgsfulde.",
+  },
+  {
+    source: "google",
+    name: "Ant",
+    date: "aug. 2026",
+    rating: 5,
+    quote:
+      "Kan klart anbefales. God og klar kommunikation i efterspillet af indgrebet.",
+  },
+  {
+    source: "google",
+    name: "Fahad Baragzai",
+    date: "jul. 2026",
+    rating: 5,
+    quote:
+      "We live in Sweden (Malmö), and many of our friends recommended different clinics here. However, none of them offered circumcision under general anesthesia, which was very important to us. That is why we found this clinic.",
+    context: "Fuld bedøvelse",
+  },
+  {
+    source: "google",
+    name: "Abdul Sabor Yousefi",
+    date: "jul. 2026",
+    rating: 5,
+    quote:
+      "Salam Alaikum. Jeg takker kirurgen fra mit hjerte. Min søn blev omskåret sidste uge, uden nogen komplikationer, alhamdulillah.",
+  },
+  {
     source: "trustpilot",
     name: "Samir Ghazal",
     date: "18. jul. 2026",
@@ -91,6 +156,23 @@ const REVIEWS: Review[] = [
     rating: 5,
     quote:
       "Jeg er meget glad på min søns vegne. Jeg kunne tydeligt mærke, at han ikke græd nær så meget, som min ældste gjorde, da han blev omskåret et andet sted. Her på klinikken var jeg rigtig glad for forløbet. Hilsen en glad mor.",
+  },
+  {
+    source: "google",
+    name: "Jonathan Iyamu",
+    date: "jun. 2026",
+    rating: 5,
+    quote:
+      "It was seamless. They are experienced doctors. They communicate the whole process with you.",
+  },
+  {
+    source: "google",
+    name: "Kamran Ahmed",
+    date: "jun. 2026",
+    rating: 5,
+    quote:
+      "We recently had our twin boys circumcised at Specialklinik Taastrup, and I cannot recommend the clinic highly enough.",
+    context: "Tvillinger",
   },
   {
     source: "trustpilot",
@@ -133,6 +215,22 @@ const REVIEWS: Review[] = [
     rating: 5,
     quote:
       "God og tryg oplevelse hos Amin. Høj faglighed og god information hele vejen igennem. Derudover er Amin super hurtig til at svare. Vi fik en hurtig tid, efter at vi havde skrevet os op på ventelisten.",
+  },
+  {
+    source: "google",
+    name: "Silja Eriksen",
+    date: "maj 2026",
+    rating: 5,
+    quote:
+      "Virkelig søde, tålmodige og dygtige mennesker. Var gode til at svare hurtigt på spørgsmål over mail både inden og efter, og gav en god gennemgang af det hele, mens man var der. Kan kun anbefale denne klinik.",
+  },
+  {
+    source: "google",
+    name: "Saad Khan",
+    date: "maj 2026",
+    rating: 5,
+    quote:
+      "Rigtig kompetent og tryghedsskabende personale. Det blev til en rigtig fin oplevelse for vores søn.",
   },
   {
     source: "google",
